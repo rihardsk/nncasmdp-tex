@@ -108,10 +108,42 @@ Abstract-en
 
 \specnodala{Ievads}
 Te ir ievads
-\chapter{Nodaļa}
+\chapter{Markova izvēles procesi}
+Markova izvēles procesi (angliski Markov decision processes, turpmāk tekstā - MDP) formalizē un ļauj modelēt izvēles veikšanas procesu apstākļos, kur darbības rezultāts ir atkarīgs tikai no sistēmas pašreizējā stāvokļa, bet ir daļēji nejaušs, t.i., izvēles veicējs procesu kontrolē tikai daļēji.
+MDP ļauj modelēt daudz dažādas optimizācijas problēmas, kuru risināšanai tiek lietotas dinamiskās programmēšanas metodes un šajā darbā apskatītā stimulētā mācīšanās.
+MDP ir ieviesti \autocite{Bel}.
+Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas.
+
+\begin{definicija}
+Par Markova izvēles procesu, jeb MDP, sauc kortežu $(S, A, T, R)$, kur:
+\begin{itemize}
+	\item $S \subseteq \mathbb{R}^{D_S}, D_S \in \mathbb{N}$ ir stāvokļu kopa, %TODO iespējams bezgalīga?
+	\item $A \subseteq \mathbb{R}^{D_A}, D_A \in \mathbb{N}$ ir darbību kopa, %TODO iespējams bezgalīga?
+	\item $T:S \times A \times S \rightarrow [0,1]$ ir pārejas funkcija, kur $T(s, a, s')$ norāda varbūtību, esot stāvoklī $s \in S$ veicot darbību $a \in A$, nonākt stāvoklī $s' \in S$,
+	\item $R:S \times A \times S \rightarrow \mathbb{R}$ ir atalgojuma funkcija, $R(s, a, s')$ norāda atalgojumu, kas tiek saņemts, esot stāvoklī $s \in S$ veicot darbību $a \in A$ un pēc tam nonākot stāvoklī $s' \in S$.
+\end{itemize}
+\end{definicija}
+%TODO beigu stāvokļi?
+
+Neformāli to var iedomāties kā procesu, kur darbību veicējs, sauksim viņu par aktieri, var novērot to, kādā %TODO aktieris ir normāls vārds?
+stāvoklī sistēma ir pašlaik, un viņam ir pieejama informācija par darbībām, ko ir iespējams veikt.
+Aktieris izvēlas darbību un novēro jauno stāvokli, uz kuru pāriet sistēma, kā arī rezultātā saņemto atalgojumu.
+Aktiera mērķis ir izvēlēties darbības tā, lai maksimizētu laika gaitā saņemto atalgojumu.
+Aktieris iepriekš nezina ne varbūtību, ar kādu tiks veikta viņa izvēlētā pāreja, ne pašu stāvokli, uz kuru pāries sistēma, ne arī atalgojumu, ko saņems.
+Šo informāciju viņam ir jāuzkrāj laika gaitā no iepriekšējās pieredzes.
+
+Jāņem vērā, ka uzdevumu sarežģī tieši iepriekš minētā nenoteiktība.
+Sākot darbu, aktierim iepriekš nezināmā domēnā, tam trūkst jebkāda informācija par .
+Vēlams lai aktieris savas darbības pielāgo tā, lai
+
+Pieminēsim par discount factor un to, ka citādāk var definēt darb. funkc
+
+\chapter{Funkciju aproksimācija}
+\chapter{Stimulētā mācīšanās}
 \section{apakšnodaļa}
 Apakšnodaļas teksts.
 
+\chapter{Diskusija}
 \chapter{Secinājumi}
 Te ir secinājumi
 
