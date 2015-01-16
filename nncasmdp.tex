@@ -1,0 +1,113 @@
+\documentclass{ludis} % pieejams https://github.com/rihardsk/LU-nosl-guma-darbs---LaTeX
+
+% xelatex
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+
+%\usepackage[utf8]{inputenc}
+
+% languages
+\usepackage{fixlatvian}
+\usepackage{polyglossia}
+\setdefaultlanguage{latvian}
+\setotherlanguages{english,russian}
+
+% fonts
+%\setmainfont[Mapping=tex-text]{Times New Roman}
+%\defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
+
+% bibliography
+%\usepackage{csquotes}
+\usepackage[
+    backend=biber,
+    style=numeric-comp,
+    sorting=none,
+    natbib=true,
+    url=false,
+    doi=true%,
+    %eprint=false
+]{biblatex}
+\addbibresource{bibliography.bib}
+
+\usepackage[]{hyperref}
+\hypersetup{
+    colorlinks=false
+}
+\urlstyle{same}
+
+% toc
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+%tables
+\usepackage{longtable}
+
+%papildus matemātika
+\usepackage{mathtools}
+\newenvironment{thmenum}
+ {\begin{enumerate}[label=\upshape(\arabic*),ref=\thethm(\arabic*)]}
+ {\end{enumerate}}
+ 
+%\begin{thmenum}
+%\item \label{foo} Foo
+%\item \label{bar} Bar
+%\item \label{baz} Baz
+%\end{thmenum}
+
+%images
+\usepackage{graphicx}
+\usepackage{float}
+
+%dalīšana kolonnās
+\usepackage{multicol}
+
+%saraksti
+\usepackage{enumitem}
+
+\fakultate{Datorikas}
+\nosaukums{Neironu tīkli un nepārtrauktas darbību telpas Markova izvēles procesi}
+\darbaveids{Maģistra kursa}
+\autors{Rihards Krišlauks}
+\studapl{rk09006}
+\vaditajs{Prof., Dr. comp. Valdis Zuters}
+%\recenzents{Juris Vīksna profesors Dr.sc.comp.}
+\vieta{Rīga}
+\gads{2015}
+
+\begin{document}
+\maketitle
+
+\begin{abstract-lv}
+Abstract-lv
+\keywords{atslēgas vārds 1, atslēgas vārds 2}
+\end{abstract-lv}
+\clearpage
+
+\begin{abstract-en}
+Abstract-en
+\keywords{Keyword 1, keyword 2}
+\end{abstract-en}
+
+
+\tableofcontents
+
+\specnodala{Apzīmējumu saraksts}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{| c | p{28em} |}
+  \hline
+  \textbf{Apzīmējums} & \textbf{Atšifrējums}\\ 
+  \endhead
+
+  \hline
+  $math$ & Apzīmējuma nosaukums \\
+  $math2$ &  Apzīmējuma nosaukums 2\\
+  \hline
+\end{longtable}
+
+\specnodala{Ievads}
+Te ir ievads
+\chapter{Nodaļa}
+\section{apakšnodaļa}
+Apakšnodaļas teksts.
