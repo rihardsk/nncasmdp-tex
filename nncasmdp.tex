@@ -131,8 +131,6 @@ Pieeju MDP risināšanai vada par sistēmu pieejamās informācijas veids.
 Gadījumus, kad par sistēmu pieejamā informācija ir pilnīga, t.i., ir zināma sistēmas stāvokļu pāreju dinamika, kā arī ar darbību veikšanu saistītā atalgojumu funkcija, parasti mēdz risināt ar dinamiskās programmēšanas metodēm.
 Savukārt, grūtāko uzstādījumu, kur par sistēmu nav zināma nekāda sākotnējā informācija, un informācija par sistēmas pārejām un atalgojumiem ir noskaidrojama tikai ar to mijiedarbojoties, risina ar simulētās mācīšanās metodēm, kas tiek apskatītas šajā darbā.
 
-MDP var arī uzskatīt kā 
-
 Tālāk tiek ieviesta Markova izvēles procesu definīcija. Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas. Ievērosim, ka definīciju var sašaurināt uz diskrētām stāvokļu vai darbību telpām, ņemot $S \subseteq \mathbb{N}^{D_S}$ vai $A \subseteq \mathbb{N}^{D_A}$.
 
 \begin{definicija}
@@ -188,6 +186,36 @@ Ja pārtrauktās, galīgās stāvokļu telpās vēlme ir, lai, meklējot optimā
 Jāpiebilst, ka tie paši apsvērumi, kas šajā nodaļā ir izteikti par nepārtrauktām stāvokļu un darbību telpām, lielā mērā ir attiecināmi arī uz diskrētām, bet lielām telpām.
 Turpmākajā tekstā, runājot par diskrētām telpām, domātas ir telpas, kuras ir pietiekami mazas.
 Konkrēti apmēri šeit netiek minēti, jo tie atkarīgi no pieejamajiem skaitļošanas resursiem.
+
+\section{Stratēģijas optimalitāte}
+Darbā jau vairākkārt ir pieminēts, ka stratēģijai, kas tiek izmantota MDP kontrolē jāapmierina kaut kādus optimalitātes kritērijus.
+Izteiksim šo prasību formālāk, norādot trīs iespējamos optimalitātes kritērijus, kā tie ieviesti \autocite{Otterlo}.
+
+\begin{definicija}
+Teiksim, ka dotam MDP, ko apzīmēsim ar $M$, stratēģija $\pi$ ir optimāla galīgā horizonta nozīmē, ja tā maksimizē izteiksmi:
+\[
+	E\left[\sum_{t=0}^{h}r_t\right],
+\]
+kur $h \in \mathbb{N}$ ir horizonta izmērs, un $r_t$ apzīmē $t$-ajā solī saņemto atalgojumu, kontrolējot $K$ pēc shēmas $\pi$.
+\end{definicija}
+
+\begin{definicija}
+Teiksim, ka dotam MDP, ko apzīmēsim ar $M$, stratēģija $\pi$ ir optimāla bezgalīgā horizonta nozīmē, ja tā maksimizē izteiksmi:
+\[
+	E\left[\sum_{t=0}^{\infty}\gamma^t r_t\right],
+\]
+kur $\gamma \in \left[0, 1\right)$ ir atlaides koeficients, un $r_t$ apzīmē $t$-ajā solī saņemto atalgojumu, kontrolējot $K$ pēc shēmas $\pi$.
+\end{definicija}
+
+\begin{definicija}
+Teiksim, ka dotam MDP, ko apzīmēsim ar $M$, stratēģija $\pi$ ir optimāla vidējā atalgojuma nozīmē, ja tā maksimizē izteiksmi:
+\[
+	\lim\limits_{h \rightarrow \infty} E\left[\frac{1}{h}\sum_{t=0}^{h}r_t\right],
+\]
+kur $h \in \mathbb{N}$ ir horizonta izmērs, un $r_t$ apzīmē $t$-ajā solī saņemto atalgojumu, kontrolējot $K$ pēc shēmas $\pi$.
+\end{definicija}
+
+Optimalitātes kritērija izvēle var būt atkarīga no risināmās problēmas. Pārskats par dažādu optimalitātes kritēriju izmantošanu MDP modelēšanā ir dots \autocite{koenig2002interaction}. %TODO saprast un pateikt, kas tiek izmantots algoritmos, kas ir šajā darbā
 
 \section{MDP risināšana}
 Diskrētās stāvokļu un darbību telpās MDP ir atrisināmi precīzi. Pastāv gan analītiski risinājumi, gan numeriski %TODO lūdzu atrast šim tulkojumu :(
