@@ -215,9 +215,40 @@ Teiksim, ka dotam MDP, ko apzīmēsim ar $M$, stratēģija $\pi$ ir optimāla vi
 kur $h \in \mathbb{N}$ ir horizonta izmērs, un $r_t$ apzīmē $t$-ajā solī saņemto atalgojumu, kontrolējot $K$ pēc shēmas $\pi$.
 \end{definicija}
 
-Optimalitātes kritērija izvēle var būt atkarīga no risināmās problēmas. Pārskats par dažādu optimalitātes kritēriju izmantošanu MDP modelēšanā ir dots \autocite{koenig2002interaction}. %TODO saprast un pateikt, kas tiek izmantots algoritmos, kas ir šajā darbā
+Optimalitātes kritērija izvēle var būt atkarīga no risināmās problēmas. Pārskats par dažādu optimalitātes kritēriju izmantošanu MDP modelēšanā ir dots \autocite{koenig2002interaction}.
+Turpmāk tekstā tiks izmantots bezgalīgā horizonta optimalitātes nosacījums.
 
-\section{MDP risināšana}
+%TODO svarīgi, pārskata grāmata saka, ka kritērijus ar konkrētu \pi sasaista value funkcija. es savukārt neredzu iemeslu, kāpēc mest \pi no definīcijas laukā
+
+\section{Vērtības funkcija, stāvokļu-darbību vērtības funkcija}
+Stāvokļu vērtības funkcija, vai vienkāršāk -- vērtības funkcija -- tiek ieviesta, lai izteiktu stāvokļa vērtību pie konkrētas stratēģijas.
+Tā izsaka, cik izdevīgi ir atrasties kādā stāvoklī pie dotās stratēģijas, ņemot vērā optimalitātes nosacījumu.
+\begin{definicija}
+Teiksim, ka ir dota kontroles shēma $\pi$.
+Tai atbilstošā stāvokļu vērtības funkcija $V^\pi : S \rightarrow \mathbb{R}$ izsaka sagaidāmo atalgojumu, sekojot stratēģijai $\pi$, sākot no stāvokļa $s$:
+\[
+	V^\pi (s) = E_\pi \left\{ \sum_{k=0}^{\infty} \gamma^k r_{t+k} \mid s_t = s\right\}
+\]
+\end{definicija}
+
+Līdzīgi var ieviest arī stāvokļu-darbību vērtību funkciju:
+\begin{definicija}
+Teiksim, ka ir dota kontroles shēma $\pi$.
+Tai atbilstošā stāvokļu-darbību vērtības funkcija $Q^\pi : S \times A \rightarrow \mathbb{R}$ izsaka sagaidāmo atalgojumu, sekojot stratēģijai $\pi$, sākot no stāvokļa $s$ un veicot darbību $a$:
+\[
+	Q^\pi (s,a) = E_\pi \left\{ \sum_{k=0}^{\infty} \gamma^k r_{t+k} \mid s_t = s \land a_t = a\right\}
+\]
+\end{definicija}
+
+Tagad varam pārformulēt optimālās stratēģijas jēdzienu:
+\begin{definicija}
+Teiksim, ka stratēģija ir optimāla, un apzīmēsim to ar $\pi^*$, ja visiem stāvokļiem $s \in S$ un visām stratēģijām $\pi$ izpildās:
+\[
+	V^{\pi^*}(s) \geq V^{\pi}(s)
+\]
+\end{definicija}
+
+\section{MDP risināšana un Bellmana vienādojumi}
 Diskrētās stāvokļu un darbību telpās MDP ir atrisināmi precīzi. Pastāv gan analītiski risinājumi, gan numeriski %TODO lūdzu atrast šim tulkojumu :(
 risinājumi ar garantētu konverģenci \autocite{Barto}. %TODO šo arī laikam jāpārformulē
 %TODO varbūt vajag to, kas apakšā
