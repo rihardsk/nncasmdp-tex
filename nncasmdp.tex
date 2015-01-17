@@ -307,14 +307,28 @@ Pretnostatījumā offline algoritmi ieejas datus apstrādā pa vairākiem novēr
 Online algoritmiem ir raksturīgas mazākas prasības pēc skaitļošanas resursiem viena novērojuma apstrādāšanai. Tie strādā labi gadījumos, kad novērojumu ir pieejams daudz un viena novērojuma veikšana nav resursietilpīga.
 Offline algoritmi savukārt efektīvāk izmanto pieejamos novērojumus, kas tiem ļauj līdzvērtīgu rezultātu sasniegt, apstrādājot mazāk novērojumu.
 
+Pie on-policy algoritmiem pieder, piemēram, temporal-difference saimes algoritmi. Pie off-policy algoritmiem pieskaitāms, piemēram, ir Q-learning un tā varianti. Katrā minēto algoritmu grupā ietilpst gan online, gan offline algoritmu varianti \autocite{Barto}.
+
+Minētajiem algoritmiem darbošanās nepārtrauktās stāvokļu telpās nesagādā problēmas. Šādās situācijās parasti $V^{\pi^*}$ vai $Q^{\pi^*}$ reprezentācijai tiek izmantota kāda funkciju aproksimēšanas pieeja, piemēram, neironu tīkli. Kā piemēru var skatīt \autocite{tesauro1995temporal}, kur neironu tīkls tiek trenēts ar Q-learning, lai aproksimētu funkcijas $Q^{\pi^*}$ vērtību backgammon spēlē.
+Jaunākā avotā \autocite{mnih2013playing} Q-learning variants tiek izmantots, lai autonomi apmācītu aģentu spēlēt vairākas Atari 2600 videospēles, kā ieejas datus izmantojot tikai spēlēs ekrāna pikseļu vērtības (bez īpašas priekšapstrādes) un spēles rezultātu.
+$Q^{\pi^*}$ aproksimēšanai tiek izmantots neironu tīkls.
+Šis rezultāts ir īpaši interesants, jo spēles stāvokļu telpa ir izteikti sarežģīta, lai no spēles ekrāna pikseļu vērtībām būtu iespējams kaut ko pateikt par pašreizējo spēles stāvokli, aģentam ir jāiemācās pikseļu vērtības abstrahēt sarežģītākos objektos.
+To šeit paveic neironu tīkls.
+
+Ar nepārtrauktām darbību telpām ir citādi.
+Tā kā bieži šajos algoritmos, lai atrastu optimālo stratēģiju, atbilstoši \eqref{eq:2} tiek meklēts atrisinājums izteiksmei
+\[
+	\arg \max_a Q^*(s, a),
+\]
+tad nevar iztikt bez darbību telpas diskretizēšanas.
+Literatūrā un praksē sastopami dažādi diskretizācijas varianti -- sākot no vienkāršākajiem kā tile coding, kur darbību telpa tiek sadalīta nepārklājošos apgabalos, kas katrs uztverams kā diskretizētās darbību telpas atsevišķs elements, līdz sarežģītākām, kā, piemēram, Kanerva coding \autocite{Barto}.
+
+Algoritmus, kuros optimālā stratēģija tiek atvasināta no $Q^*$ funkcijas, kā redzams augstāk, grūti vispārināt atbilstoši darba mērķim darbībai ar neironu tīkliem, jo tas prasa algoritmam glabāt neironu tīkla vai kāda cita funkciju aproksimētāja svarus, un tos darbības laikā pielāgot.
+Cik autoram zināms, šādas problēmas pastāv off-policy algoritmos, piemēram, minētajā Q-learning.
+On-policy algoritmi šajā aspektā darba ietvaros nav pētīti.
 
 \subsection{Stratēģijas aproksimācija}
 
-Diskrētās stāvokļu un darbību telpās MDP ir atrisināmi precīzi. Pastāv gan analītiski risinājumi, gan numeriski %TODO lūdzu atrast šim tulkojumu :(
-risinājumi ar garantētu konverģenci \autocite{Barto}. %TODO šo arī laikam jāpārformulē
-%TODO varbūt vajag to, kas apakšā
-%No otrās kategorijas šeit tiks apskatīts Value-iteration algorims, tā kā līdzīgi principi tiek izmantoti 
-Pie otrās kategorijas vērts pieminēt policy-iteration un value-iteration algoritmus, kas darbojas diskrētās telpās un var pierādīt, ka tie konverģē uz optimālo kontroles shēmu \autocite{Barto}. %TODO vajag pateikt, kas ir optimālā shēma 
 
 \chapter{Funkciju aproksimācija}
 \chapter{Stimulētā mācīšanās}
