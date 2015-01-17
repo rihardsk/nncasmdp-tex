@@ -7,6 +7,12 @@
 
 %\usepackage[utf8]{inputenc}
 
+\usepackage[]{hyperref}
+\hypersetup{
+    colorlinks=false
+}
+\urlstyle{same}
+
 % languages
 \usepackage{fixlatvian}
 \usepackage{polyglossia}
@@ -30,12 +36,6 @@
 ]{biblatex}
 \addbibresource{bibliography.bib}
 
-\usepackage[]{hyperref}
-\hypersetup{
-    colorlinks=false
-}
-\urlstyle{same}
-
 % toc
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -48,6 +48,7 @@
 \newenvironment{thmenum}
  {\begin{enumerate}[label=\upshape(\arabic*),ref=\thethm(\arabic*)]}
  {\end{enumerate}}
+\usepackage{amsmath}
  
 %\begin{thmenum}
 %\item \label{foo} Foo
@@ -101,8 +102,12 @@ Abstract-en
   \endhead
 
   \hline
-  $math$ & Apzīmējuma nosaukums \\
-  $math2$ &  Apzīmējuma nosaukums 2\\
+  $D_X \in \mathbb{N}_+$ & \\
+  $S \subseteq \mathbb{R}^{D_S}$ & \\
+  $A \subseteq \mathbb{R}^{D_A}$ & \\
+  $R:S \times A \times S \rightarrow \mathbb{R}$ & \\
+  $T:S \times A \times S \rightarrow [0,1]$ & Apzīmējuma nosaukums \\
+  $\pi(s, a)$ &  Apzīmējuma nosaukums 2\\
   \hline
 \end{longtable}
 
@@ -110,9 +115,25 @@ Abstract-en
 Te ir ievads
 \chapter{Markova izvēles procesi}
 Markova izvēles procesi (angliski Markov decision processes, turpmāk tekstā - MDP) formalizē un ļauj modelēt izvēles veikšanas procesu apstākļos, kur darbības rezultāts ir atkarīgs tikai no sistēmas pašreizējā stāvokļa, bet ir daļēji nejaušs, t.i., izvēles veicējs procesu kontrolē tikai daļēji.
+Mērķis ir kontrolēt sistēmu tā, lai tiktu maksimizēta kāda metrika, kas ir atkarīga no katrā solī veiktās darbības rezultāta.
+Tiek uzskatīts, ka MDP ir ieviesti \autocite{Bel}.
+
+MDP vispārina MI (mākslīgā intelekta) plānošanas paradigmu \autocite{Hendler1990ai}.
+Tie ļauj plānošanas problēmu modelī iekļaut nejaušību, kas saistīta ar darbību izpildi, un ļauj specificēt mazāk konkrētus plāna mērķus.
+Turklāt MDP ļauj formalizēt sistēmas, kuru darbībā jāņem vērā resursu patēriņš.
+Plāns MI plānošanas izpratnē kā soļu virkne, kas paredzēta, lai no sākuma stāvokļa sasniegtu uzdoto beigu stāvokli, MDP formālismā tiek vispārināts par stratēģiju, jeb funkciju, kas katram sistēmas stāvoklim piekārto optimālo darbību, tā lai sistēmas kontroles procesā tiktu maksimizēta kāda no uzdevuma atkarīga metrika.
+
+\autocite{Otterlo} tiek dots piemērs tipiskai MI plānošanas problēmai. Var iedomāties, ka ir dota kāda telpa ar tajā sakrāmētām kastēm, un uzdevums ir kastes pārkrāmēt tā, lai dažas no tām pārliktu norādītās vietās. Šo uzdevumu var risināt ar MI plānošanas metodēm.
+Toties, ja tiek apskatīta situācija, kur kastu krāmēšanas operators, piemēram, robots, darbības neizpilda pilnīgi precīzi, bet var pieļaut kļūdas, vai arī var iestāties kādi citi apstākļi, kas nav operatora kontrolē, tad šādam uzstādījumam dabīgāk atbilst MDP paradigma, kurā var, teiksim, uzdevuma mērķi atslābināt un teikt, ka uzdevuma mērķis ir maksimizēt atalgojumu, kas saņemts par katras kastes nolikšanu vietā.
+
+Pieeju MDP risināšanai vada par sistēmu pieejamās informācijas veids.
+Gadījumus, kad par sistēmu pieejamā informācija ir pilnīga, t.i., ir zināma sistēmas stāvokļu pāreju dinamika, kā arī ar darbību veikšanu saistītā atalgojumu funkcija, parasti mēdz risināt ar dinamiskās programmēšanas metodēm.
+Savukārt, grūtāko uzstādījumu, kur par sistēmu nav zināma nekāda sākotnējā informācija, un informācija par sistēmas pārejām un atalgojumiem ir noskaidrojama tikai ar to mijiedarbojoties, risina ar simulētās mācīšanās metodēm, kas tiek apskatītas šajā darbā.
+
 MDP ļauj modelēt daudz dažādas optimizācijas problēmas, kuru risināšanai tiek lietotas dinamiskās programmēšanas metodes un šajā darbā apskatītā stimulētā mācīšanās.
-MDP ir ieviesti \autocite{Bel}.
-Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas.
+
+
+Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas. Ievērosim, ka definīciju var sašaurināt uz diskrētām stāvokļu vai darbību telpām, ņemot $S \subseteq \mathbb{N}^{D_S}$ vai $A \subseteq \mathbb{N}^{D_A}$.
 
 \begin{definicija}
 Par Markova izvēles procesu, jeb MDP, sauc kortežu $(S, A, T, R)$, kur:
@@ -122,21 +143,57 @@ Par Markova izvēles procesu, jeb MDP, sauc kortežu $(S, A, T, R)$, kur:
 	\item $T:S \times A \times S \rightarrow [0,1]$ ir pārejas funkcija, kur $T(s, a, s')$ norāda varbūtību, esot stāvoklī $s \in S$ veicot darbību $a \in A$, nonākt stāvoklī $s' \in S$,
 	\item $R:S \times A \times S \rightarrow \mathbb{R}$ ir atalgojuma funkcija, $R(s, a, s')$ norāda atalgojumu, kas tiek saņemts, esot stāvoklī $s \in S$ veicot darbību $a \in A$ un pēc tam nonākot stāvoklī $s' \in S$.
 \end{itemize}
+Ja stāvokļu telpa ir nepārtraukta, $T(s, a, s')$ apzīmē varbūtību blīvuma funkciju, jeb
+\[
+	\int_{S'} T(s, a, s')ds' = P(s_{t+1} \in S' \mid s_t = s \land a_t = a),
+\]
+kas norāda varbūtību, ka stāvoklī $s \in S$, veicot darbību $a \in A$ pāreja beigsies stāvoklī, kas pieder apgabalam $S'$. %TODO jāpaskaidro _t un _{t+1}?
 \end{definicija}
 %TODO beigu stāvokļi?
 
-Neformāli to var iedomāties kā procesu, kur darbību veicējs, sauksim viņu par aktieri, var novērot to, kādā %TODO aktieris ir normāls vārds?
+MDP definīcijā mēdz arī iekļaut atlaides koeficientu (angliski discount factor), ko apzīmē ar $\gamma \in [0,1]$.
+Tas raksturo to, kā atšķiras nākotnē saņemtie no tagadnē saņemtajiem atalgojumiem.
+Šajā darbā tiek pieņemts, ka $\gamma$ pieder pie katra konkrētā algoritma specifikācijas. %TODO šis vārds izbīdāš aiz paragrāfa malas robežas
+Tas tiek darīts tādēļ, ka $\gamma$ divi dažādi algoritmi vienā un tajā pašā uzdevumā var sniegt dažādus rezultātus pie dažādām $\gamma$ vērtībām, %TODO vajag atsauci
+tāpēc $\gamma$ izvēle tiek atstāta algoritma ziņā, tā kā tā maiņā neietekmē uzdevuma būtību. %TODO ok, šīs varbūt ir muļķības. ko darīt, ja gamma ir līdzeklis, ar ko specificēt kādu uzdevumam noderīgu aspektu?
+
+Parasti tiek ieviesta arī funkcija $\pi: S \times A \rightarrow [0, 1]$, kas apzīmē optimālo stratēģiju, jeb kontroles shēmu:
+\[
+	\pi(s, a) = P(a_t = a \mid s_t = s),
+\]
+kur $\sum_{a\in A} \pi(s,a)=1$, ja darbību telpa ir diskrēta, un $\int_{A} \pi(s,a) da = 1$, ja tā ir nepārtraukta. Funkcija norāda varbūtību, ar kādu optimālajā stratēģijā esot stāvoklī $s \in S$ tiek veikta darbība $a \in A$. Gadījumā, ja darbību telpa ir nepārtraukta, $\pi$ ir varbūtību blīvuma funkcija.
+
+Neformāli to var iedomāties kā procesu, kur darbību veicējs, sauksim viņu par aģentu, var novērot to, kādā 
 stāvoklī sistēma ir pašlaik, un viņam ir pieejama informācija par darbībām, ko ir iespējams veikt.
-Aktieris izvēlas darbību un novēro jauno stāvokli, uz kuru pāriet sistēma, kā arī rezultātā saņemto atalgojumu.
-Aktiera mērķis ir izvēlēties darbības tā, lai maksimizētu laika gaitā saņemto atalgojumu.
-Aktieris iepriekš nezina ne varbūtību, ar kādu tiks veikta viņa izvēlētā pāreja, ne pašu stāvokli, uz kuru pāries sistēma, ne arī atalgojumu, ko saņems.
+Aģents izvēlas darbību un novēro jauno stāvokli, uz kuru pāriet sistēma, kā arī rezultātā saņemto atalgojumu.
+Aģenta mērķis ir izvēlēties darbības tā, lai maksimizētu laika gaitā saņemto atalgojumu.
+Aģents iepriekš nezina ne varbūtību, ar kādu tiks veikta viņa izvēlētā pāreja, ne pašu stāvokli, uz kuru pāries sistēma, ne arī atalgojumu, ko saņems.
 Šo informāciju viņam ir jāuzkrāj laika gaitā no iepriekšējās pieredzes.
 
 Jāņem vērā, ka uzdevumu sarežģī tieši iepriekš minētā nenoteiktība.
-Sākot darbu, aktierim iepriekš nezināmā domēnā, tam trūkst jebkāda informācija par .
-Vēlams lai aktieris savas darbības pielāgo tā, lai
+Sākot darbu, aģentam iepriekš nezināmā domēnā, tam trūkst jebkādas informācijas par uzdevumu, un tā ir iegūstama tikai mijiedarbojoties ar domēnu.
+Turklāt par izdarītās izvēles labumu liecina nevis uzreiz pēc tās veikšanas saņemtais atalgojums, bet gan arī atalgojums, kas saņemts nākotnē, pēc šī stāvokļa apmeklēšanas.
+Citiem vārdiem -- darbības izdevīgums ir jāvērtē ilgtermiņā.
+Vēl viens aspekts, kura nozīme pieaug jo īpaši nepārtrauktās stāvokļu un darbību telpās, ir soļu skaits, pēc kura aģents atrod stratēģiju, kas tuva optimālajai.
+Ja pārtrauktās, galīgās stāvokļu telpās vēlme ir, lai, meklējot optimālo stratēģiju katrs stāvoklis tiktu apmeklēts pēc iespējas mazāk reižu, tad nepārtrauktās stāvokļu un darbību telpās katru stāvokli un darbību nemaz nav iespējams izmēģināt, tā kā to skaits ir neierobežots.
+Šis apsvērums nošķir stratēģijas, kas izmantojamas MDP risināšanas algoritmā. %TODO laikam slikti skan. jāpārformulē
 
-Pieminēsim par discount factor un to, ka citādāk var definēt darb. funkc
+%TODO jāievieš stāvokļu-darbību vērtības funkcija
+
+%TODO jāievieš stāvokļu vērtības funkcija
+
+%TODO jāpasaka, kas ir Belmana vienādojumi, varbūt
+
+Jāpiebilst, ka tie paši apsvērumi, kas šajā nodaļā ir izteikti par nepārtrauktām stāvokļu un darbību telpām, lielā mērā ir attiecināmi arī uz diskrētām, bet lielām telpām.
+Turpmākajā tekstā, runājot par diskrētām telpām, domātas ir telpas, kuras ir pietiekami mazas.
+Konkrēti apmēri šeit netiek minēti, jo tie atkarīgi no pieejamajiem skaitļošanas resursiem.
+
+\section{MDP risināšana}
+Diskrētās stāvokļu un darbību telpās MDP ir atrisināmi precīzi. Pastāv gan analītiski risinājumi, gan numeriski %TODO lūdzu atrast šim tulkojumu :(
+risinājumi ar garantētu konverģenci \autocite{Barto}. %TODO šo arī laikam jāpārformulē
+%TODO varbūt vajag to, kas apakšā
+%No otrās kategorijas šeit tiks apskatīts Value-iteration algorims, tā kā līdzīgi principi tiek izmantoti 
+Pie otrās kategorijas vērts pieminēt policy-iteration un value-iteration algoritmus, kas darbojas diskrētās telpās un var pierādīt, ka tie konverģē uz optimālo kontroles shēmu \autocite{Barto}. %TODO vajag pateikt, kas ir optimālā shēma 
 
 \chapter{Funkciju aproksimācija}
 \chapter{Stimulētā mācīšanās}

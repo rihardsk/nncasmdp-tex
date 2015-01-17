@@ -13,3 +13,5 @@ Tex/*.pdf
 ludis.cls
 *Thumbs.db
 nncasmdp.pdf
+*.fls
+*.fdb_latexmk
