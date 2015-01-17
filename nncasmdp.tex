@@ -44,7 +44,7 @@
 \usepackage{longtable}
 
 %papildus matemātika
-\usepackage{mathtools}
+\usepackage[showonlyrefs]{mathtools}
 \newenvironment{thmenum}
  {\begin{enumerate}[label=\upshape(\arabic*),ref=\thethm(\arabic*)]}
  {\end{enumerate}}
@@ -220,7 +220,7 @@ Turpmāk tekstā tiks izmantots bezgalīgā horizonta optimalitātes nosacījums
 
 %TODO svarīgi, pārskata grāmata saka, ka kritērijus ar konkrētu \pi sasaista value funkcija. es savukārt neredzu iemeslu, kāpēc mest \pi no definīcijas laukā
 
-\section{Vērtības funkcija, stāvokļu-darbību vērtības funkcija}
+\section{Vērtības funkcija un stāvokļu-darbību vērtības funkcija}
 Stāvokļu vērtības funkcija, vai vienkāršāk -- vērtības funkcija -- tiek ieviesta, lai izteiktu stāvokļa vērtību pie konkrētas stratēģijas.
 Tā izsaka, cik izdevīgi ir atrasties kādā stāvoklī pie dotās stratēģijas, ņemot vērā optimalitātes nosacījumu.
 \begin{definicija}
@@ -249,6 +249,67 @@ Teiksim, ka stratēģija ir optimāla, un apzīmēsim to ar $\pi^*$, ja visiem s
 \end{definicija}
 
 \section{MDP risināšana un Bellmana vienādojumi}
+Īsumā ieskatīsimies MDP risināšanas iespējās.
+Bellmana optimalitātes vienādojums ļauj rekursīvi izteikt optimālo stāvokļu vērtības funkciju $V^* = V^{\pi^*}$ atkarībā no pārejas un atalgojuma funkcijām \autocite{Bel}\autocite{Otterlo}\autocite{Hasselt2012}.
+Šeit tas ir izteikts nepārtrauktām stāvokļu telpām: 
+\[
+	V^*(s) = \max_{a\in A} \int_S T(s,a,s')\left(R(s,a,s') + \gamma V^*(s)\right) ds'.
+\]
+Vienādojums sniedz arī veidu, kā izteikt pašu optimālo stratēģiju:
+\begin{equation}
+	\pi^*(s) =  \arg \max_{a} \int_S T(s,a,s')\left(R(s,a,s') + \gamma V^*(s)\right) ds'. \label{eq:1}
+\end{equation}
+Līdzīga sakarība ir arī spēkā optimālajai stāvokļu-darbību vērtības funkcijai $Q^* = Q^{\pi^*}$:
+\[
+	Q^*(s, a) = \int_S T(s,a,s')\left(R(s,a,s') + \gamma \max_{a'}Q^*(s',a')\right) ds'.
+\]
+$Q^*$ un $V^*$ saista sakarības:
+\[
+	Q^*(s, a) = \int_S T(s,a,s')\left(R(s,a,s') + \gamma V^*(s')\right) ds',
+\]
+\[
+	V^*(s) = \max_{a} Q^*(s,a),
+\]
+kas ļauj izteikt optimālo stratēģiju arī ar stāvokļu-darbību vērtības funkciju:
+\begin{equation}
+	\pi^*(s) = \arg \max_a Q^*(s, a). \label{eq:2}
+\end{equation}
+
+Augstāk redzamie vienādojumi ļauj kategorizēt veidus, kādos risināmi MDP.
+
+\subsection{Modeļa aproksimācija}
+Modeļa aproksimācijas pieejā tiek mēģināts tuvināti atrast dotās MDP nezināmos parametrus -- pāreju funkciju $T$ un atalgojuma funkciju $R$ --, lai no tām atvasinātu aproksimētās MDP optimālo kontroles shēmu.
+Modeļa meklēšanā tiek pieņemts, ka kopas $S$ un $A$ ir zināmas.
+Dziļākam ieskatam metodēs, kas tiek izmantotas modeļa aproksimēšanā, skatīt \autocite{nguyen2011model}.
+
+Kad modelis ir zināms, optimālās stratēģijas atrašana galīgam stāvokļu un darbību telpām ir samērā vienkārša. Var tikt izmantots, piemēram, value iteration vai policy iteration algoritms, kam ir var pierādīt, ka tie konverģē uz optimālo $\pi^*$ \autocite{Barto}.
+Tomēr vispārīgā gadījumā MDP nepārtrauktās stāvokļu telpās situācija ir krietni sarežģītāka -- katram katram stāvoklim optimālo stratēģiju atrast nav iespējams \autocite{Otterlo}.
+Piemēram, iepriekš minētie value iteration un policy iteration algoritmi satur ciklu pa visu stāvokļu kopu, kas algoritmu padara nelietojamu, ja stāvokļu skaits ir bezgalīgi liels.
+
+%TODO šo varbūt var iekļaut: Alternatīvi \autocite{Otterlo} tiek minēta iespēja tuvināto MDP izmantot, lai ģenerētu 
+
+Lai arī iepriekš minētie argumenti nav spēkā uz MDP ar nepārtrauktām darbību telpām, autors neredz tiešu veidu, kā pieeja būtu vispārināma, lai no iegūtā MDP modeļa atvasinātu stratēģiju, kas optimālo darbību stāvoklī atrod ar neirona tīkla palīdzību.
+%TODO jāpasaka, kāpēc neironu tīkls būtu labāks
+Turklāt, lai arī kā darba mērķis netika uzstādīta prasība algoritmam darboties arī ar nepārtrauktām stāvokļu telpām, nevajadzīga algoritma vispārīguma samazināšana, ja no tā var izvairīties, tiek uzskatīta par nevēlamu.
+
+\subsection{Vērtību aproksimācija}
+Vērtību aproksimācijas piegājienā tiek nevis mēģināts atrast trūkstošās pāreju un atalgojuma funkcijas, bet gan tiek uzreiz mēģināts tuvināti atrast funkcijas $V^*$ vai $Q^*$.
+Kā redzams iepriekšējā sadaļā, vienādojumi \eqref{eq:1} un \eqref{eq:2} ļauj atrast $\pi^*$, ja $V^*$ vai $Q^*$ ir zināma.
+Šīs kategorijas algoritmus iedala atkarībā no tā, vai tie ir spējīgi mācīties tiešsaistē, un vai algoritms ir on-policy vai off-policy tipa.
+
+Atsaucoties uz \autocite{Hasselt2012} -- on-policy algoritmi mēģina tuvināti atrast stāvokļu vērtības funkciju $V^\pi$ vai stāvokļu-darbību vērtības funkciju $Q^\pi$ stratēģijai $\pi$, kura konkrētajā brīdī tiek izmantota.
+Lai arī optimālā stratēģija $\pi^*$ iesākumā nav zināma, on-policy algoritmi pakāpeniski nonāk pie optimālās funkcijas $V^{\pi^*}$ vai $Q^{\pi^*}$, iteratīvi katrā solī uzlabojot sev zināmo $\pi$.
+Off-policy tipa algoritmi izmanto citu pieeju, kas tiešā veidā necenšas atrast optimālo stratēģiju $\pi^*$.
+Funkciju $V^{\pi^*}$ vai $Q^{\pi^*}$ novērtējumi var tikt uzlaboti, sekojot stratēģijām, kas nav optimālas.
+
+Algoritmus, kas spējīgi mācīties tiešsaistē, jeb online algoritmus, raksturo tas, ka tie savus novērtējumus pielāgo pēc katras pārejas veikšanas, novērojot jauno sistēmas stāvokli un saņemto atalgojumu.
+Pretnostatījumā offline algoritmi ieejas datus apstrādā pa vairākiem novērojumiem vienā grupā.
+Online algoritmiem ir raksturīgas mazākas prasības pēc skaitļošanas resursiem viena novērojuma apstrādāšanai. Tie strādā labi gadījumos, kad novērojumu ir pieejams daudz un viena novērojuma veikšana nav resursietilpīga.
+Offline algoritmi savukārt efektīvāk izmanto pieejamos novērojumus, kas tiem ļauj līdzvērtīgu rezultātu sasniegt, apstrādājot mazāk novērojumu.
+
+
+\subsection{Stratēģijas aproksimācija}
+
 Diskrētās stāvokļu un darbību telpās MDP ir atrisināmi precīzi. Pastāv gan analītiski risinājumi, gan numeriski %TODO lūdzu atrast šim tulkojumu :(
 risinājumi ar garantētu konverģenci \autocite{Barto}. %TODO šo arī laikam jāpārformulē
 %TODO varbūt vajag to, kas apakšā
