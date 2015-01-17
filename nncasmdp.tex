@@ -123,23 +123,23 @@ Tie ļauj plānošanas problēmu modelī iekļaut nejaušību, kas saistīta ar 
 Turklāt MDP ļauj formalizēt sistēmas, kuru darbībā jāņem vērā resursu patēriņš.
 Plāns MI plānošanas izpratnē kā soļu virkne, kas paredzēta, lai no sākuma stāvokļa sasniegtu uzdoto beigu stāvokli, MDP formālismā tiek vispārināts par stratēģiju, jeb funkciju, kas katram sistēmas stāvoklim piekārto optimālo darbību, tā lai sistēmas kontroles procesā tiktu maksimizēta kāda no uzdevuma atkarīga metrika.
 
-\autocite{Otterlo} tiek dots piemērs tipiskai MI plānošanas problēmai. Var iedomāties, ka ir dota kāda telpa ar tajā sakrāmētām kastēm, un uzdevums ir kastes pārkrāmēt tā, lai dažas no tām pārliktu norādītās vietās. Šo uzdevumu var risināt ar MI plānošanas metodēm.
+\autocite{Otterlo} tiek dots piemērs tipiskai MI plānošanas problēmai. Var iedomāties, ka ir dota kāda telpa ar tajā sakrāmētām kastēm, un uzdevums ir kastes pārkrāmēt tā, lai dažas no tām pārliktu norādītās vietās.
+Šo uzdevumu var risināt ar MI plānošanas metodēm.
 Toties, ja tiek apskatīta situācija, kur kastu krāmēšanas operators, piemēram, robots, darbības neizpilda pilnīgi precīzi, bet var pieļaut kļūdas, vai arī var iestāties kādi citi apstākļi, kas nav operatora kontrolē, tad šādam uzstādījumam dabīgāk atbilst MDP paradigma, kurā var, teiksim, uzdevuma mērķi atslābināt un teikt, ka uzdevuma mērķis ir maksimizēt atalgojumu, kas saņemts par katras kastes nolikšanu vietā.
 
 Pieeju MDP risināšanai vada par sistēmu pieejamās informācijas veids.
 Gadījumus, kad par sistēmu pieejamā informācija ir pilnīga, t.i., ir zināma sistēmas stāvokļu pāreju dinamika, kā arī ar darbību veikšanu saistītā atalgojumu funkcija, parasti mēdz risināt ar dinamiskās programmēšanas metodēm.
 Savukārt, grūtāko uzstādījumu, kur par sistēmu nav zināma nekāda sākotnējā informācija, un informācija par sistēmas pārejām un atalgojumiem ir noskaidrojama tikai ar to mijiedarbojoties, risina ar simulētās mācīšanās metodēm, kas tiek apskatītas šajā darbā.
 
-MDP ļauj modelēt daudz dažādas optimizācijas problēmas, kuru risināšanai tiek lietotas dinamiskās programmēšanas metodes un šajā darbā apskatītā stimulētā mācīšanās.
+MDP var arī uzskatīt kā 
 
-
-Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas. Ievērosim, ka definīciju var sašaurināt uz diskrētām stāvokļu vai darbību telpām, ņemot $S \subseteq \mathbb{N}^{D_S}$ vai $A \subseteq \mathbb{N}^{D_A}$.
+Tālāk tiek ieviesta Markova izvēles procesu definīcija. Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas. Ievērosim, ka definīciju var sašaurināt uz diskrētām stāvokļu vai darbību telpām, ņemot $S \subseteq \mathbb{N}^{D_S}$ vai $A \subseteq \mathbb{N}^{D_A}$.
 
 \begin{definicija}
 Par Markova izvēles procesu, jeb MDP, sauc kortežu $(S, A, T, R)$, kur:
 \begin{itemize}
-	\item $S \subseteq \mathbb{R}^{D_S}, D_S \in \mathbb{N}$ ir stāvokļu kopa, %TODO iespējams bezgalīga?
-	\item $A \subseteq \mathbb{R}^{D_A}, D_A \in \mathbb{N}$ ir darbību kopa, %TODO iespējams bezgalīga?
+	\item $S \subseteq \mathbb{R}^{D_S}$, kur $D_S \in \mathbb{N}$, ir stāvokļu kopa, %TODO iespējams bezgalīga?
+	\item $A \subseteq \mathbb{R}^{D_A}$, kur $D_A \in \mathbb{N}$, ir darbību kopa, %TODO iespējams bezgalīga?
 	\item $T:S \times A \times S \rightarrow [0,1]$ ir pārejas funkcija, kur $T(s, a, s')$ norāda varbūtību, esot stāvoklī $s \in S$ veicot darbību $a \in A$, nonākt stāvoklī $s' \in S$,
 	\item $R:S \times A \times S \rightarrow \mathbb{R}$ ir atalgojuma funkcija, $R(s, a, s')$ norāda atalgojumu, kas tiek saņemts, esot stāvoklī $s \in S$ veicot darbību $a \in A$ un pēc tam nonākot stāvoklī $s' \in S$.
 \end{itemize}
@@ -156,6 +156,7 @@ Tas raksturo to, kā atšķiras nākotnē saņemtie no tagadnē saņemtajiem ata
 Šajā darbā tiek pieņemts, ka $\gamma$ pieder pie katra konkrētā algoritma specifikācijas. %TODO šis vārds izbīdāš aiz paragrāfa malas robežas
 Tas tiek darīts tādēļ, ka $\gamma$ divi dažādi algoritmi vienā un tajā pašā uzdevumā var sniegt dažādus rezultātus pie dažādām $\gamma$ vērtībām, %TODO vajag atsauci
 tāpēc $\gamma$ izvēle tiek atstāta algoritma ziņā, tā kā tā maiņā neietekmē uzdevuma būtību. %TODO ok, šīs varbūt ir muļķības. ko darīt, ja gamma ir līdzeklis, ar ko specificēt kādu uzdevumam noderīgu aspektu?
+Šādā veidā MDP tiek ieviesti arī \autocite{Otterlo}.
 
 Parasti tiek ieviesta arī funkcija $\pi: S \times A \rightarrow [0, 1]$, kas apzīmē optimālo stratēģiju, jeb kontroles shēmu:
 \[
@@ -163,7 +164,7 @@ Parasti tiek ieviesta arī funkcija $\pi: S \times A \rightarrow [0, 1]$, kas ap
 \]
 kur $\sum_{a\in A} \pi(s,a)=1$, ja darbību telpa ir diskrēta, un $\int_{A} \pi(s,a) da = 1$, ja tā ir nepārtraukta. Funkcija norāda varbūtību, ar kādu optimālajā stratēģijā esot stāvoklī $s \in S$ tiek veikta darbība $a \in A$. Gadījumā, ja darbību telpa ir nepārtraukta, $\pi$ ir varbūtību blīvuma funkcija.
 
-Neformāli to var iedomāties kā procesu, kur darbību veicējs, sauksim viņu par aģentu, var novērot to, kādā 
+Neformāli to var iedomāties (no simulētās mācīšanās pieejas skatpunkta) kā procesu, kur darbību veicējs, sauksim viņu par aģentu, var novērot to, kādā 
 stāvoklī sistēma ir pašlaik, un viņam ir pieejama informācija par darbībām, ko ir iespējams veikt.
 Aģents izvēlas darbību un novēro jauno stāvokli, uz kuru pāriet sistēma, kā arī rezultātā saņemto atalgojumu.
 Aģenta mērķis ir izvēlēties darbības tā, lai maksimizētu laika gaitā saņemto atalgojumu.
