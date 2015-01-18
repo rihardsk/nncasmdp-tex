@@ -114,6 +114,9 @@ Abstract-en
 \specnodala{Ievads}
 Te ir ievads
 \chapter{Markova izvēles procesi}
+Nodaļā tiek apskatīti Markova izvēles procesi ar mērķi sniegt vispārīgu priekšstatu par tēmu.
+Tiek doti arī piemēri un paņēmieni, kas tieši neattiecas uz darba mērķi, bet doti, lai vieglāk izprast jēdziena kontekstu, tomēr lielākā daļa izklāsta ir pozicionēta tieši vēlāk apskatāmās stimulētās mācīšanās kontekstā.
+
 Markova izvēles procesi (angliski Markov decision processes, turpmāk tekstā - MDP) formalizē un ļauj modelēt izvēles veikšanas procesu apstākļos, kur darbības rezultāts ir atkarīgs tikai no sistēmas pašreizējā stāvokļa, bet ir daļēji nejaušs, t.i., izvēles veicējs procesu kontrolē tikai daļēji.
 Mērķis ir kontrolēt sistēmu tā, lai tiktu maksimizēta kāda metrika, kas ir atkarīga no katrā solī veiktās darbības rezultāta.
 Tiek uzskatīts, ka MDP ir ieviesti \autocite{Bel}.
@@ -328,10 +331,16 @@ Cik autoram zināms, šādas problēmas pastāv off-policy algoritmos, piemēram
 On-policy algoritmi šajā aspektā darba ietvaros nav pētīti.
 
 \subsection{Stratēģijas aproksimācija}
-
+Atšķirībā no vērtību aproksimācijas algoritmiem, stratēģijas aproksimācijas pieejas algoritmi optimālās stratēģijas tuvinājumu glabā tiešā veidā.
+Parasti nav nekādu šķēršļu $\pi^*$ reprezentācijai izmantot kādu vispārīgu funkciju aproksimētāju. Tādā gadījumā algoritms glabā tā parametrus.
+Šim nolūkam var tikt izmantots arī neironu tīkls.
+Bez tuvinātas optimālās stratēģijas mēdz tikt glabāta arī $V^{\pi^*}$ vai $Q^{\pi^*}$ funkcija.
+Algoritmus, kuros tiek tā darīts, mēdz saukt par actor-critic algoritmiem, ar vārdu critic atsaucoties uz algoritma daļu, kas vērtē spēles stāvokļa izdevību, jeb $V^{\pi^*}$ vai $Q^{\pi^*}$, un ar actor atsaucoties uz stratēģiju.
+Pēc analoģijas, stratēģijas aproksimācijas algoritmus, kas neizmanto kādu no vērtību funkcijām, dēvē par actor-only algoritmie, savukārt vērtību aproksimācijas algoritmus -- par critic-only algoritmiem.
+Stratēģijas aproksimācijas algoritmi tiks tuvāk apskatīti \ref{chap:stim} nodaļā.
 
 \chapter{Funkciju aproksimācija}
-\chapter{Stimulētā mācīšanās}
+\chapter{Stimulētā mācīšanās} \label{chap:stim}
 \section{apakšnodaļa}
 Apakšnodaļas teksts.
 
