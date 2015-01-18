@@ -388,7 +388,7 @@ Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām va
 Neironu tīkli pieder pie nelineārajiem funkciju aproksimētājiem.
 Tie it veidoti uz līdzību pamata ar bioloģisko neironu tīkliem smadzenēs un parasti tiek formulēti kā savstarpēji savienotu "neironu" sistēma, kas dotus ieejas datus pārvērš izejas datos atbilstoši sistēmas neironu svariem.
 Katru neironu raksturo svaru komplekts, kas ir koeficienti dotā neirona ieejas neironu vērtībām.
-Neirons izejā dod ieejas neironu signālu un svaru lineāru kombināciju, kam pielietota kāda (parasti) nelineāra funkcija.
+Neirons izejā dod ieejas neironu signālu un svaru lineāru kombināciju, kam pielietota kāda (parasti) nelineāra funkcija. To dēvē par aktivācijas funkciju.
 Praksē bieži tiek lietota t.s. simgoid funkcija
 \[
 	f(x) = \frac{1}{1 + e^{-x}}.
@@ -397,9 +397,7 @@ Izsakot to atkarībā no neirona svaru vektora $\Theta$, iegūst
 \[
 	f_\Theta(x) = \frac{1}{1 + e^{-\Theta^T x}},
 \]
-kur $D_\Theta = D_x$.
-
-Viena no iespējamajām neironu tīklu arhitektūrām ir apskatāma attēlā \ref{fig:nn}.
+kur $D_\Theta = D_x$. Formāli neironu tīkls ir parasta parametrizējama funkcija, bet šāds skatījums ir intuitīvi vieglāk saprotams.
 
 \begin{figure}
 	\centering
@@ -408,7 +406,17 @@ Viena no iespējamajām neironu tīklu arhitektūrām ir apskatāma attēlā \re
 	\label{fig:nn}
 \end{figure}
 
-Formāli neironu tīkls ir parametrizējama funkcija.
+Viena no iespējamajām neironu tīklu arhitektūrām ir apskatāma attēlā \ref{fig:nn}
+Šeit līmeni $L_1$ sastāda ieejas neironi, kas apzīmē tīklam padotās ieejas parametru vērtības.
+Līmeni $L_3$ sastāda neironi (vispārīgā gadījumā tie var būt vairāki), kuru izejas vērtības tiek atgrieztas kā rezultāts.
+Pārējos līmeņus, šoreiz tāds ir tikai viens -- $L_2$ --, sauc par slēptajiem līmeņiem.
+Ar $+1$ tiek apzīmēti neironi, kas nesaņem ieejā citu neironu vērtības; tie atgriež konstanti $1$, un ļauj neironu vērtību un svaru lineārajā kombinācijā pieskaitīt koeficientu, kas nav atkarīgs no ieejas vērtībām.
+Bultiņas apzīmē, kuru neironu atgrieztās vērtības tiek izmantotas kāda neirona ieejā.
+
+Ir pierādīts, ka neironu tīkli darbojas kā universāli funkciju aproksimētāji \autocite{hornik1991approximation}.
+Šo apgalvojumu formulē kā universālās aproksimācijas teorēmu (universal approximation theorem).
+Tā apgalvo, ka feed-forward tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
+
 \section{Parametru pielāgošana}
 \subsection{Uz gradientiem bāzētās metodes}
 \subsection{Evolucionārās metodes}
