@@ -132,7 +132,7 @@ Toties, ja tiek apskatīta situācija, kur kastu krāmēšanas operators, piemē
 
 Pieeju MDP risināšanai vada par sistēmu pieejamās informācijas veids.
 Gadījumus, kad par sistēmu pieejamā informācija ir pilnīga, t.i., ir zināma sistēmas stāvokļu pāreju dinamika, kā arī ar darbību veikšanu saistītā atalgojumu funkcija, parasti mēdz risināt ar dinamiskās programmēšanas metodēm.
-Savukārt, grūtāko uzstādījumu, kur par sistēmu nav zināma nekāda sākotnējā informācija, un informācija par sistēmas pārejām un atalgojumiem ir noskaidrojama tikai ar to mijiedarbojoties, risina ar simulētās mācīšanās metodēm, kas tiek apskatītas šajā darbā.
+Savukārt, grūtāko uzstādījumu, kur par sistēmu nav zināma nekāda sākotnējā informācija, un informācija par sistēmas pārejām un atalgojumiem ir noskaidrojama tikai ar to mijiedarbojoties, risina ar stimulētās mācīšanās metodēm, kas tiek apskatītas šajā darbā.
 
 Tālāk tiek ieviesta Markova izvēles procesu definīcija. Mēs lietosim definīciju, kas pieļauj nepārtrauktas stāvokļu un darbību telpas. Ievērosim, ka definīciju var sašaurināt uz diskrētām stāvokļu vai darbību telpām, ņemot $S \subseteq \mathbb{N}^{D_S}$ vai $A \subseteq \mathbb{N}^{D_A}$.
 
@@ -165,7 +165,7 @@ Parasti tiek ieviesta arī funkcija $\pi: S \times A \rightarrow [0, 1]$, kas ap
 \]
 kur $\sum_{a\in A} \pi(s,a)=1$, ja darbību telpa ir diskrēta, un $\int_{A} \pi(s,a) da = 1$, ja tā ir nepārtraukta. Funkcija norāda varbūtību, ar kādu optimālajā stratēģijā esot stāvoklī $s \in S$ tiek veikta darbība $a \in A$. Gadījumā, ja darbību telpa ir nepārtraukta, $\pi$ ir varbūtību blīvuma funkcija.
 
-Neformāli to var iedomāties (no simulētās mācīšanās pieejas skatpunkta) kā procesu, kur darbību veicējs, sauksim viņu par aģentu, var novērot to, kādā 
+Neformāli to var iedomāties (no stimulētās mācīšanās pieejas skatpunkta) kā procesu, kur darbību veicējs, sauksim viņu par aģentu, var novērot to, kādā 
 stāvoklī sistēma ir pašlaik, un viņam ir pieejama informācija par darbībām, ko ir iespējams veikt.
 Aģents izvēlas darbību un novēro jauno stāvokli, uz kuru pāriet sistēma, kā arī rezultātā saņemto atalgojumu.
 Aģenta mērķis ir izvēlēties darbības tā, lai maksimizētu laika gaitā saņemto atalgojumu.
@@ -340,6 +340,18 @@ Pēc analoģijas, stratēģijas aproksimācijas algoritmus, kas neizmanto kādu 
 Stratēģijas aproksimācijas algoritmi tiks tuvāk apskatīti \ref{chap:stim} nodaļā.
 
 \chapter{Funkciju aproksimācija}
+Nodaļā tiek likts uzsvars uz nelineāro funkciju aproksimētāju, it īpaši neironu tīklu, apskatu, bet tiek arī apskatīti un īsumā izvērtēti citu klašu funkciju aproksimētāji, uzmanību pievēršot, piemēram, ģenētiskajiem algoritmiem.
+
+Ar funkciju aproksimēšanu, sauktu arī par funkciju tuvināšanu, tiek saprastas pieejas, kuru mērķis ir, par izejas datiem ņemot aproksimējamās, jeb mērķa, funkcijas vērtības, atrast citu funkciju noteiktā klasē, kas pēc iespējas vairāk atbilst aproksimējamajai.
+Bieži vien aproksimējamā funkcija kā tāda nemaz nepastāv, bet aproksimēšana notiek ar mērķi iegūt funkciju, kas izsaka sakarības, kas novērojamas kādā mūs interesējošā procesā.
+Skatoties mašīnmācīšanās kontekstā, vai konkrētāk -- apskatot pārraudzītās mācīšanās (supervised learning) problēmu -- mērķis ir no dota datu korpusa, kas satur kāda mūs interesējošu objekta parametrus, kam attiecināta kāda no parametriem (iespējams daļēji) atkarīga vērtība, konstruēt funkciju, kas, ieejā saņemot minētā veida parametrus, būtu spējīga prognozēt iepriekš neredzētu datu punktu vērtības.
+
+Stimulētās mācīšanās uzdevumos, kur tiek lietotas vērtību aproksimācijas pieejas, funkciju aproksimēšana tiek lietota, lai ar kādiem domēnu aprakstošiem parametriem izteiktu stāvokļu vai stāvokļu-darbību vērtību funkciju. Stratēģijas aproksimācijas pieejās funkciju aproksimācija var tikt lietota, lai izteiktu optimālo stratēģiju atkarībā no MDP stavokļa.
+Funkciju aproksimācijā sakarības, kas atrastas novērotajos datos, tiek vispārinātas uz datiem, kas nav redzēti. Tas ir ļoti svarīgs ieguvums stimulētās mācīšanās problēmās ar nepārtrauktām vai ļoti lielām stāvokļu vai darbību telpām, tā kā nav nepieciešams apskatīt visus telpas punktus, lai algoritms spētu sekmīgi darboties.
+
+Mašīnmācīšanās pieejas nav vienmēr tiešā veidā pielietojamas stimulētās mācīšanās uzdevumos.
+Stimulētās mācīšanās kontekstā uzdevumu parasti papildus apgrūtina fakts, ka vērtības, kas tiek izmantotas, lai funkcijas aproksimatora pielāgošanai, pašas ir atkarīgas no tā snieguma -- gājieni, ko veic aģents ir atkarīgi no spēles stāvokļa novērtējuma.
+
 \chapter{Stimulētā mācīšanās} \label{chap:stim}
 \section{apakšnodaļa}
 Apakšnodaļas teksts.
