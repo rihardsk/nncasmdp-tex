@@ -386,7 +386,27 @@ Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām va
 
 \subsection{Neironu tīkli un nelineārā funkciju aproksimēšana}
 Neironu tīkli pieder pie nelineārajiem funkciju aproksimētājiem.
+Tie it veidoti uz līdzību pamata ar bioloģisko neironu tīkliem smadzenēs un parasti tiek formulēti kā savstarpēji savienotu "neironu" sistēma, kas dotus ieejas datus pārvērš izejas datos atbilstoši sistēmas neironu svariem.
+Katru neironu raksturo svaru komplekts, kas ir koeficienti dotā neirona ieejas neironu vērtībām.
+Neirons izejā dod ieejas neironu signālu un svaru lineāru kombināciju, kam pielietota kāda (parasti) nelineāra funkcija.
+Praksē bieži tiek lietota t.s. simgoid funkcija
+\[
+	f(x) = \frac{1}{1 + e^{-x}}.
+\]
+Izsakot to atkarībā no neirona svaru vektora $\Theta$, iegūst
+\[
+	f_\Theta(x) = \frac{1}{1 + e^{-\Theta^T x}},
+\]
+kur $D_\Theta = D_x$.
 
+Viena no iespējamajām neironu tīklu arhitektūrām ir apskatāma attēlā \ref{fig:nn}.
+
+\begin{figure}
+	\centering
+	\includegraphics{Img/nn-arhitektura.pdf}
+	\caption{Neironu tīkla arhitektūras piemērs.}
+	\label{fig:nn}
+\end{figure}
 
 Formāli neironu tīkls ir parametrizējama funkcija.
 \section{Parametru pielāgošana}
