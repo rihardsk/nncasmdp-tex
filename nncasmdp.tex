@@ -344,13 +344,54 @@ Nodaļā tiek likts uzsvars uz nelineāro funkciju aproksimētāju, it īpaši n
 
 Ar funkciju aproksimēšanu, sauktu arī par funkciju tuvināšanu, tiek saprastas pieejas, kuru mērķis ir, par izejas datiem ņemot aproksimējamās, jeb mērķa, funkcijas vērtības, atrast citu funkciju noteiktā klasē, kas pēc iespējas vairāk atbilst aproksimējamajai.
 Bieži vien aproksimējamā funkcija kā tāda nemaz nepastāv, bet aproksimēšana notiek ar mērķi iegūt funkciju, kas izsaka sakarības, kas novērojamas kādā mūs interesējošā procesā.
-Skatoties mašīnmācīšanās kontekstā, vai konkrētāk -- apskatot pārraudzītās mācīšanās (supervised learning) problēmu -- mērķis ir no dota datu korpusa, kas satur kāda mūs interesējošu objekta parametrus, kam attiecināta kāda no parametriem (iespējams daļēji) atkarīga vērtība, konstruēt funkciju, kas, ieejā saņemot minētā veida parametrus, būtu spējīga prognozēt iepriekš neredzētu datu punktu vērtības.
+Skatoties mašīnmācīšanās kontekstā, vai konkrētāk -- apskatot pārraudzītās mācīšanās (supervised learning) problēmu -- mērķis ir no dota datu korpusa, kas satur kāda mūs interesējoša objekta parametrus, kam attiecināta kāda no parametriem (iespējams daļēji) atkarīga vērtība, konstruēt funkciju, kas, ieejā saņemot minētā veida parametrus, būtu spējīga prognozēt iepriekš neredzētu datu punktu vērtības.
 
 Stimulētās mācīšanās uzdevumos, kur tiek lietotas vērtību aproksimācijas pieejas, funkciju aproksimēšana tiek lietota, lai ar kādiem domēnu aprakstošiem parametriem izteiktu stāvokļu vai stāvokļu-darbību vērtību funkciju. Stratēģijas aproksimācijas pieejās funkciju aproksimācija var tikt lietota, lai izteiktu optimālo stratēģiju atkarībā no MDP stavokļa.
 Funkciju aproksimācijā sakarības, kas atrastas novērotajos datos, tiek vispārinātas uz datiem, kas nav redzēti. Tas ir ļoti svarīgs ieguvums stimulētās mācīšanās problēmās ar nepārtrauktām vai ļoti lielām stāvokļu vai darbību telpām, tā kā nav nepieciešams apskatīt visus telpas punktus, lai algoritms spētu sekmīgi darboties.
 
 Mašīnmācīšanās pieejas nav vienmēr tiešā veidā pielietojamas stimulētās mācīšanās uzdevumos.
-Stimulētās mācīšanās kontekstā uzdevumu parasti papildus apgrūtina fakts, ka vērtības, kas tiek izmantotas, lai funkcijas aproksimatora pielāgošanai, pašas ir atkarīgas no tā snieguma -- gājieni, ko veic aģents ir atkarīgi no spēles stāvokļa novērtējuma.
+Stimulētās mācīšanās kontekstā uzdevumu parasti papildus apgrūtina fakts, ka vērtības, kas tiek izmantotas, lai funkcijas aproksimētāja pielāgošanai, pašas ir atkarīgas no tā snieguma -- gājieni, ko veic aģents ir atkarīgi no spēles stāvokļa novērtējuma.
+
+Nākamajās sadaļās tiks apskatītas galvenās funkciju aproksimētāju klases, lielāku uzmanību pievēršot nelineārajiem aproksimētājiem un neironu tīkliem.
+
+\section{Funkciju aproksimēšanas veidi}
+Funkciju aproksimētājus, atkarībā no to uzbūves, mēdz iedalīt lineārajos un nelineārajos. Lineārie aproksimētaji tiks apskatīti ierobežoti, vairāk uzmanības veltot nelineārajiem aproksimētājiem.
+Jēdziens funkciju aproksimētājs tiek lietots, apzīmējot funkciju, kas tiek izmantota dotās mērķa funkcijas aproksimēšanai.
+Piemēram, sakot "lineārs funkciju aproksimētājs" jāsaprot, ka izmantotā funkcija ir lineāra.
+
+\subsection{Lineārā funkcju aproksimēšana}
+Par lineāru funkciju dēvē tādu funkciju, ko var izteikt formā
+\[
+	F(\phi) = \Theta^T \phi,
+\]
+kur $\Theta$ ir funkcijas parametru vektors un $D_\Theta = D_\phi$.
+Stimulētās mācīšanās kontekstā parasti tiek pieņemts, ka $\phi$ ir kāda funkcija parametru iegūšanai no MDP stāvokļa $\phi : S \times \Phi$, kur $\Phi$ ir kāda parametru telpa.
+Tad, lineāru funkciju izmantojot, piemēram, stāvokļu vērtības funkcijas aproksimēšanai, to var izteikt formā
+\[
+	V(s) = \Theta^T \phi(s).
+\]
+Jāpiemin, ka nosacījums, ka stāvokļu vērtības funkcija ir izsakāma kā lineāra kombinācija no parametru vērtībām, nenozīmē, ka tai jābūt lineārai attiecībā pret stāvokļu telpu.
+Izvēloties pazīme, kas nav lineāras attiecībā pret stāvokļu telpu, tiek iegūta nelineāra stāvokļu vērtības funkcija attiecībā pret $S$.
+
+Kā redzams, gadījumā, kad stāvokļu telpa ir nepārtraukta, funkcija $\phi$ to attēlo uz galīgu skaitu elementu.
+Citiem vārdiem -- stāvokļu telpa tiek diskretizēta.
+Pats veids, kā notiek pazīmju piekārtošana stāvokļiem nosaka diskretizācijas veidu.
+Piemēram, ja stāvokļu telpa tiek sadalīta vienādos apgabalos, kam katram tiek piekārtota sava unikāla pazīme, tad iegūto attēlojumu sauc par tile coding, kas tika minēts jau iepriekš.
+
+Lineārajiem funkciju aproksimētājiem nepārtrauktās telpās piemīt iepriekšējā sadaļā minētā īpašība par novērojumu vispārināšanu iepriekš neapskatītiem telpas punktiem.
+Tomēr stāvokļu un darbību telpas diskretizācija ir iemesls, kāpēc šajā darbā priekšroka tiek dota tādiem nelineārajiem funkciju aproksimētājiem kā neironu tīkli.
+Labākā telpas diskretizācijas pieeja var būt atkarīga no uzdevuma.
+Tas ir pretrunā ar vēlmi atrast pēc iespējas vispārīgu pieeju simulētās mācīšanās uzdevumu risināšanai nepārtrauktās telpās.
+Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām var ar dažādiem panākumiem cīnīties, kas vairāk aprakstītas \autocite{Hasselt2012} .
+
+\subsection{Neironu tīkli un nelineārā funkciju aproksimēšana}
+Neironu tīkli pieder pie nelineārajiem funkciju aproksimētājiem.
+
+
+Formāli neironu tīkls ir parametrizējama funkcija.
+\section{Parametru pielāgošana}
+\subsection{Uz gradientiem bāzētās metodes}
+\subsection{Evolucionārās metodes}
 
 \chapter{Stimulētā mācīšanās} \label{chap:stim}
 \section{apakšnodaļa}
