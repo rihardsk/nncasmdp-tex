@@ -113,7 +113,7 @@ Abstract-en
 
 \specnodala{Ievads}
 Te ir ievads
-\chapter{Markova izvēles procesi}
+\chapter{Markova izvēles procesi} \label{chap:mdp}
 Nodaļā tiek apskatīti Markova izvēles procesi ar mērķi sniegt vispārīgu priekšstatu par tēmu.
 Tiek doti arī piemēri un paņēmieni, kas tieši neattiecas uz darba mērķi, bet doti, lai vieglāk izprast jēdziena kontekstu, tomēr lielākā daļa izklāsta ir pozicionēta tieši vēlāk apskatāmās stimulētās mācīšanās kontekstā.
 
@@ -433,6 +433,19 @@ Skatoties uz nelineāriem funkciju aproksimētājiem kopumā -- atsevišķos gad
 \subsection{Evolucionārās metodes}
 
 \chapter{Stimulētā mācīšanās} \label{chap:stim}
+Simulētas mācīšanās (reinforcement learning) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
+Tā vietā, lai problēmu risinātu dodot algoritmam sagatavotus ieejas datus ar norādītām labākajām darbībām, algoritms mācās no savas pieredzes, izmēģinot darbības un novērojot saņemto atalgojumu.
+Vispārīgā gadījumā algoritmam ir patstāvīgi jāapgūst darbošanās sarežģītos problēmapgabalos, kur darbības labumu var izvērtēt tikai ilgtermiņā uz priekšu.
+Citējot \citet{Barto}: "Šie divi atribūti -- mācīšanās no pieredzes un novēlotais atalgojums -- ir simulētās mācīšanās vissvarīgākās raksturiezīmes.
+Simulēto mācīšanos definē nevis mācīšanās metodes, bet gan risināmā problēma."
+Šīs pieejas ir interesantas, jo ir tuvas idealizētam skatījumam uz to, kā mācās dzīvnieki vai cilvēks.
+
+De facto modelis stimulētās mācīšanās problēmu formalizēšanai ir \ref{chap:mdp} nodaļā apskatītie Markova izvēles procesi.
+Tiek pieņemts, ka aģentam sākotnēji nav pieejama nekāda informācija par procesu, izņemot, kādām kopām pieder procesa stāvokļi un pieejamās darbības.
+
+Dažādās konceptuālās MDP risināšanas pieejas, kas izriet no Bellmana vienādojumiem ir apskatītas nodaļā \ref{chap:mdp}
+Šajā nodaļā tiks pievērsta padziļināta uzmanība stratēģijas aproksimēšanas algoritmiem.
+
 \section{apakšnodaļa}
 Apakšnodaļas teksts.
 
