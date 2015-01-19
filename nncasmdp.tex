@@ -456,18 +456,29 @@ Tas ir nozīmīgs ieguvums nepārtrauktās darbību telpās, jo nav jāveic darb
  
 Lai stratēģijas aproksimēšanai varētu izmantot kādu parametrizētu funkciju, nepieciešams ieviest veidu, kā pielāgot tās parametrus algoritma darbības laikā, ņemot vērā saņemto atalgojumu.
 Standarta pieeja ir izmantot gradient ascent soļus pa $V^\pi$ sagaidāmās vērtības funkciju \autocite{williams1992simple} \autocite{sutton2000policy} \autocite{Hasselt2012}.
-Stratēģijas parametru pielāgošanas solis ir
+Stratēģijas parametru pielāgošanas solis (batch gadījumā) ir
 \[
 	\psi_{k+1} = \psi_k + \beta_k \nabla_\psi E \left\{V^\pi(s_t)\right\} = \psi_k + \beta_k \nabla_\psi \int_{s \in S} P(s_t = s) V^\pi(s)\ ds,
 \]
 kur $P(s_t = s)$ norāda varbūtību, ka aģents laikā $t$ atrodas stāvoklī $s$, un $\beta_k \in [0,1]$ ir mācīšanās soļa izmērs.
-Pastāv arī alternatīva, kur tiek lietots gradient ascent stohastiskais variants, kas ļauj parametru vērtības pielāgot katrā solī.
+Pastāv arī alternatīva, kur tiek lietots gradient ascent stohastiskais variants, kas ļauj parametru vērtības pielāgot katrā solī
 \[
 	\psi_{t+1} = \psi_t + \beta_t(s_t) \nabla_\psi V^\pi(s_t).
 \]
 
-Šeit actor-only algoritmi sastopas ar problēmu.
+Šeit actor-only algoritmi sastopas ar problēmu. Veicot gradient ascent soļus pa $V^\pi$ funkciju (vai sagaidāmās vērtības funkciju) diferencējamā funkcija actor-only piegājienā nav pieejama.
+Ar to iespējams tikt galā, ar vairākām matemātiskām manipulācijām, kas šeit izlaistas, izsakot $\nabla_\psi V^\pi(s_t)$ ar $\pi$ funkciju
+\[
+	\nabla_\psi V^\pi(s_t) = E \left\{R_k(s_t) \left(\sum\limits_{j=t}^{T_k - 1} \nabla_\psi \log \pi(s_j, a_j, \psi) \right) \right\}
+\]
 
+Sagaidāmā vērtība šajā un atvasinātajās metodēs tiek iegūta ar Monte Carlo metodēm \autocite{halton1970retrospective}.
+Īsumā -- meklējamā vērtība tiek novērtēta ar vairāku nejaušu paraugu palīdzību.
+Monte Carlo metodes pielietojot gradienta aprēķiniem actor-only piegājienā, ir novērots, ka tās saistās ir lielas variances ieviešanu rezultātos.
+Ar dažādiem paņēmieniem ar šo efektu ir iespējams cīnīties, bet, kā vēlāk redzēsim, actor-critic piegājienā no šo metožu izmantošanas ir iespējams izvairīties vispār. %TODO: kas atrisina saistītās problēmas.?
+
+Actor-only metodēm mēs tālāk šeit nesekosim.
+Vispārīgs pārskats ir dots \autocite{Hasselt2012}.
  
 \subsection{Actor-critic metodes un CACLA algoritms}
 
