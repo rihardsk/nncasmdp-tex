@@ -433,7 +433,7 @@ Skatoties uz nelineāriem funkciju aproksimētājiem kopumā -- atsevišķos gad
 \subsection{Evolucionārās metodes}
 
 \chapter{Stimulētā mācīšanās} \label{chap:stim}
-Simulētas mācīšanās (reinforcement learning) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
+Simulētas mācīšanās (SM, angliski -- reinforcement learning) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
 Tā vietā, lai problēmu risinātu dodot algoritmam sagatavotus ieejas datus ar norādītām labākajām darbībām, algoritms mācās no savas pieredzes, izmēģinot darbības un novērojot saņemto atalgojumu.
 Vispārīgā gadījumā algoritmam ir patstāvīgi jāapgūst darbošanās sarežģītos problēmapgabalos, kur darbības labumu var izvērtēt tikai ilgtermiņā uz priekšu.
 Citējot \citet{Barto}: "Šie divi atribūti -- mācīšanās no pieredzes un novēlotais atalgojums -- ir simulētās mācīšanās vissvarīgākās raksturiezīmes.
@@ -446,8 +446,30 @@ Tiek pieņemts, ka aģentam sākotnēji nav pieejama nekāda informācija par pr
 Dažādās konceptuālās MDP risināšanas pieejas, kas izriet no Bellmana vienādojumiem ir apskatītas nodaļā \ref{chap:mdp}
 Šajā nodaļā tiks pievērsta padziļināta uzmanība stratēģijas aproksimēšanas algoritmiem.
 
-\section{apakšnodaļa}
-Apakšnodaļas teksts.
+\section{Stratēģijas aproksimācija}
+Kā iepriekš minēts, stratēģijas aproksimācijas pieeju raksturo stratēģijas funkcijas $\pi$ glabāšana tiešā veidā un pielāgošana algoritma darbības laikā, lai to tuvinātu optimālajai stratēģijai $\pi^*$.
+Tas ļauj izvairīties no grūtībām, ar ko nākas saskarties tīrajās vērtību aproksimācijas metodēs, tā kā nav nepieciešams papildus darbs, lai atrastu labāko stratēģiju algoritma darbības beigās, vai arī labāko gājienu kādam stāvoklim algoritma darbības laikā.
+Tas ir nozīmīgs ieguvums nepārtrauktās darbību telpās, jo nav jāveic darbību telpas diskretizācija, un ir pat iespējams lietot procesa stāvokļus tiešā veidā bez atsevišķa parametru iegūšanas soļa.
+%TODO varbūt vajag pieminēt ATARI rakstu un pateikt, ka gribu darīt tāpat, kā viņi ar value funkciju.
+
+Šeit mēs lietosim pielāgotu stratēģijas funkcijas definīciju, lai pieļautu iespēju lietot stratēģiju nosakošu parametru vektoru. Funkcija būs formā $\pi: S \times A \times \Psi \rightarrow [0,1]$, kur $\pi(s, a, \psi)$ norāda varbūtību atrodoties stāvoklī $s$ veikt darbību $a$ pie stratēģijas parametru vērtībām $\psi \in \Psi \subseteq \mathbb{R}^{D_\Psi}$.
+ 
+Lai stratēģijas aproksimēšanai varētu izmantot kādu parametrizētu funkciju, nepieciešams ieviest veidu, kā pielāgot tās parametrus algoritma darbības laikā, ņemot vērā saņemto atalgojumu.
+Standarta pieeja ir izmantot gradient ascent soļus pa $V^\pi$ sagaidāmās vērtības funkciju \autocite{williams1992simple} \autocite{sutton2000policy} \autocite{Hasselt2012}.
+Stratēģijas parametru pielāgošanas solis ir
+\[
+	\psi_{k+1} = \psi_k + \beta_k \nabla_\psi E \left\{V^\pi(s_t)\right\} = \psi_k + \beta_k \nabla_\psi \int_{s \in S} P(s_t = s) V^\pi(s)\ ds,
+\]
+kur $P(s_t = s)$ norāda varbūtību, ka aģents laikā $t$ atrodas stāvoklī $s$, un $\beta_k \in [0,1]$ ir mācīšanās soļa izmērs.
+Pastāv arī alternatīva, kur tiek lietots gradient ascent stohastiskais variants, kas ļauj parametru vērtības pielāgot katrā solī.
+\[
+	\psi_{t+1} = \psi_t + \beta_t(s_t) \nabla_\psi V^\pi(s_t).
+\]
+
+Šeit actor-only algoritmi sastopas ar problēmu.
+
+ 
+\subsection{Actor-critic metodes un CACLA algoritms}
 
 \chapter{Diskusija}
 \chapter{Secinājumi}
