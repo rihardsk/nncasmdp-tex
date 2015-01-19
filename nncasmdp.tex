@@ -415,7 +415,18 @@ Bultiņas apzīmē, kuru neironu atgrieztās vērtības tiek izmantotas kāda ne
 
 Ir pierādīts, ka neironu tīkli darbojas kā universāli funkciju aproksimētāji \autocite{hornik1991approximation}.
 Šo apgalvojumu formulē kā universālās aproksimācijas teorēmu (universal approximation theorem).
-Tā apgalvo, ka feed-forward tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
+Tā apgalvo, ka feed-forward tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni, ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
+Tas nozīmē, ka neironu tīkls ar pietiekamu ir izmantojams patvaļīgu funkciju aproksimēšanai.
+Šī ir nozīmīga priekšrocība, salīdzinot ar, piemēram, lineārajiem funkciju aproksimājiem.
+Turklāt, kā ieejas parametrus iespējams izmantot MDP stāvokļu mainīgos, izvairoties no atsevišķas parametru funkcijas ieviešanas.
+
+Tomēr universālās aproksimācijas teorēma nerisina jautājumu par attiecīgo parametru algoritmisku iegūšanu, bet tikai par to eksistenci.
+Praksē uzdevums vispārīgā gadījumā ir sarežģīts.
+Neironu tīkla parametru iegūšanu apgrūtina nepieciešamība izvairīties no lokālajiem minimumiem trenēšanas procesā, tīkla arhitektūras izvēle, lai izvairītos no pārlieku pielāgošanās treniņa datiem (overfitting) un grūtības, kas saistītas ar labu hiperparametru izvēli trenēšanas procesam.
+Turklāt nelineārajiem funkciju aproksimētājiem kopumā ir mazāk garantiju, ka trenēšanas algoritmus konverģēs uz optimālo risinājumu.
+Tomēr pastāv veidi, kā ar šīm problēmām cīnīties -- overfitting problēmu risina ar regularizācijas palīdzību \autocite{sarle1995stopped} \autocite{srivastava2014dropout}, atsevišķām neironu tīklu arhitektūrām var veidot mērķa funkciju, kas ir ieliekta, un pastāv metodes optimālo hiperparametru meklēšanai \autocite{bergstra2011algorithms}.
+Kopumā neironu tīklu trenēšanu ir ļoti atvieglojusi backpropagation algoritma ieviešana \autocite{Werbos74} \autocite{Rumelhart1988}.
+Skatoties uz nelineāriem funkciju aproksimētājiem kopumā -- atsevišķos gadījumos var arī tikt dotas konverģences garantijas vismaz lokālā optimuma sasniegšanai \autocite{bhatnagar2009convergent}.
 
 \section{Parametru pielāgošana}
 \subsection{Uz gradientiem bāzētās metodes}
