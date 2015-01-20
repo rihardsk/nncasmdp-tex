@@ -453,6 +453,9 @@ Tas ir nozīmīgs ieguvums nepārtrauktās darbību telpās, jo nav jāveic darb
 %TODO varbūt vajag pieminēt ATARI rakstu un pateikt, ka gribu darīt tāpat, kā viņi ar value funkciju.
 
 Šeit mēs lietosim pielāgotu stratēģijas funkcijas definīciju, lai pieļautu iespēju lietot stratēģiju nosakošu parametru vektoru. Funkcija būs formā $\pi: S \times A \times \Psi \rightarrow [0,1]$, kur $\pi(s, a, \psi)$ norāda varbūtību atrodoties stāvoklī $s$ veikt darbību $a$ pie stratēģijas parametru vērtībām $\psi \in \Psi \subseteq \mathbb{R}^{D_\Psi}$.
+
+%TODO šeit iespējams vajag Actor-only virsrakstu
+\subsection{Actor-only metodes}
  
 Lai stratēģijas aproksimēšanai varētu izmantot kādu parametrizētu funkciju, nepieciešams ieviest veidu, kā pielāgot tās parametrus algoritma darbības laikā, ņemot vērā saņemto atalgojumu.
 Standarta pieeja ir izmantot gradient ascent soļus pa $V^\pi$ sagaidāmās vērtības funkciju \autocite{williams1992simple} \autocite{sutton2000policy} \autocite{Hasselt2012}.
@@ -462,25 +465,35 @@ Stratēģijas parametru pielāgošanas solis (batch gadījumā) ir
 \]
 kur $P(s_t = s)$ norāda varbūtību, ka aģents laikā $t$ atrodas stāvoklī $s$, un $\beta_k \in [0,1]$ ir mācīšanās soļa izmērs.
 Pastāv arī alternatīva, kur tiek lietots gradient ascent stohastiskais variants, kas ļauj parametru vērtības pielāgot katrā solī
-\[
+\begin{equation} \label{eq:stohgrad}
 	\psi_{t+1} = \psi_t + \beta_t(s_t) \nabla_\psi V^\pi(s_t).
-\]
+\end{equation}
 
 Šeit actor-only algoritmi sastopas ar problēmu. Veicot gradient ascent soļus pa $V^\pi$ funkciju (vai sagaidāmās vērtības funkciju) diferencējamā funkcija actor-only piegājienā nav pieejama.
 Ar to iespējams tikt galā, ar vairākām matemātiskām manipulācijām, kas šeit izlaistas, izsakot $\nabla_\psi V^\pi(s_t)$ ar $\pi$ funkciju
-\[
+\begin{equation} \label{eq:nablav}
 	\nabla_\psi V^\pi(s_t) = E \left\{R_k(s_t) \left(\sum\limits_{j=t}^{T_k - 1} \nabla_\psi \log \pi(s_j, a_j, \psi) \right) \right\}
-\]
+\end{equation}
 
 Sagaidāmā vērtība šajā un atvasinātajās metodēs tiek iegūta ar Monte Carlo metodēm \autocite{halton1970retrospective}.
 Īsumā -- meklējamā vērtība tiek novērtēta ar vairāku nejaušu paraugu palīdzību.
-Monte Carlo metodes pielietojot gradienta aprēķiniem actor-only piegājienā, ir novērots, ka tās saistās ir lielas variances ieviešanu rezultātos.
-Ar dažādiem paņēmieniem ar šo efektu ir iespējams cīnīties, bet, kā vēlāk redzēsim, actor-critic piegājienā no šo metožu izmantošanas ir iespējams izvairīties vispār. %TODO: kas atrisina saistītās problēmas.?
+Monte Carlo metodes pielietojot gradienta aprēķiniem actor-only piegājienā, ir novērots, ka tās saistās ir lielas dispersijas ieviešanu rezultātos.
+Tas var būtiski negatīvi ietekmēt laiku, kas algoritmam ir nepieciešams, lai sasniegtu rezultātu.
+Ar dažādiem paņēmieniem ar šo efektu ir iespējams cīnīties, bet, kā vēlāk redzēsim, actor-critic piegājienā no šo metožu izmantošanas ir iespējams izvairīties vispār. %TODO: kas atrisina ar to saistītās problēmas.?
 
 Actor-only metodēm mēs tālāk šeit nesekosim.
 Vispārīgs pārskats ir dots \autocite{Hasselt2012}.
  
 \subsection{Actor-critic metodes un CACLA algoritms}
+Actor-critic metodes ar iepriekšējā sadaļā norādītajiem ierobežojumiem cīnās līdztekus ar $\pi^*$ aproksimējot arī $V^*$.
+Gadījumā, kad parametru vektora $\psi$ pielāgošanai tiek izmantoti gradient ascent soļi pa $V^\pi$, tas ļauj iztikt bez vienādojumā \eqref{eq:nablav} redzamā lieluma novērtēšanas ar Monte Carlo metodēm, jo var parādīt, ka tā vietā var novērtēt $Q^\pi(s_t, a_t) - V^\pi(s_t)$ ar lielumu $\delta_t = r_{t+1} + \gamma V_t(s_t + 1) - V_t(s_t)$.
+$\delta_t$ tiek dēvēts par temporal difference error.
+Tas ļauj stratēģijas gradientu novērtēt ar $\delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)$, aizstājot \eqref{eq:stohgrad} ar
+
+\[
+	\psi_{t+1} = \psi_t + \beta_t(s_t) \delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)
+\]
+kā stratēģijas parametru pielāgošanas soli.
 
 \chapter{Diskusija}
 \chapter{Secinājumi}
