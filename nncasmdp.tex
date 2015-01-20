@@ -486,7 +486,7 @@ Ja funkcija $A(x)$ ir nepārtraukta, un ir parametrizēta ar kādu papildus vekt
 \[
 	\theta_{t+1} = \theta_t + \alpha \left(B_t - A_t(x)\right) \nabla_\theta A_t(x),
 \]
-ko var interpretēt kā gradient ascent soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
+ko var interpretēt kā gradient descent soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
 Tas ļauj pārrakstīt TD soli kā
 \[
 	V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1}).
@@ -569,7 +569,7 @@ CACLA pseidokods ir dots algoritmā \ref{alg:cacla}
 \begin{algorithm}
 \caption{CACLA pseidokods}\label{alg:cacla}
 inicializē $\theta_0, \psi_0, s_0$ \\
-\For{$f \in \{0,1,2,\ldots\}$}{
+\For{$t \in \{0,1,2,\ldots\}$}{
 	ņem $a_t$ ar izkliedi ap $Ac_t(s_t)$ \\
 	veic $a_t$, novēro $r_t, s_{t+1}$ \\
 	\eIf{$s_{t+1}$ ir gala stāvoklis}{
@@ -585,8 +585,19 @@ inicializē $\theta_0, \psi_0, s_0$ \\
 \end{algorithm}
 \end{spacing}
 
-CACLA algoritms ir ieviests \autocite{Hasselt2007}. Tas radies, pielāgojot actor-critic learning automaton (ACLA) algoritmu nepārtrauktām darbību telpām. To darbībā ir vairākas līdzības, piemēram. glabā $V^*$ un $\pi^*$ funkciju aproksimācijas.
+CACLA algoritms ir ieviests \autocite{Hasselt2007}. Tas radies, pielāgojot actor-critic learning automaton (ACLA) algoritmu nepārtrauktām darbību telpām.
+To darbībā ir vairākas līdzības, piemēram $Ac_t$ pielāgošana, ņemot vērā tikai TD izmaiņas zīmi, nevis konkrēto vērtību, kā tas tiek darīts vairumā citu actor-critic algoritmu.
+Šai pieejai ir vairākas priekšrocības \autocite{Hasselt2007}.
+Tā dara algoritmu noturīgu pret troksni novērojumos trenēšanas laikā.
+CACLA algoritma gadījumā tā padara stāvokļu vērtību funkciju invariantu pret dažāda veida mērogošanu.
+Kā papildus ieguvums ir tas, ka algoritmu ir viegli implementēt.
+Kā arī šis ir viens no iemesliem, kāpēc algoritmu ir viegli izmantot nepārtrauktām darbību telpām un savietot ar, piemēram, neironu tīkliem.
+Tā kā TD izmaiņas apmērs nav būtisks, aktiera parametrus var pielāgot, ņemot vērā tikai kļūdu darbību telpā.
+Izmantotais pielāgošanas solis $Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t$ ir ekvivalents gradient descent soļa veikšanai parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
+Citiem vārdiem -- aproksimācijai lietojot neironu tīklus, to parametru pielāgošanai pie pozitīvas TD izmaiņas var lietot standarta stohastiskā gradient descent pielāgošanas soli.
+Tas atbilst no mašīnmācīšanās aizgūtajai intuīcijai par neironu tīklu parametru pielāgošanu.
 
+\subsubsection{CACLA darbības analīze literatūrā}
 \chapter{Diskusija}
 \chapter{Secinājumi}
 Te ir secinājumi
