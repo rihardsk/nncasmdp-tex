@@ -486,7 +486,7 @@ Ja funkcija $A(x)$ ir nepārtraukta, un ir parametrizēta ar kādu papildus vekt
 \[
 	\theta_{t+1} = \theta_t + \alpha \left(B_t - A_t(x)\right) \nabla_\theta A_t(x),
 \]
-ko var interpretēt kā gradient descent soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
+ko var interpretēt, kā gradient descent soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
 Tas ļauj pārrakstīt TD soli kā
 \[
 	V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1}).
@@ -592,16 +592,43 @@ Tā dara algoritmu noturīgu pret troksni novērojumos trenēšanas laikā.
 CACLA algoritma gadījumā tā padara stāvokļu vērtību funkciju invariantu pret dažāda veida mērogošanu.
 Kā papildus ieguvums ir tas, ka algoritmu ir viegli implementēt.
 Kā arī šis ir viens no iemesliem, kāpēc algoritmu ir viegli izmantot nepārtrauktām darbību telpām un savietot ar, piemēram, neironu tīkliem.
+
+Zīmīgi ir arī tas, ka TD izmaiņas apjoma ignorēšana var dot mācīšanās ātruma pieaugumu.
+Tas ir novērojams, kad stāvokļu vērtības funkcijas parametri nonāk apgabalos ar mazām izmaiņām funkcijas vērtību telpā.
+Šādos apgabalos TD izmaiņas apjoms ir mazs, un klasiskajā gadījumā tas noved pie mazas izmaiņas aktiera parametros.
+Intuīcija saka, ka pielāgojot aktiera uzvedību, attālums līdz jaunai daudzsološai darbībai ir nozīmīgāks nekā stāvokļa vērtības pieaugums, ko jaunā uzvedība sniegtu sniegtu.
+
+Šiem apsvērumiem par labu runā arī novērojumi \autocite{Hasselt2007}.
+Rakstā CACLA algoritms tiek salīdzināts ar citiem nepārtrauktu darbības telpu actor-critic algoritmiem.
+Novērojumi rāda, ka CACLA daudz ātrāk sasniedz labas stratēģijas.
+Apskatīts tiek arī CACLA variants, kas veic papildus aktiera pielāgošanas soļus, ja TD izmaiņa ir bijusi liela attiecībā pret standartnovirzi, kas noved pie vēl ātrākas labas stratēģijas sasniegšanas.
+
 Tā kā TD izmaiņas apmērs nav būtisks, aktiera parametrus var pielāgot, ņemot vērā tikai kļūdu darbību telpā.
 Izmantotais pielāgošanas solis $Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t$ ir ekvivalents gradient descent soļa veikšanai parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
 Citiem vārdiem -- aproksimācijai lietojot neironu tīklus, to parametru pielāgošanai pie pozitīvas TD izmaiņas var lietot standarta stohastiskā gradient descent pielāgošanas soli.
 Tas atbilst no mašīnmācīšanās aizgūtajai intuīcijai par neironu tīklu parametru pielāgošanu.
 
-\subsubsection{CACLA darbības analīze literatūrā}
+Atšķirībā no ACLA algoritma, CACLA nepielāgo aktieri, ja TD izmaiņa ir bijusi negatīva. Tādējādi tiktu veiktas izmaiņas virzienā prom no izmēģinātās darbības, t.i., kādas citas neizmēģinātas darbības virzienā.
+Šādu pieeju pamato, apskatot gadījumu, kad algoritms, pieņemsim, jau ir sasniedzis optimālo stratēģiju un stāvokļu vērtības funkciju.
+Šajā gadījumā neviena darbība nenoved pie pozitīva TD izmaiņas un algoritms virzās prom no optimālās stratēģijas.
+Tas ir arī empīriski pārbaudīts \autocite{Hasselt2007}.
+CACLA modifikācijai, kas veic izmaiņas stratēģijā arī, kad TD izmaiņa ir bijusi negatīva, ir novērojama pasliktināšanās algoritma darbībā.
+
+Citā darbā CACLA algoritms tiek salīdzināts arī ar vērtību aproksimācijas algoritmiem diskrētās darbību telpās \autocite{Hasselt2009}.
+Tiek parādīts, ka pārbaudītajos domēnos CACLA ir izteiktas priekšrocības attiecībā pret diskrētu darbības telpu algoritmiem, kā Q-learning un Sarsa, neskatoties uz to, ka CACLA darbības tiek noapaļotas uz tuvākajām pieļaujamajām.
+Interesants novērojums minētajā darbā ir, ka CACLA parāda spējas vispārināt apgūto stratēģiju līdzīgiem uzdevumiem.
+Tika novērots, ka darbību telpas samazināšana cart-pole uzdevumā, atstājot tikai 2 pieejamās darbības, neprasīja algoritma pārtrenēšanu, atšķirībā no pārējiem algoritmiem.
+Tas tiek skaidrots ar priekšrocībām, ko sniedz nepārtrauktas darbību telpas izmantošana.
+Diskrēto algoritmu rezultātu kritums ir skaidrojams ar to, izmestās darbības tika apgūtas, ka atsevišķas sastāvdaļas stratēģijā.
+Tā kā algoritms ir iemācījies uz tām paļauties lielā daļā gadījumu, tad to izmešana būtiski negatīvi ietekmē sniegumu.
+CACLA neiemācās paļauties uz konkrētām darbībām -- stratēģija ir vispārīga, jo ir ietvertas sakarības darbību telpā.
+Tomēr interesanti, ka ieguvums ir arī attiecībā pret pārējiem testētajiem nepārtraukto darbības telpu algoritmiem.
+
+%\subsubsection{CACLA darbības analīze literatūrā}
 \chapter{Diskusija}
 \chapter{Secinājumi}
 Te ir secinājumi
 
 \printbibliography
-
+%TODO pārbaudīt, vai tiek litots saku diskrētās, nevis pārtrauktās
 \end{document}
