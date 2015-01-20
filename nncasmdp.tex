@@ -49,7 +49,18 @@
  {\begin{enumerate}[label=\upshape(\arabic*),ref=\thethm(\arabic*)]}
  {\end{enumerate}}
 \usepackage{amsmath}
- 
+
+%pseidokodam
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%\usepackage[noend]{algpseudocode}
+%\usepackage{algpseudocode}
+\usepackage[boxed,linesnumbered]{algorithm2e}
+\SetAlgorithmName{Algoritms}{}{Algoritmu saraksts}
+
+%main line spacing, kur vajag
+\usepackage{setspace}
+
 %\begin{thmenum}
 %\item \label{foo} Foo
 %\item \label{bar} Bar
@@ -102,7 +113,7 @@ Abstract-en
   \endhead
 
   \hline
-  $D_X \in \mathbb{N}_+$ & \\
+  $D_X \in \mathbb{N}_+$ & \\ %TODO šis jādefinē arī telpas elementiem
   $S \subseteq \mathbb{R}^{D_S}$ & \\
   $A \subseteq \mathbb{R}^{D_A}$ & \\
   $R:S \times A \times S \rightarrow \mathbb{R}$ & \\
@@ -229,9 +240,9 @@ Tā izsaka, cik izdevīgi ir atrasties kādā stāvoklī pie dotās stratēģija
 \begin{definicija}
 Teiksim, ka ir dota kontroles shēma $\pi$.
 Tai atbilstošā stāvokļu vērtības funkcija $V^\pi : S \rightarrow \mathbb{R}$ izsaka sagaidāmo atalgojumu, sekojot stratēģijai $\pi$, sākot no stāvokļa $s$:
-\[
+\begin{equation} \label{eq:vpi}
 	V^\pi (s) = E_\pi \left\{ \sum_{k=0}^{\infty} \gamma^k r_{t+k} \mid s_t = s\right\}
-\]
+\end{equation}
 \end{definicija}
 
 Līdzīgi var ieviest arī stāvokļu-darbību vērtību funkciju:
@@ -364,7 +375,7 @@ Par lineāru funkciju dēvē tādu funkciju, ko var izteikt formā
 \[
 	F(\phi) = \Theta^T \phi,
 \]
-kur $\Theta$ ir funkcijas parametru vektors un $D_\Theta = D_\phi$.
+kur $\Theta$ ir funkcijas parametru vektors un $D_\Theta = D_\phi$. %TODO D ir definēts telpām. jāpielāgo definīcija, vai šis jāmaina
 Stimulētās mācīšanās kontekstā parasti tiek pieņemts, ka $\phi$ ir kāda funkcija parametru iegūšanai no MDP stāvokļa $\phi : S \times \Phi$, kur $\Phi$ ir kāda parametru telpa.
 Tad, lineāru funkciju izmantojot, piemēram, stāvokļu vērtības funkcijas aproksimēšanai, to var izteikt formā
 \[
@@ -445,6 +456,43 @@ Tiek pieņemts, ka aģentam sākotnēji nav pieejama nekāda informācija par pr
 
 Dažādās konceptuālās MDP risināšanas pieejas, kas izriet no Bellmana vienādojumiem ir apskatītas nodaļā \ref{chap:mdp}
 Šajā nodaļā tiks pievērsta padziļināta uzmanība stratēģijas aproksimēšanas algoritmiem.
+Bet vispirms jāsniedz īss ieskats temporal difference soļu izmantošanu algoritmos.
+
+\subsection{Temporal difference soļi} \label{chap:td}
+Temporal difference (TD) soļi tiek izmantoti stāvokļu vērtības funkcijas aproksimācijā.
+Šis paņēmiens ir idejiski tuvās vērtības aproksimācijas metodēm, bet, kā vēlāk redzēsim, ir izmantojams arī actor-critic metodēs, lai iegūtu $V^*$ aproksimāciju.
+Pastāv dažādas idejas variācijas, kas ir pamatā vairākiem vērtību aproksimācijas algoritmiem, kas tiek klasificēti zem TD learning vārda, bet pamatideja ir vienkārša.
+TD soļiem tabulārajā formā stāvokļu vērtību funkcija tiek pielāgota, izmantojot vienādojumu
+\[
+	V_{t+1}(s_t) = V_t + \alpha_t(s_t) \delta_t,
+\]
+kur $\delta_t = r_{t} + \gamma V_t(s_{t + 1}) - V_t(s_t)$ un $\alpha_t(s_t) \in [0,1]$ ir soļa lieluma parametrs.
+Nepārtrauktai stāvokļu vērtību funkcijai TD soļa pielietošana ir saistīta ar gradient ascent soļa veikšanu funkcijas parametriem.
+Ja ir dota parametrizēta vērtību funkcija $V:S \times \Theta \rightarrow \mathbb{R}$, tad TD solis tiek veikts funkcijas parametriem atbilstoši vienādojumam
+\[
+	\theta_{t+1} = \theta_t + \alpha_t(s_t) \delta_t \nabla_\theta V_t(s_t).
+\]
+Uzskatāmības labad ieviesīsim jaunu apzīmējumu, kas šo pierakstu vienkāršos.
+Ar
+\[
+	A_{t+1}(x) \xleftarrow{\alpha} B_t
+\]
+apzīmēsim $A_t$ pielāgošanu, nākamajā laika momentā $A_t(x)$ tuvinot vērtības $B_t$ virzienā apmērā $\alpha$, kur $\alpha \in [0,1]$.
+Ja funkcija ir uzdota tabulārā formā (tā ir diskrēta), tad iepriekšējā izteiksme apzīmē soli
+\[
+	A_{t+1}(x) = A_t(x) + \alpha(A_t(x) - B_t).
+\]
+Ja funkcija $A(x)$ ir nepārtraukta, un ir parametrizēta ar kādu papildus vektoru $\theta$, tad ar pierakstu saprotam
+\[
+	\theta_{t+1} = \theta_t + \alpha \left(B_t - A_t(x)\right) \nabla_\theta A_t(x),
+\]
+ko var interpretēt kā gradient ascent soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
+Tas ļauj pārrakstīt TD soli kā
+\[
+	V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1}).
+\]
+
+Vairāk par TD metodēm var lasīt \autocite{Hasselt2012}.
 
 \section{Stratēģijas aproksimācija}
 Kā iepriekš minēts, stratēģijas aproksimācijas pieeju raksturo stratēģijas funkcijas $\pi$ glabāšana tiešā veidā un pielāgošana algoritma darbības laikā, lai to tuvinātu optimālajai stratēģijai $\pi^*$.
@@ -459,6 +507,7 @@ Tas ir nozīmīgs ieguvums nepārtrauktās darbību telpās, jo nav jāveic darb
  
 Lai stratēģijas aproksimēšanai varētu izmantot kādu parametrizētu funkciju, nepieciešams ieviest veidu, kā pielāgot tās parametrus algoritma darbības laikā, ņemot vērā saņemto atalgojumu.
 Standarta pieeja ir izmantot gradient ascent soļus pa $V^\pi$ sagaidāmās vērtības funkciju \autocite{williams1992simple} \autocite{sutton2000policy} \autocite{Hasselt2012}.
+Citiem vārdiem -- stratēģijas parametri tiek pielāgoti tā, lai pieaugtu funkcijas $V^\pi$, kā tā ieviesta \eqref{eq:vpi}, sagaidāmā vērtība.
 Stratēģijas parametru pielāgošanas solis (batch gadījumā) ir
 \[
 	\psi_{k+1} = \psi_k + \beta_k \nabla_\psi E \left\{V^\pi(s_t)\right\} = \psi_k + \beta_k \nabla_\psi \int_{s \in S} P(s_t = s) V^\pi(s)\ ds,
@@ -484,16 +533,59 @@ Ar dažādiem paņēmieniem ar šo efektu ir iespējams cīnīties, bet, kā vē
 Actor-only metodēm mēs tālāk šeit nesekosim.
 Vispārīgs pārskats ir dots \autocite{Hasselt2012}.
  
-\subsection{Actor-critic metodes un CACLA algoritms}
+\subsection{Actor-critic metodes}
 Actor-critic metodes ar iepriekšējā sadaļā norādītajiem ierobežojumiem cīnās līdztekus ar $\pi^*$ aproksimējot arī $V^*$.
-Gadījumā, kad parametru vektora $\psi$ pielāgošanai tiek izmantoti gradient ascent soļi pa $V^\pi$, tas ļauj iztikt bez vienādojumā \eqref{eq:nablav} redzamā lieluma novērtēšanas ar Monte Carlo metodēm, jo var parādīt, ka tā vietā var novērtēt $Q^\pi(s_t, a_t) - V^\pi(s_t)$ ar lielumu $\delta_t = r_{t+1} + \gamma V_t(s_t + 1) - V_t(s_t)$.
-$\delta_t$ tiek dēvēts par temporal difference error.
-Tas ļauj stratēģijas gradientu novērtēt ar $\delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)$, aizstājot \eqref{eq:stohgrad} ar
-
-\[
+Gadījumā, kad parametru vektora $\psi$ pielāgošanai tiek izmantoti gradient ascent soļi pa $V^\pi$, tas ļauj iztikt bez vienādojumā \eqref{eq:nablav} redzamā lieluma novērtēšanas ar Monte Carlo metodēm, jo var parādīt, ka tā vietā var novērtēt $Q^\pi(s_t, a_t) - V^\pi(s_t)$ ar lielumu $\delta_t = r_{t} + \gamma V_t(s_{t+1}) - V_t(s_t)$.
+Lielums $\delta_t$ tiek dēvēts par temporal difference (TD) error.
+Tas ļauj stratēģijas gradientu novērtēt ar $\delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)$ \autocite{sutton2000policy}, aizstājot \eqref{eq:stohgrad} ar
+\begin{equation} \label{eq:psi}
 	\psi_{t+1} = \psi_t + \beta_t(s_t) \delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)
-\]
+\end{equation}
 kā stratēģijas parametru pielāgošanas soli.
+
+Līdz šim ir apskatītas pieejas stratēģijas parametrus pielāgo, cenšoties paaugstināt $V^\pi$ sagaidāmo vērtību.
+Alternatīva ir parametrus pielāgot, cenšoties samazināt stratēģijas $\pi$ atšķirības no optimālās stratēģijas $\pi^*$.
+Citiem vārdiem -- ņemt vērā pašreizējās stratēģijas optimālo gājienu prognožu kļūdas.
+Šī ideja ir būtiska continuous action-critic learning automaton (CACLA) algoritmam, un nošķir to no vairuma citu actor-critic metožu.
+
+\subsubsection{CACLA algoritms}
+CACLA algoritma pamatā ir vienkārša ideja -- ja veiktā darbība paaugstina stāvokļa vērtības novērtējumu, tad šim stāvoklim ir derīgi pielāgot stratēģiju veiktās darbības virzienā, jo tā potenciāli var novest pie lielāka kopējā atalgojuma.
+%Paralēli tam, algoritms katrā solī uzlabo savu stāvokļu vērtības novērtējumu.
+%Laika gaitā stāvokļu vērtības novērtējums konverģē uz  Rezultātā algoritma stratēģija ar vien vairāk tuvojas optimālajai.
+Algoritms glabā funkciju $V:S \times \Theta \rightarrow \mathbb{R}$ -- kritiķi -- un $Ac : S \times \Psi \rightarrow A$ -- aktieri. Sasaistot apzīmējumus ar ierastajiem -- $V$ tagad tiek parametrizēta ar kādu vektoru $\theta \in \Theta$, kas ļaus pielāgot funkcijas vērtības algoritma darbības laikā. Apzīmēsim $V_t(s_t) = V(s_t, \theta_t)$ un $Ac_t(s_t) = Ac(s_t, \psi_t)$.
+Aktieris katrā solī dotajam stāvoklim $s_t$ sniedz darbību $Ac(s_t, \psi_t)$.
+Lai nodrošinātu darbību telpas izpēti, nepieciešams, lai galā izmantotā darbība atšķiras no ieteiktās, jeb $a_t \neq Ac(s_t, \psi_t)$.
+To var darīt, piemēram, ņemot $\pi(s_t, \psi_t)$ kā normālsadalījumu ar centru $Ac(s_t, \psi_t)$.
+Kad ir iegūta veicamā darbība $a_t$, novēro atalgojumu $r_t$ un veic standarta TD soli vērtību funkcijai, kā tas aprakstīts sadaļā \ref{chap:td}
+\[
+	V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1}).
+\]
+Ja $a_t$ veikšana ir palielinājusi $s_t$ vērtības novērtējumu, t.i., ja $V_{t+1}(s_t) > V_t(s_t)$, tad pielāgo aktieri darbības $a_t$ virzienā
+\[
+	Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t.
+\]
+CACLA pseidokods ir dots algoritmā \ref{alg:cacla}
+\begin{spacing}{1}
+\begin{algorithm}
+\caption{CACLA pseidokods}\label{alg:cacla}
+inicializē $\theta_0, \psi_0, s_0$ \\
+\For{$f \in \{0,1,2,\ldots\}$}{
+	ņem $a_t$ ar izkliedi ap $Ac_t(s_t)$ \\
+	veic $a_t$, novēro $r_t, s_{t+1}$ \\
+	\eIf{$s_{t+1}$ ir gala stāvoklis}{
+		$V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t$ \\
+		ņem jaunu $s_{t+1}$
+	}{
+		$V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1})$
+	}
+	\If{$V_{t+1}(s_t) > V_t(s_t)$}{
+		$Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t$
+	}
+}
+\end{algorithm}
+\end{spacing}
+
+CACLA algoritms ir ieviests \autocite{Hasselt2007}. Tas radies, pielāgojot actor-critic learning automaton (ACLA) algoritmu nepārtrauktām darbību telpām. To darbībā ir vairākas līdzības, piemēram. glabā $V^*$ un $\pi^*$ funkciju aproksimācijas.
 
 \chapter{Diskusija}
 \chapter{Secinājumi}
