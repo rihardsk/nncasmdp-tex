@@ -668,7 +668,7 @@ Tomēr vairākas interesantas tēmas ir palikušas ārpus darba robežām.
 
 Viena šāda tēma ir dziļo on un rekursīvā tipa neironu tīklu pielietojums simulētās mācīšanās jomā.
 Lai arī literatūrā dziļie neironu tīkli tiek apskatīti jau kopš 1980. gada, plašu atpazīstamību tie ir ieguvuši tikai salīdzinoši nesen, parādoties efektīvām metodēm to trenēšanai.
-To panākumi attēlu klasificēšanas jomā ir ievērojami, un %TODO
+To panākumi attēlu klasificēšanas jomā ir ievērojami, un šī darba tapšanas laikā tiem pieskaitāmas vairākas state of the art pieejas gan attēlu klasificēšanā, gan citos uzdevumos.
 Tomēr iespējams pat svarīgākas ir idejas, kas ir pienestas neironu tīklu pielietojumā un trenēšanā.
 Deep leaning pieejas atbrīvo no nepieciešamības veidot lielus, pašrocīgi sagatavotus datu masīvus.
 Mācīšanu iespējams veikt ar nemarķētiem (angliski unlabeled) datiem, un paraugi tiek izmantoti, lai tīkls iemācītos sakarības datos un tos abstrahēt.
@@ -688,7 +688,22 @@ Tomēr šādu tīklu pielietojums SI paradigmā šķiet ļoti labi motivēts.
 
 %tas, ka pats visu izdomāju :D
 \chapter{Secinājumi}
-Te ir secinājumi
+Modeļa aproksimācijas metodēs un plaši izmantotās vērtību aproksimācijas metodēs problēmas, kas saistās ar to pielietojumu nepārtrauktām darbību telpām nav vienkāršā veidā risināmas ar neironu tīkliem.
+Tam traucē fakts, ka šeit stratēģija tiek atvasināta no vērtību funkcijas.
+Tas arī saistās ar nepieciešamību diskretizēt darbību telpu.
+Darbā netiek tuvāk pētīts, cik pārvarama ir šī problēma, bet tā vietā risinājums tiek meklēts alternatīvā pieejā, ko sniedz stratēģijas aproksimācijas metodes.
+Stratēģiju glabājot tiešā veidā, paveras iespējas šo lomu uzticēt neironu tīklam.
+Tomēr, kā nākas secināt, daļā metožu tīkla parametru pielāgošana, jeb tīkla trenēšana, it diezgan sarežģīta.
+Actor-only metodēs nākas parametru pielāgošanu sarežģītā veidā sasaistīt ar atalgojuma funkcijas novērtējumiem, izmantojot Monte Carlo metodes.
+Alternatīvu piedāvā actor-critic pieeja, kur tiešā veidā tiek glabāta gan stāvokļu vērtības funkcijas aproksimācija gan stratēģijas aproksimācija.
+Šīs īpašības noved iespējas pie stratēģijas parametrus pielāgot, ņemot vērā kļūdu tās paredzēto darbību telpā, katras darbības labumu vērtējot ar izmaiņām, ko tās sniegtais atalgojums dod stāvokļa vērtības novērtējumam.
+Šīs idejas ir apvienotas CACLA, jeb continuous actor-critic learning automaton, algoritmā.
+Autora prāt algoritma dizains elegantā un vienkārša veidā iekļauj risinājumus visām iepriekš minētajām problēmām.
+Turklāt ir empīriski parādītas priekšrocības, kas tam piemīt mācīšanās ātruma ziņā salīdzinot ar plaši izmantotajiem klasisko pieeju algoritmiem, kā arī algoritmam piemīt vairākas citas pozitīvas īpašības, kas izpaužas nestandarta uzdevumu uzstādījumos, kā, piemēram, darbinot CACLA diskrētā darbību telpā, pēc laika samazinot pieejamo darbību skaitu.
+
+%Noslēgumā var secināt, ka s..
+%Sākotnējā intuīcija par neironu tīklu lietderību stimulētas mācīšanās uzdevumos ar nepārtrauktām darbību telpām ir bijusi derīga.
+
 
 \printbibliography
 %TODO pārbaudīt, vai tiek litots saku diskrētās, nevis pārtrauktās
