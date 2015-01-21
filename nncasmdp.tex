@@ -390,7 +390,10 @@ Pēc analoģijas, stratēģijas aproksimācijas algoritmus, kas neizmanto kādu 
 Stratēģijas aproksimācijas algoritmi tiks tuvāk apskatīti \ref{chap:stim} nodaļā.
 
 \chapter{Funkciju aproksimācija}
-Nodaļā tiek likts uzsvars uz nelineāro funkciju aproksimētāju, it īpaši neironu tīklu, apskatu, bet tiek arī apskatīti un īsumā izvērtēti citu klašu funkciju aproksimētāji, uzmanību pievēršot, piemēram, ģenētiskajiem algoritmiem.
+Nodaļā tiks apskatītas funkciju aproksimācijas metodes, kas ir pamatā darbā minētajiem stimulētās mācīšanās algoritmiem.
+Izklāsts ir daļēji tehniskas dabas, bet tiek skaidrotas arī pielietojamo metožu sekas attiecībā uz stimulētās mācīšanās uzdevumu veikšanu nepārtrauktās darbību telpās.
+Tiek likts uzsvars uz nelineāro funkciju aproksimētāju, it īpaši neironu tīklu, apskatu, kā arī tiek sniegta motivācija to lietojumam no tehniskās puses.
+%Tiek arī apskatīti un īsumā izvērtēti citu klašu funkciju aproksimētāji. %, uzmanību pievēršot, piemēram, ģenētiskajiem algoritmiem.
 
 Ar funkciju aproksimēšanu, sauktu arī par funkciju tuvināšanu, tiek saprastas pieejas, kuru mērķis ir, par izejas datiem ņemot aproksimējamās, jeb mērķa, funkcijas vērtības, atrast citu funkciju noteiktā klasē, kas pēc iespējas vairāk atbilst aproksimējamajai.
 Bieži vien aproksimējamā funkcija kā tāda nemaz nepastāv, bet aproksimēšana notiek ar mērķi iegūt funkciju, kas izsaka sakarības, kas novērojamas kādā mūs interesējošā procesā.
@@ -431,7 +434,7 @@ Piemēram, ja stāvokļu telpa tiek sadalīta vienādos apgabalos, kam katram ti
 Lineārajiem funkciju aproksimētājiem nepārtrauktās telpās piemīt iepriekšējā sadaļā minētā īpašība par novērojumu vispārināšanu iepriekš neapskatītiem telpas punktiem.
 Tomēr stāvokļu un darbību telpas diskretizācija ir iemesls, kāpēc šajā darbā priekšroka tiek dota tādiem nelineārajiem funkciju aproksimētājiem kā neironu tīkli.
 Labākā telpas diskretizācijas pieeja var būt atkarīga no uzdevuma.
-Tas ir pretrunā ar vēlmi atrast pēc iespējas vispārīgu pieeju stimuletās mācīšanās uzdevumu risināšanai nepārtrauktās telpās.
+Tas ir pretrunā ar vēlmi atrast pēc iespējas vispārīgu pieeju stimulētās mācīšanās uzdevumu risināšanai nepārtrauktās telpās.
 Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām var ar dažādiem panākumiem cīnīties, kas vairāk aprakstītas \autocite{Hasselt2012} .
 
 \subsection{Neironu tīkli un nelineārā funkciju aproksimēšana}
@@ -467,8 +470,9 @@ Ir pierādīts, ka neironu tīkli darbojas kā universāli funkciju aproksimēt�
 Šo apgalvojumu formulē kā universālās aproksimācijas teorēmu (universal approximation theorem).
 Tā apgalvo, ka feed-forward tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni, ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
 Tas nozīmē, ka neironu tīkls ar pietiekamu ir izmantojams patvaļīgu funkciju aproksimēšanai.
-Šī ir nozīmīga priekšrocība, salīdzinot ar, piemēram, lineārajiem funkciju aproksimājiem.
-Turklāt, kā ieejas parametrus iespējams izmantot MDP stāvokļu mainīgos, izvairoties no atsevišķas parametru funkcijas ieviešanas.
+Šī ir nozīmīga priekšrocība, salīdzinot ar, piemēram, lineārajiem funkciju aproksimājiem, un ir pamatā intuīcijai par neironu tīklu spēju uztvert sakarības MDP optimālajā kontroles stratēģijā.
+Kā arī spēja aproksimēt nepārtrauktas funkcijas ir nepieciešama lai funkciju aproksimētājs būtu spējīgs darboties nepārtrauktās darbību telpās.
+Turklāt, kā ieejas parametrus iespējams izmantot MDP stāvokļu mainīgos, izvairoties no atsevišķas parametru funkcijas ieviešanas, kas ļautu MDP risināšanā izmantot arī tādas pieejas, kas procesa stāvokli tiešā veidā tulko par veicamo darbību.
 
 Tomēr universālās aproksimācijas teorēma nerisina jautājumu par attiecīgo parametru algoritmisku iegūšanu, bet tikai par to eksistenci.
 Praksē uzdevums vispārīgā gadījumā ir sarežģīts.
