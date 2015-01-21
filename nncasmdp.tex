@@ -431,7 +431,7 @@ Piemēram, ja stāvokļu telpa tiek sadalīta vienādos apgabalos, kam katram ti
 Lineārajiem funkciju aproksimētājiem nepārtrauktās telpās piemīt iepriekšējā sadaļā minētā īpašība par novērojumu vispārināšanu iepriekš neapskatītiem telpas punktiem.
 Tomēr stāvokļu un darbību telpas diskretizācija ir iemesls, kāpēc šajā darbā priekšroka tiek dota tādiem nelineārajiem funkciju aproksimētājiem kā neironu tīkli.
 Labākā telpas diskretizācijas pieeja var būt atkarīga no uzdevuma.
-Tas ir pretrunā ar vēlmi atrast pēc iespējas vispārīgu pieeju simulētās mācīšanās uzdevumu risināšanai nepārtrauktās telpās.
+Tas ir pretrunā ar vēlmi atrast pēc iespējas vispārīgu pieeju stimuletās mācīšanās uzdevumu risināšanai nepārtrauktās telpās.
 Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām var ar dažādiem panākumiem cīnīties, kas vairāk aprakstītas \autocite{Hasselt2012} .
 
 \subsection{Neironu tīkli un nelineārā funkciju aproksimēšana}
@@ -483,11 +483,11 @@ Skatoties uz nelineāriem funkciju aproksimētājiem kopumā -- atsevišķos gad
 \subsection{Evolucionārās metodes}
 
 \chapter{Stimulētā mācīšanās} \label{chap:stim}
-Simulētas mācīšanās (SM, angliski -- reinforcement learning) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
-Tā vietā, lai problēmu risinātu dodot algoritmam sagatavotus ieejas datus ar norādītām labākajām darbībām, algoritms mācās no savas pieredzes, izmēģinot darbības un novērojot saņemto atalgojumu.
+Stimuletas mācīšanās (SM, angliski -- reinforcement learning) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
+Tā vietā, lai problēmu risinātu, dodot algoritmam sagatavotus ieejas datus ar norādītām labākajām darbībām, algoritms mācās no savas pieredzes, izmēģinot darbības un novērojot saņemto atalgojumu.
 Vispārīgā gadījumā algoritmam ir patstāvīgi jāapgūst darbošanās sarežģītos problēmapgabalos, kur darbības labumu var izvērtēt tikai ilgtermiņā uz priekšu.
-Citējot \citet{Barto}: "Šie divi atribūti -- mācīšanās no pieredzes un novēlotais atalgojums -- ir simulētās mācīšanās vissvarīgākās raksturiezīmes.
-Simulēto mācīšanos definē nevis mācīšanās metodes, bet gan risināmā problēma."
+Citējot \citet{Barto}: "Šie divi atribūti -- mācīšanās no pieredzes un novēlotais atalgojums -- ir stimuletās mācīšanās vissvarīgākās raksturiezīmes.
+Stimuleto mācīšanos definē nevis mācīšanās metodes, bet gan risināmā problēma."
 Šīs pieejas ir interesantas, jo ir tuvas idealizētam skatījumam uz to, kā mācās dzīvnieki vai cilvēks.
 
 De facto modelis stimulētās mācīšanās problēmu formalizēšanai ir \ref{chap:mdp} nodaļā apskatītie Markova izvēles procesi.
@@ -497,7 +497,7 @@ Dažādās konceptuālās MDP risināšanas pieejas, kas izriet no Bellmana vien
 Šajā nodaļā tiks pievērsta padziļināta uzmanība stratēģijas aproksimēšanas algoritmiem.
 Bet vispirms jāsniedz īss ieskats temporal difference soļu izmantošanu algoritmos.
 
-\subsection{Temporal difference soļi} \label{chap:td}
+\section{Temporal difference soļi} \label{chap:td}
 Temporal difference (TD) soļi tiek izmantoti stāvokļu vērtības funkcijas aproksimācijā.
 Šis paņēmiens ir idejiski tuvās vērtības aproksimācijas metodēm, bet, kā vēlāk redzēsim, ir izmantojams arī actor-critic metodēs, lai iegūtu $V^*$ aproksimāciju.
 Pastāv dažādas idejas variācijas, kas ir pamatā vairākiem vērtību aproksimācijas algoritmiem, kas tiek klasificēti zem TD learning vārda, bet pamatideja ir vienkārša.
@@ -694,14 +694,14 @@ Darba gaitā tika izskatīts liels apjoms literatūras, un secinājumi, kas atti
 darbā ir iekļauti.
 Tomēr vairākas interesantas tēmas ir palikušas ārpus darba robežām.
 
-Viena šāda tēma ir dziļo on un rekursīvā tipa neironu tīklu pielietojums simulētās mācīšanās jomā.
+Viena šāda tēma ir dziļo on un rekursīvā tipa neironu tīklu pielietojums stimulās mācīšanās jomā.
 Lai arī literatūrā dziļie neironu tīkli tiek apskatīti jau kopš 1980. gada, plašu atpazīstamību tie ir ieguvuši tikai salīdzinoši nesen, parādoties efektīvām metodēm to trenēšanai.
 To panākumi attēlu klasificēšanas jomā ir ievērojami, un šī darba tapšanas laikā tiem pieskaitāmas vairākas state of the art pieejas gan attēlu klasificēšanā, gan citos uzdevumos.
 Tomēr iespējams pat svarīgākas ir idejas, kas ir pienestas neironu tīklu pielietojumā un trenēšanā.
 Deep leaning pieejas atbrīvo no nepieciešamības veidot lielus, pašrocīgi sagatavotus datu masīvus.
 Mācīšanu iespējams veikt ar nemarķētiem (angliski unlabeled) datiem, un paraugi tiek izmantoti, lai tīkls iemācītos sakarības datos un tos abstrahēt.
 Pētot apmācītos tīklus attēlu klasificēšanas gadījumā, var redzēt, ka tīkla līmeņi patstāvīgi ir iemācījušies atpazīt attēla objektu malas, nākamiem līmeņiem veidojot jau dziļākas abstrakcijas, piemēram, cilvēka sejas kontūras.
-Tādēļ dziļo tīklu sasaistīšana ar simulētās mācīšanās paradigmu ir ļoti interesanta tēma, jo tā potenciāli varētu dot lielu ieguvumu sarežģītākos uzdevumos.
+Tādēļ dziļo tīklu sasaistīšana ar stimuletās mācīšanās paradigmu ir ļoti interesanta tēma, jo tā potenciāli varētu dot lielu ieguvumu sarežģītākos uzdevumos.
 Ir bijuši darbi, kur tas jau ir novērots, piemēram, jau iepriekš minētais \autocite{mnih2013playing}, kur SI aģents tika uztrenēts Atari 2600 videospēļu spēlēšanā, izmantojot neapstrādātus spēles pikseļus.
 Tomēr, tik zīmīgi panākumi nav novērojami stratēģijas aproksimēšanas jomā.
 Darbā \autocite{Levine2013} tika pētīts dziļo un rekursīvo neironu tīklu pielietojums robota ekstremitāšu kontrolē.
