@@ -91,7 +91,7 @@
 \maketitle
 
 \begin{abstract-lv}
-Abstract-lv
+
 \keywords{atslēgas vārds 1, atslēgas vārds 2}
 \end{abstract-lv}
 \clearpage
@@ -626,6 +626,31 @@ Tomēr interesanti, ka ieguvums ir arī attiecībā pret pārējiem testētajiem
 
 %\subsubsection{CACLA darbības analīze literatūrā}
 \chapter{Diskusija}
+Darba gaitā tika izskatīts liels apjoms literatūras, un secinājumi, kas attiecas uz sākotnēji uzstādīto mērķi, %TODO formulēt kādu
+darbā ir iekļauti.
+Tomēr vairākas interesantas tēmas ir palikušas ārpus darba robežām.
+
+Viena šāda tēma ir dziļo on un rekursīvā tipa neironu tīklu pielietojums simulētās mācīšanās jomā.
+Lai arī literatūrā dziļie neironu tīkli tiek apskatīti jau kopš 1980. gada, plašu atpazīstamību tie ir ieguvuši tikai salīdzinoši nesen, parādoties efektīvām metodēm to trenēšanai.
+To panākumi attēlu klasificēšanas jomā ir ievērojami, un %TODO
+Tomēr iespējams pat svarīgākas ir idejas, kas ir pienestas neironu tīklu pielietojumā un trenēšanā.
+Deep leaning pieejas atbrīvo no nepieciešamības veidot lielus, pašrocīgi sagatavotus datu masīvus.
+Mācīšanu iespējams veikt ar nemarķētiem (angliski unlabeled) datiem, un paraugi tiek izmantoti, lai tīkls iemācītos sakarības datos un tos abstrahēt.
+Pētot apmācītos tīklus attēlu klasificēšanas gadījumā, var redzēt, ka tīkla līmeņi patstāvīgi ir iemācījušies atpazīt attēla objektu malas, nākamiem līmeņiem veidojot jau dziļākas abstrakcijas, piemēram, cilvēka sejas kontūras.
+Tādēļ dziļo tīklu sasaistīšana ar simulētās mācīšanās paradigmu ir ļoti interesanta tēma, jo tā potenciāli varētu dot lielu ieguvumu sarežģītākos uzdevumos.
+Ir bijuši darbi, kur tas jau ir novērots, piemēram, jau iepriekš minētais \autocite{mnih2013playing}, kur SI aģents tika uztrenēts Atari 2600 videospēļu spēlēšanā, izmantojot neapstrādātus spēles pikseļus.
+Tomēr, tik zīmīgi panākumi nav novērojami stratēģijas aproksimēšanas jomā.
+Darbā \autocite{Levine2013} tika pētīts dziļo un rekursīvo neironu tīklu pielietojums robota ekstremitāšu kontrolē.
+Lai arī process nav formulēts kā MDP, izmantotā pieeja ir ļoti interesanta, jo tiek mēģināts citās jomās novērotās dziļo tīklu abstrahēšanas spējas pielietot sarežģītas kontroles shēmas reprezentācijai.
+Autori gan secina, ka sarežģījumi, ko rada dziļo un rekursīvo tīklu trenēšana, ir izrādījušies grūti pārvarami.
+Tomēr šādu tīklu pielietojums SI paradigmā šķiet ļoti labi motivēts.
+
+
+%evo
+
+%Vai MDP nosacījums vajadzīgs 
+
+%tas, ka pats visu izdomāju :D
 \chapter{Secinājumi}
 Te ir secinājumi
 
