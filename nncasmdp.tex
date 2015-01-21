@@ -83,7 +83,7 @@
 \darbaveids{Maģistra kursa}
 \autors{Rihards Krišlauks}
 \studapl{rk09006}
-\vaditajs{Prof., Dr. dat. Valdis Zuters}
+\vaditajs{asoc.prof., Dr. dat. Jānis Zuters}
 %\recenzents{Juris Vīksna profesors Dr.sc.comp.}
 \vieta{Rīga}
 \gads{2015}
@@ -134,7 +134,33 @@ This leads in a natural way to the continuous action-critic learning automaton (
 \end{longtable}
 
 \specnodala{Ievads}
-Te ir ievads
+Salīdzinot mašīnmācīšanās disciplīnas, stimulētā mācīšanās uz pārējo fona izceļas.
+Tā stāv ļoti tuvu intuitīvajai izpratnei, par to, kas vispār ir mācīšanās tādā nozīmē, kā to dara dzīvnieki vai cilvēks.
+Tās pamatā ir aģenta mijiedarbība ar apkārtējo vidi, lai patstāvīgi iemācītos tajā darboties, atbilstoši kādai izpratnei par optimālumu.
+Kā jau matemātiskā disciplīnā tajā apskatāmās situācijas tiek formalizētas, un parasti tas tiek darīts ar Markova izvēles procesu palīdzību.
+Tas ļauj stimulētās mācīšanās paradigmā formulēt ļoti plašu problēmu loku, sākot ar, piemēram, orientēšanos labirintā, līdz autonomai lidaparāta kontrolei.
+Tomēr, apskatot risināmo problēmu domēnu īpašības, ir pamanāmas vairākas iezīmes, kas tos ļauj iedalīt nosacītās grupās.
+
+Viens nozīmīgs faktors ir apskatāmās sistēmas stāvokļu telpas un darbību telpas veids.
+Ja apskata iepriekšējos piemērus, tad ir redzamas izteiktas atšķirības abu uzdevumu specifikā.
+Pirmajā gadījumā aģentam uzdevuma risināšanai ir dots neliels skaits diskrētu darbību, kā arī procesa stāvoklis, pieņemot, ka labirints ir sadalāms diskrētos lauciņos, ir skaidri izšķirams.
+Pretnostatījumā lidaparāta kontroles uzdevumā, veicamo darbību un lidaparāta stāvokļa izteikšanai, nākas izmantot skalārus lielumus -- gan procesa stāvokļu, gan darbību telpa ir nepārtraukta. % --, un tas saistās ar papildus grūtībām.
+%TODO varbūt jāpaskaidro, kas ir tie skalārie lielumi
+
+Uzdevumu risināšana nepārtrauktās darbību telpās ir plaši pētīta, un to var veikt samērā sekmīgi.
+Tomēr citāda situācija paveras nepārtrauktu darbības telpu gadījumā.
+Šāda tipa uzdevumu risināšana ir mazāk pētīta, un plaši lietotās nepārtrauktu stāvokļu telpu pieejas šeit nav tiešā veidā izmantojamas.
+
+No otras puses, literatūrā un praksē ir sastopams daudz piemēru, kas izceļ neironu tīklus kā universālu līdzekli dažāda tipa problēmu risināšanā.
+Tiek demonstrētas to pozitīvās īpašības, kā robustums, spēja vispārināt un pielietojuma iespēju daudzveidība.
+Ir zināms, ka neironu tīkli var kalpot kā universāls nepārtrauktu funkciju aproksimācijas līdzeklis.
+Tas liek domāt, ka neironu tīkli ir dabīgā veidā izmantojami stimulētās mācīšanās uzdevumos aģenta darbību izvēles mehānisma reprezentācijai.
+To var intuitīvi pamatot ar neironu tīklu spēju atrast sakarības datos -- virspusēji nav redzami ierobežojumi, lai šī īpašība nebūtu pārnesama arī stimulētās mācīšanās uzdevumos, sakarību meklēšanai aģenta kontroles stratēģijā.
+Turklāt, ir pamats domāt, ka rezultātā iegūtā algoritma uzbūve būtu gana vispārīga, lai to kā universālu līdzekli pielietotu plašam problēmu lokam.
+
+Par darba mērķi tiek izvirzīts izvērtēt iespējas risināt stimulētās mācīšanās uzdevumus nepārtrauktās darbības telpās, izmantojot neironu tīklus kā līdzekli stratēģijas reprezentēšanai.
+Meklētas tiek vispārīgas pieejas, problēmas risināšanai, kas ļautu nonākt pie universāla un viegli pielietojama algoritma stimulētās mācīšanās uzdevumu risināšanai nepārtrauktās darbību telpās.
+
 \chapter{Markova izvēles procesi} \label{chap:mdp}
 Nodaļā tiek apskatīti Markova izvēles procesi ar mērķi sniegt vispārīgu priekšstatu par tēmu.
 Tiek doti arī piemēri un paņēmieni, kas tieši neattiecas uz darba mērķi, bet doti, lai vieglāk izprast jēdziena kontekstu, tomēr lielākā daļa izklāsta ir pozicionēta tieši vēlāk apskatāmās stimulētās mācīšanās kontekstā.
