@@ -62,6 +62,9 @@
 %main line spacing, kur vajag
 \usepackage{setspace}
 
+%lai flushotu floatus
+\usepackage{placeins}
+
 %\begin{thmenum}
 %\item \label{foo} Foo
 %\item \label{bar} Bar
@@ -600,7 +603,8 @@ Ja $a_t$ veikšana ir palielinājusi $s_t$ vērtības novērtējumu, t.i., ja $V
 \[
 	Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t.
 \]
-CACLA pseidokods ir dots algoritmā \ref{alg:cacla}
+
+
 \begin{spacing}{1}
 \begin{algorithm}
 \caption{CACLA pseidokods}\label{alg:cacla}
@@ -610,7 +614,7 @@ inicializē $\theta_0, \psi_0, s_0$ \\
 	veic $a_t$, novēro $r_t, s_{t+1}$ \\
 	\eIf{$s_{t+1}$ ir gala stāvoklis}{
 		$V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t$ \\
-		ņem jaunu $s_{t+1}$
+		ņem jaunu $s_{t+1}$ ($s_{t+1}$ ir sākumstāvoklis nākamajā trenēšanas epizodē)
 	}{
 		$V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1})$
 	}
@@ -620,6 +624,30 @@ inicializē $\theta_0, \psi_0, s_0$ \\
 }
 \end{algorithm}
 \end{spacing}
+
+\FloatBarrier
+
+CACLA pseidokods ir dots algoritmā \ref{alg:cacla}
+Pārfrāzēsim to saistībā ar konkrētiem stratēģijas un stāvokļu vērtību funkcijas aproksimētājiem -- izmantosim divus neironu tīklus, ko sauksim attiecīgi par $NTA_{\psi_t}$ un $NTV_{\theta_t}$, apakšdrukā norādot izmantojamos parametrus.
+Algoritms sāk, inicializējot (piemēram, ģenerējot nejaušas vērtības, kas tuvas $0$) $NTV$ parametrus $\theta_0$ un $NTA$ parametrus $\psi_0$, kā arī izvēlas sākuma stāvokli $s_0$, kas var būt skalāru vērtību vektors. Tiek sākta neironu tīklu trenēšana, un katrā laika momentā $t$ tiek paveikts:
+\begin{itemize}
+	\item darbina $NTA{\psi_t}(s_t)$, iegūstot stāvoklim $s_t$ labāko zināmo darbību (kas var būt skalāru vērtību vektors); lai nodrošinātu darbību telpas izpēti, veicamā darbība  $a_t$ tiek ņemta ar izkliedi ap $NTA_{\psi_t}$ atgriezto vektoru;
+	\item veic darbību $a_t$, un novēro stāvokli $s_{t+1}$, uz kuru sistēma pāriet, un saņemto atalgojumu $r_t$; 
+	\item ja $s_{t+1}$ ir gala stāvoklis:
+	\begin{itemize}
+		\item[--] veic stohastiskā gradient descent soli $NTV$ parametriem $\theta_t$ pa funkciju, kas izsaka $\left(NTV_{\theta_t}(s_t) - r_t\right)^2$ atkarībā no $\theta_t$; iegūst $\theta_{t+1}$; %TODO šis jādziens jāpaskaidro 2. nodaļā
+		\item[--] izvēlas nākamās epizodes sākumstāvokli $s_{t+1}$;
+	\end{itemize}
+	\item citādi:
+	\begin{itemize}
+		\item[--] veic stohastiskā gradient descent soli $NTV$ parametriem $\theta_t$ pa funkciju, kas izsaka $\left(NTV_{\theta_t}(s_t) - \left(r_t + \gamma NTV_{\theta_t}(s_{t+1}) \right) \right)^2$ atkarībā no $\theta_t$; iegūst $\theta_{t+1}$;
+	\end{itemize}
+	\item ja $NTV_{\theta_{t+1}}(s_t) > NTV_{\psi_t}(s_t)$ ($s_t$ vērtība palielinājusies):
+	\begin{itemize}
+		\item[--] veic stohastiskā gradient descent soli $NTA$ parametriem $\psi_t$ pa funkciju, kas izsaka $\left(NTA_{\psi_t}(s_t) - a_t\right)^2$ atkarībā no $\psi_t$; iegūst $\psi_{t+1}$;
+	\end{itemize}
+	\item atkārto.
+\end{itemize}
 
 CACLA algoritms ir ieviests \autocite{Hasselt2007}. Tas radies, pielāgojot actor-critic learning automaton (ACLA) algoritmu nepārtrauktām darbību telpām.
 To darbībā ir vairākas līdzības, piemēram $Ac_t$ pielāgošana, ņemot vērā tikai TD izmaiņas zīmi, nevis konkrēto vērtību, kā tas tiek darīts vairumā citu actor-critic algoritmu.
