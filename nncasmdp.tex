@@ -469,7 +469,7 @@ Bultiņas apzīmē, kuru neironu atgrieztās vērtības tiek izmantotas kāda ne
 Ir pierādīts, ka neironu tīkli darbojas kā universāli funkciju aproksimētāji \autocite{hornik1991approximation}.
 Šo apgalvojumu formulē kā universālās aproksimācijas teorēmu (universal approximation theorem).
 Tā apgalvo, ka feed-forward tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni, ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
-Tas nozīmē, ka neironu tīkls ar pietiekamu ir izmantojams patvaļīgu funkciju aproksimēšanai.
+Tas nozīmē, ka tīkls ar pietiekamu neironu skaitu ir izmantojams patvaļīgu funkciju aproksimēšanai.
 Šī ir nozīmīga priekšrocība, salīdzinot ar, piemēram, lineārajiem funkciju aproksimājiem, un ir pamatā intuīcijai par neironu tīklu spēju uztvert sakarības MDP optimālajā kontroles stratēģijā.
 Kā arī spēja aproksimēt nepārtrauktas funkcijas ir nepieciešama lai funkciju aproksimētājs būtu spējīgs darboties nepārtrauktās darbību telpās.
 Turklāt, kā ieejas parametrus iespējams izmantot MDP stāvokļu mainīgos, izvairoties no atsevišķas parametru funkcijas ieviešanas, kas ļautu MDP risināšanā izmantot arī tādas pieejas, kas procesa stāvokli tiešā veidā tulko par veicamo darbību.
@@ -503,7 +503,7 @@ Bet vispirms jāsniedz īss ieskats temporal difference soļu izmantošanu algor
 
 \section{Temporal difference soļi} \label{chap:td}
 Temporal difference (TD) soļi tiek izmantoti stāvokļu vērtības funkcijas aproksimācijā.
-Šis paņēmiens ir idejiski tuvās vērtības aproksimācijas metodēm, bet, kā vēlāk redzēsim, ir izmantojams arī actor-critic metodēs, lai iegūtu $V^*$ aproksimāciju.
+Šis paņēmiens ir idejiski tuvāks vērtības aproksimācijas metodēm, bet, kā vēlāk redzēsim, ir izmantojams arī actor-critic metodēs, lai iegūtu $V^*$ aproksimāciju.
 Pastāv dažādas idejas variācijas, kas ir pamatā vairākiem vērtību aproksimācijas algoritmiem, kas tiek klasificēti zem TD learning vārda, bet pamatideja ir vienkārša.
 TD soļiem tabulārajā formā stāvokļu vērtību funkcija tiek pielāgota, izmantojot vienādojumu
 \[
