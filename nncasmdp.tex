@@ -118,6 +118,7 @@ This leads in a natural way to the continuous action-critic learning automaton (
 
 \tableofcontents
 
+\iffalse
 \specnodala{Apzīmējumu saraksts}
 \setlength\LTleft{0pt}
 \setlength\LTright{0pt}
@@ -135,6 +136,7 @@ This leads in a natural way to the continuous action-critic learning automaton (
   $\pi(s, a)$ &  Apzīmējuma nosaukums 2\\
   \hline
 \end{longtable}
+\fi
 
 \specnodala{Ievads}
 Salīdzinot mašīnmācīšanās disciplīnas, stimulētā mācīšanās uz pārējo fona izceļas.
@@ -345,6 +347,9 @@ Lai arī iepriekš minētie argumenti nav spēkā uz MDP ar nepārtrauktām darb
 %TODO jāpasaka, kāpēc neironu tīkls būtu labāks
 Turklāt, lai arī kā darba mērķis netika uzstādīta prasība algoritmam darboties arī ar nepārtrauktām stāvokļu telpām, nevajadzīga algoritma vispārīguma samazināšana, ja no tā var izvairīties, tiek uzskatīta par nevēlamu.
 
+Vēl ir jāmin, ka metodes aproksimētā modeļa risināšanai ir tuvākas dinamiskās programmēšanas paradigmai, tāpēc tās šķiet mazāk saistošas.
+Pastāv gan arī hibrīd varianti, kur modelis tiek aproksimēts, lai uz tā veiktu trenēšanu ar stimulētās mācīšanās metodēm, gadījumos, kad mācīšanās īstajā domēnā ir pārāk resursietilpīga, bet šīs metodes saskaras jau ar citām problēmām \autocite{Hasselt2012}.
+
 \subsection{Vērtību aproksimācija}
 Vērtību aproksimācijas piegājienā tiek nevis mēģināts atrast trūkstošās pāreju un atalgojuma funkcijas, bet gan tiek uzreiz mēģināts tuvināti atrast funkcijas $V^*$ vai $Q^*$.
 Kā redzams iepriekšējā sadaļā, vienādojumi \eqref{eq:1} un \eqref{eq:2} ļauj atrast $\pi^*$, ja $V^*$ vai $Q^*$ ir zināma.
@@ -439,7 +444,7 @@ Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām va
 
 \subsection{Neironu tīkli un nelineārā funkciju aproksimēšana}
 Neironu tīkli pieder pie nelineārajiem funkciju aproksimētājiem.
-Tie it veidoti uz līdzību pamata ar bioloģisko neironu tīkliem smadzenēs un parasti tiek formulēti kā savstarpēji savienotu "neironu" sistēma, kas dotus ieejas datus pārvērš izejas datos atbilstoši sistēmas neironu svariem.
+Tie ir veidoti uz līdzību pamata ar bioloģisko neironu tīkliem smadzenēs un parasti tiek formulēti kā savstarpēji savienotu "neironu" sistēma, kas dotus ieejas datus pārvērš izejas datos atbilstoši sistēmas neironu svariem.
 Katru neironu raksturo svaru komplekts, kas ir koeficienti dotā neirona ieejas neironu vērtībām.
 Neirons izejā dod ieejas neironu signālu un svaru lineāru kombināciju, kam pielietota kāda (parasti) nelineāra funkcija. To dēvē par aktivācijas funkciju.
 Praksē bieži tiek lietota t.s. simgoid funkcija
@@ -448,9 +453,9 @@ Praksē bieži tiek lietota t.s. simgoid funkcija
 \]
 Izsakot to atkarībā no neirona svaru vektora $\Theta$, iegūst
 \[
-	f_\Theta(x) = \frac{1}{1 + e^{-\Theta^T x}},
+	f_\theta(x) = \frac{1}{1 + e^{-\theta^T x}},
 \]
-kur $D_\Theta = D_x$. Formāli neironu tīkls ir parasta parametrizējama funkcija, bet šāds skatījums ir intuitīvi vieglāk saprotams.
+kur $\theta \in \Theta, x \in X, D_\Theta = D_X$. Formāli neironu tīkls ir parasta parametrizējama funkcija, bet šāds skatījums ir intuitīvi vieglāk saprotams.
 
 \begin{figure}
 	\centering
