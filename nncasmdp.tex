@@ -98,7 +98,7 @@
 Neironu tīklu lietojums praksē un literatūrā ir parādījis to pozitīvās īpašības, kā robustumu, spēju vispārināt un pielietojuma iespēju daudzveidību.
 Darbā tiek pētīts neironu tīklu lietojums stimulētās mācīšanās paradigmā, ar mērķi pētīt iespējas to labās īpašības pārnest uz šo nozari, īpašu uzmanību pievēršot tieši to pielietojumam nepārtrauktu darbības telpu Markova izvēles procesos.
 Autors iztirzā literatūrā parādīto klasisko pieeju un algoritmu atsevišķu komponenšu sniegumu nozīmīgākajos aspektos, kas saistīti ar to lietojumu nepārtrauktās darbību telpās.
-Izpētes gaitā tiek nonākts līdz continuous action-critic learning automaton (CACLA) algoritmam, kas pārvar problēmas, ar ko saskaras citi apskatītie algoritmi un pieejas gan lietojamībā nepārtrauktās darbību telpās, gan savietojamībā ar neironu tīkliem, kā arī tiek secināts, ka tā darbībā ir vairākas citas pozitīvas īpašības.
+Izpētes gaitā tiek nonākts līdz \textit{continuous action-critic learning automaton} (CACLA) algoritmam, kas pārvar problēmas, ar ko saskaras citi apskatītie algoritmi un pieejas gan lietojamībā nepārtrauktās darbību telpās, gan savietojamībā ar neironu tīkliem, kā arī tiek secināts, ka tā darbībā ir vairākas citas pozitīvas īpašības.
 %Darbs tiek noslēgts ar diskusiju par 
 
 \keywords{stimulētā mācīšanās; neironu tīkli; Markova izvēles procesi; nepārtrauktas telpas.}
@@ -169,7 +169,7 @@ Meklētas tiek vispārīgas pieejas, problēmas risināšanai, kas ļautu nonāk
 Nodaļā tiek apskatīti Markova izvēles procesi ar mērķi sniegt vispārīgu priekšstatu par tēmu.
 Tiek doti arī piemēri un paņēmieni, kas tieši neattiecas uz darba mērķi, bet doti, lai vieglāk izprast jēdziena kontekstu, tomēr lielākā daļa izklāsta ir pozicionēta tieši vēlāk apskatāmās stimulētās mācīšanās kontekstā.
 
-Markova izvēles procesi (angliski Markov decision processes, turpmāk tekstā - MDP) formalizē un ļauj modelēt izvēles veikšanas procesu apstākļos, kur darbības rezultāts ir atkarīgs tikai no sistēmas pašreizējā stāvokļa, bet ir daļēji nejaušs, t.i., izvēles veicējs procesu kontrolē tikai daļēji.
+Markova izvēles procesi (angliski \textit{Markov decision processes}, turpmāk tekstā - MDP) formalizē un ļauj modelēt izvēles veikšanas procesu apstākļos, kur darbības rezultāts ir atkarīgs tikai no sistēmas pašreizējā stāvokļa, bet ir daļēji nejaušs, t.i., izvēles veicējs procesu kontrolē tikai daļēji.
 Mērķis ir kontrolēt sistēmu tā, lai tiktu maksimizēta kāda metrika, kas ir atkarīga no katrā solī veiktās darbības rezultāta.
 Tiek uzskatīts, ka MDP ir ieviesti \autocite{Bel}.
 
@@ -204,7 +204,7 @@ kas norāda varbūtību, ka stāvoklī $s \in S$, veicot darbību $a \in A$ pār
 \end{definicija}
 %TODO beigu stāvokļi?
 
-MDP definīcijā mēdz arī iekļaut atlaides koeficientu (angliski discount factor), ko apzīmē ar $\gamma \in [0,1]$.
+MDP definīcijā mēdz arī iekļaut atlaides koeficientu (angliski \textit{discount factor}), ko apzīmē ar $\gamma \in [0,1]$.
 Tas raksturo to, kā atšķiras nākotnē saņemtie no tagadnē saņemtajiem atalgojumiem.
 Šajā darbā tiek pieņemts, ka $\gamma$ pieder pie katra konkrētā algoritma specifikācijas. %TODO šis vārds izbīdāš aiz paragrāfa malas robežas
 Tas tiek darīts tādēļ, ka $\gamma$ divi dažādi algoritmi vienā un tajā pašā uzdevumā var sniegt dažādus rezultātus pie dažādām $\gamma$ vērtībām, %TODO vajag atsauci
@@ -337,9 +337,9 @@ Modeļa aproksimācijas pieejā tiek mēģināts tuvināti atrast dotās MDP nez
 Modeļa meklēšanā tiek pieņemts, ka kopas $S$ un $A$ ir zināmas.
 Dziļākam ieskatam metodēs, kas tiek izmantotas modeļa aproksimēšanā, skatīt \autocite{nguyen2011model}.
 
-Kad modelis ir zināms, optimālās stratēģijas atrašana galīgam stāvokļu un darbību telpām ir samērā vienkārša. Var tikt izmantots, piemēram, value iteration vai policy iteration algoritms, kam ir var pierādīt, ka tie konverģē uz optimālo $\pi^*$ \autocite{Barto}.
+Kad modelis ir zināms, optimālās stratēģijas atrašana galīgam stāvokļu un darbību telpām ir samērā vienkārša. Var tikt izmantots, piemēram, \textit{value iteration} vai \textit{policy iteration} algoritms, kam ir var pierādīt, ka tie konverģē uz optimālo $\pi^*$ \autocite{Barto}.
 Tomēr vispārīgā gadījumā MDP nepārtrauktās stāvokļu telpās situācija ir krietni sarežģītāka -- katram katram stāvoklim optimālo stratēģiju atrast nav iespējams \autocite{Otterlo}.
-Piemēram, iepriekš minētie value iteration un policy iteration algoritmi satur ciklu pa visu stāvokļu kopu, kas algoritmu padara nelietojamu, ja stāvokļu skaits ir bezgalīgi liels.
+Piemēram, iepriekš minētie \textit{value iteration} un \textit{policy} iteration algoritmi satur ciklu pa visu stāvokļu kopu, kas algoritmu padara nelietojamu, ja stāvokļu skaits ir bezgalīgi liels.
 
 %TODO šo varbūt var iekļaut: Alternatīvi \autocite{Otterlo} tiek minēta iespēja tuvināto MDP izmantot, lai ģenerētu 
 
@@ -353,22 +353,22 @@ Pastāv gan arī hibrīd varianti, kur modelis tiek aproksimēts, lai uz tā vei
 \subsection{Vērtību aproksimācija}
 Vērtību aproksimācijas piegājienā tiek nevis mēģināts atrast trūkstošās pāreju un atalgojuma funkcijas, bet gan tiek uzreiz mēģināts tuvināti atrast funkcijas $V^*$ vai $Q^*$.
 Kā redzams iepriekšējā sadaļā, vienādojumi \eqref{eq:1} un \eqref{eq:2} ļauj atrast $\pi^*$, ja $V^*$ vai $Q^*$ ir zināma.
-Šīs kategorijas algoritmus iedala atkarībā no tā, vai tie ir spējīgi mācīties tiešsaistē, un vai algoritms ir on-policy vai off-policy tipa.
+Šīs kategorijas algoritmus iedala atkarībā no tā, vai tie ir spējīgi mācīties tiešsaistē, un vai algoritms ir \textit{on-policy} vai \textit{off-policy} tipa.
 
-Atsaucoties uz \autocite{Hasselt2012} -- on-policy algoritmi mēģina tuvināti atrast stāvokļu vērtības funkciju $V^\pi$ vai stāvokļu-darbību vērtības funkciju $Q^\pi$ stratēģijai $\pi$, kura konkrētajā brīdī tiek izmantota.
-Lai arī optimālā stratēģija $\pi^*$ iesākumā nav zināma, on-policy algoritmi pakāpeniski nonāk pie optimālās funkcijas $V^{\pi^*}$ vai $Q^{\pi^*}$, iteratīvi katrā solī uzlabojot sev zināmo $\pi$.
-Off-policy tipa algoritmi izmanto citu pieeju, kas tiešā veidā necenšas atrast optimālo stratēģiju $\pi^*$.
+Atsaucoties uz \autocite{Hasselt2012} -- \textit{on-policy} algoritmi mēģina tuvināti atrast stāvokļu vērtības funkciju $V^\pi$ vai stāvokļu-darbību vērtības funkciju $Q^\pi$ stratēģijai $\pi$, kura konkrētajā brīdī tiek izmantota.
+Lai arī optimālā stratēģija $\pi^*$ iesākumā nav zināma, \textit{on-policy} algoritmi pakāpeniski nonāk pie optimālās funkcijas $V^{\pi^*}$ vai $Q^{\pi^*}$, iteratīvi katrā solī uzlabojot sev zināmo $\pi$.
+\textit{Off-policy} tipa algoritmi izmanto citu pieeju, kas tiešā veidā necenšas atrast optimālo stratēģiju $\pi^*$.
 Funkciju $V^{\pi^*}$ vai $Q^{\pi^*}$ novērtējumi var tikt uzlaboti, sekojot stratēģijām, kas nav optimālas.
 
-Algoritmus, kas spējīgi mācīties tiešsaistē, jeb online algoritmus, raksturo tas, ka tie savus novērtējumus pielāgo pēc katras pārejas veikšanas, novērojot jauno sistēmas stāvokli un saņemto atalgojumu.
-Pretnostatījumā offline algoritmi ieejas datus apstrādā pa vairākiem novērojumiem vienā grupā.
-Online algoritmiem ir raksturīgas mazākas prasības pēc skaitļošanas resursiem viena novērojuma apstrādāšanai. Tie strādā labi gadījumos, kad novērojumu ir pieejams daudz un viena novērojuma veikšana nav resursietilpīga.
-Offline algoritmi savukārt efektīvāk izmanto pieejamos novērojumus, kas tiem ļauj līdzvērtīgu rezultātu sasniegt, apstrādājot mazāk novērojumu.
+Algoritmus, kas spējīgi mācīties tiešsaistē, jeb \textit{online} algoritmus, raksturo tas, ka tie savus novērtējumus pielāgo pēc katras pārejas veikšanas, novērojot jauno sistēmas stāvokli un saņemto atalgojumu.
+Pretnostatījumā \textit{offline} algoritmi ieejas datus apstrādā pa vairākiem novērojumiem vienā grupā.
+\textit{Online} algoritmiem ir raksturīgas mazākas prasības pēc skaitļošanas resursiem viena novērojuma apstrādāšanai. Tie strādā labi gadījumos, kad novērojumu ir pieejams daudz un viena novērojuma veikšana nav resursietilpīga.
+\textit{Offline} algoritmi savukārt efektīvāk izmanto pieejamos novērojumus, kas tiem ļauj līdzvērtīgu rezultātu sasniegt, apstrādājot mazāk novērojumu.
 
-Pie on-policy algoritmiem pieder, piemēram, temporal-difference saimes algoritmi. Pie off-policy algoritmiem pieskaitāms, piemēram, ir Q-learning un tā varianti. Katrā minēto algoritmu grupā ietilpst gan online, gan offline algoritmu varianti \autocite{Barto}.
+Pie \textit{on-policy} algoritmiem pieder, piemēram, \textit{temporal-difference} saimes algoritmi. Pie \textit{off-policy} algoritmiem pieskaitāms, piemēram, ir \textit{Q-learning} un tā varianti. Katrā minēto algoritmu grupā ietilpst gan \textit{online}, gan \textit{offline} algoritmu varianti \autocite{Barto}.
 
-Minētajiem algoritmiem darbošanās nepārtrauktās stāvokļu telpās nesagādā problēmas. Šādās situācijās parasti $V^{\pi^*}$ vai $Q^{\pi^*}$ reprezentācijai tiek izmantota kāda funkciju aproksimēšanas pieeja, piemēram, neironu tīkli. Kā piemēru var skatīt \autocite{tesauro1995temporal}, kur neironu tīkls tiek trenēts ar Q-learning, lai aproksimētu funkcijas $Q^{\pi^*}$ vērtību backgammon spēlē.
-Jaunākā avotā \autocite{mnih2013playing} Q-learning variants tiek izmantots, lai autonomi apmācītu aģentu spēlēt vairākas Atari 2600 videospēles, kā ieejas datus izmantojot tikai spēlēs ekrāna pikseļu vērtības (bez īpašas priekšapstrādes) un spēles rezultātu.
+Minētajiem algoritmiem darbošanās nepārtrauktās stāvokļu telpās nesagādā problēmas. Šādās situācijās parasti $V^{\pi^*}$ vai $Q^{\pi^*}$ reprezentācijai tiek izmantota kāda funkciju aproksimēšanas pieeja, piemēram, neironu tīkli. Kā piemēru var skatīt \autocite{tesauro1995temporal}, kur neironu tīkls tiek trenēts ar \textit{Q-learning}, lai aproksimētu funkcijas $Q^{\pi^*}$ vērtību backgammon spēlē.
+Jaunākā avotā \autocite{mnih2013playing} \textit{Q-learning} variants tiek izmantots, lai autonomi apmācītu aģentu spēlēt vairākas Atari 2600 videospēles, kā ieejas datus izmantojot tikai spēlēs ekrāna pikseļu vērtības (bez īpašas priekšapstrādes) un spēles rezultātu.
 $Q^{\pi^*}$ aproksimēšanai tiek izmantots neironu tīkls.
 Šis rezultāts ir īpaši interesants, jo spēles stāvokļu telpa ir izteikti sarežģīta, lai no spēles ekrāna pikseļu vērtībām būtu iespējams kaut ko pateikt par pašreizējo spēles stāvokli, aģentam ir jāiemācās pikseļu vērtības abstrahēt sarežģītākos objektos.
 To šeit paveic neironu tīkls.
@@ -379,19 +379,19 @@ Tā kā bieži šajos algoritmos, lai atrastu optimālo stratēģiju, atbilstoš
 	\arg \max_a Q^*(s, a),
 \]
 tad nevar iztikt bez darbību telpas diskretizēšanas.
-Literatūrā un praksē sastopami dažādi diskretizācijas varianti -- sākot no vienkāršākajiem kā tile coding, kur darbību telpa tiek sadalīta nepārklājošos apgabalos, kas katrs uztverams kā diskretizētās darbību telpas atsevišķs elements, līdz sarežģītākām, kā, piemēram, Kanerva coding \autocite{Barto}.
+Literatūrā un praksē sastopami dažādi diskretizācijas varianti -- sākot no vienkāršākajiem kā \textit{tile coding}, kur darbību telpa tiek sadalīta nepārklājošos apgabalos, kas katrs uztverams kā diskretizētās darbību telpas atsevišķs elements, līdz sarežģītākām, kā, piemēram, \textit{Kanerva coding} \autocite{Barto}.
 
 Algoritmus, kuros optimālā stratēģija tiek atvasināta no $Q^*$ funkcijas, kā redzams augstāk, grūti vispārināt atbilstoši darba mērķim darbībai ar neironu tīkliem, jo tas prasa algoritmam glabāt neironu tīkla vai kāda cita funkciju aproksimētāja svarus, un tos darbības laikā pielāgot.
-Cik autoram zināms, šādas problēmas pastāv off-policy algoritmos, piemēram, minētajā Q-learning.
-On-policy algoritmi šajā aspektā darba ietvaros nav pētīti.
+Cik autoram zināms, šādas problēmas pastāv \textit{off-policy} algoritmos, piemēram, minētajā \textit{Q-learning}.
+\textit{On-policy} algoritmi šajā aspektā darba ietvaros nav pētīti.
 
 \subsection{Stratēģijas aproksimācija}
 Atšķirībā no vērtību aproksimācijas algoritmiem, stratēģijas aproksimācijas pieejas algoritmi optimālās stratēģijas tuvinājumu glabā tiešā veidā.
 Parasti nav nekādu šķēršļu $\pi^*$ reprezentācijai izmantot kādu vispārīgu funkciju aproksimētāju. Tādā gadījumā algoritms glabā tā parametrus.
 Šim nolūkam var tikt izmantots arī neironu tīkls.
 Bez tuvinātas optimālās stratēģijas mēdz tikt glabāta arī $V^{\pi^*}$ vai $Q^{\pi^*}$ funkcija.
-Algoritmus, kuros tiek tā darīts, mēdz saukt par actor-critic algoritmiem, ar vārdu critic atsaucoties uz algoritma daļu, kas vērtē spēles stāvokļa izdevību, jeb $V^{\pi^*}$ vai $Q^{\pi^*}$, un ar actor atsaucoties uz stratēģiju.
-Pēc analoģijas, stratēģijas aproksimācijas algoritmus, kas neizmanto kādu no vērtību funkcijām, dēvē par actor-only algoritmie, savukārt vērtību aproksimācijas algoritmus -- par critic-only algoritmiem.
+Algoritmus, kuros tiek tā darīts, mēdz saukt par \textit{actor-critic} algoritmiem, ar vārdu \textit{critic} atsaucoties uz algoritma daļu, kas vērtē spēles stāvokļa izdevību, jeb $V^{\pi^*}$ vai $Q^{\pi^*}$, un ar \textit{actor} atsaucoties uz stratēģiju.
+Pēc analoģijas, stratēģijas aproksimācijas algoritmus, kas neizmanto kādu no vērtību funkcijām, dēvē par \textit{actor-only} algoritmiem, savukārt vērtību aproksimācijas algoritmus -- par \textit{critic-only} algoritmiem.
 Stratēģijas aproksimācijas algoritmi tiks tuvāk apskatīti \ref{chap:stim} nodaļā.
 
 \chapter{Funkciju aproksimācija}
@@ -402,9 +402,9 @@ Tiek likts uzsvars uz nelineāro funkciju aproksimētāju, it īpaši neironu t�
 
 Ar funkciju aproksimēšanu, sauktu arī par funkciju tuvināšanu, tiek saprastas pieejas, kuru mērķis ir, par izejas datiem ņemot aproksimējamās, jeb mērķa, funkcijas vērtības, atrast citu funkciju noteiktā klasē, kas pēc iespējas vairāk atbilst aproksimējamajai.
 Bieži vien aproksimējamā funkcija kā tāda nemaz nepastāv, bet aproksimēšana notiek ar mērķi iegūt funkciju, kas izsaka sakarības, kas novērojamas kādā mūs interesējošā procesā.
-Skatoties mašīnmācīšanās kontekstā, vai konkrētāk -- apskatot pārraudzītās mācīšanās (supervised learning) problēmu -- mērķis ir no dota datu korpusa, kas satur kāda mūs interesējoša objekta parametrus, kam attiecināta kāda no parametriem (iespējams daļēji) atkarīga vērtība, konstruēt funkciju, kas, ieejā saņemot minētā veida parametrus, būtu spējīga prognozēt iepriekš neredzētu datu punktu vērtības.
+Skatoties mašīnmācīšanās kontekstā, vai konkrētāk -- apskatot pārraudzītās mācīšanās (\textit{supervised learning}) problēmu -- mērķis ir no dota datu korpusa, kas satur kāda mūs interesējoša objekta parametrus, kam attiecināta kāda no parametriem (iespējams daļēji) atkarīga vērtība, konstruēt funkciju, kas, ieejā saņemot minētā veida parametrus, būtu spējīga prognozēt iepriekš neredzētu datu punktu vērtības.
 
-Stimulētās mācīšanās uzdevumos, kur tiek lietotas vērtību aproksimācijas pieejas, funkciju aproksimēšana tiek lietota, lai ar kādiem domēnu aprakstošiem parametriem izteiktu stāvokļu vai stāvokļu-darbību vērtību funkciju. Stratēģijas aproksimācijas pieejās funkciju aproksimācija var tikt lietota, lai izteiktu optimālo stratēģiju atkarībā no MDP stavokļa.
+Stimulētās mācīšanās uzdevumos, kur tiek lietotas vērtību aproksimācijas pieejas, funkciju aproksimēšana tiek lietota, lai ar kādiem domēnu aprakstošiem parametriem izteiktu stāvokļu vai stāvokļu-darbību vērtību funkciju. Stratēģijas aproksimācijas pieejās funkciju aproksimācija var tikt lietota, lai izteiktu optimālo stratēģiju atkarībā no MDP stāvokļa.
 Funkciju aproksimācijā sakarības, kas atrastas novērotajos datos, tiek vispārinātas uz datiem, kas nav redzēti. Tas ir ļoti svarīgs ieguvums stimulētās mācīšanās problēmās ar nepārtrauktām vai ļoti lielām stāvokļu vai darbību telpām, tā kā nav nepieciešams apskatīt visus telpas punktus, lai algoritms spētu sekmīgi darboties.
 
 Mašīnmācīšanās pieejas nav vienmēr tiešā veidā pielietojamas stimulētās mācīšanās uzdevumos.
@@ -417,7 +417,7 @@ Funkciju aproksimētājus, atkarībā no to uzbūves, mēdz iedalīt lineārajos
 Jēdziens funkciju aproksimētājs tiek lietots, apzīmējot funkciju, kas tiek izmantota dotās mērķa funkcijas aproksimēšanai.
 Piemēram, sakot "lineārs funkciju aproksimētājs" jāsaprot, ka izmantotā funkcija ir lineāra.
 
-\subsection{Lineārā funkcju aproksimēšana}
+\subsection{Lineārā funkciju aproksimēšana}
 Par lineāru funkciju dēvē tādu funkciju, ko var izteikt formā
 \[
 	F(\phi) = \Theta^T \phi,
@@ -434,20 +434,20 @@ Izvēloties pazīme, kas nav lineāras attiecībā pret stāvokļu telpu, tiek i
 Kā redzams, gadījumā, kad stāvokļu telpa ir nepārtraukta, funkcija $\phi$ to attēlo uz galīgu skaitu elementu.
 Citiem vārdiem -- stāvokļu telpa tiek diskretizēta.
 Pats veids, kā notiek pazīmju piekārtošana stāvokļiem nosaka diskretizācijas veidu.
-Piemēram, ja stāvokļu telpa tiek sadalīta vienādos apgabalos, kam katram tiek piekārtota sava unikāla pazīme, tad iegūto attēlojumu sauc par tile coding, kas tika minēts jau iepriekš.
+Piemēram, ja stāvokļu telpa tiek sadalīta vienādos apgabalos, kam katram tiek piekārtota sava unikāla pazīme, tad iegūto attēlojumu sauc par \textit{tile coding}, kas tika minēts jau iepriekš.
 
 Lineārajiem funkciju aproksimētājiem nepārtrauktās telpās piemīt iepriekšējā sadaļā minētā īpašība par novērojumu vispārināšanu iepriekš neapskatītiem telpas punktiem.
 Tomēr stāvokļu un darbību telpas diskretizācija ir iemesls, kāpēc šajā darbā priekšroka tiek dota tādiem nelineārajiem funkciju aproksimētājiem kā neironu tīkli.
 Labākā telpas diskretizācijas pieeja var būt atkarīga no uzdevuma.
 Tas ir pretrunā ar vēlmi atrast pēc iespējas vispārīgu pieeju stimulētās mācīšanās uzdevumu risināšanai nepārtrauktās telpās.
-Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām var ar dažādiem panākumiem cīnīties, kas vairāk aprakstītas \autocite{Hasselt2012} .
+Turklāt lineāriem funkciju aproksimētājiem ir citas problēmas, ar kurām var ar dažādiem panākumiem cīnīties, kas vairāk aprakstītas \autocite{Hasselt2012}.
 
 \subsection{Neironu tīkli un nelineārā funkciju aproksimēšana}
 Neironu tīkli pieder pie nelineārajiem funkciju aproksimētājiem.
 Tie ir veidoti uz līdzību pamata ar bioloģisko neironu tīkliem smadzenēs un parasti tiek formulēti kā savstarpēji savienotu "neironu" sistēma, kas dotus ieejas datus pārvērš izejas datos atbilstoši sistēmas neironu svariem.
 Katru neironu raksturo svaru komplekts, kas ir koeficienti dotā neirona ieejas neironu vērtībām.
 Neirons izejā dod ieejas neironu signālu un svaru lineāru kombināciju, kam pielietota kāda (parasti) nelineāra funkcija. To dēvē par aktivācijas funkciju.
-Praksē bieži tiek lietota t.s. simgoid funkcija
+Praksē bieži tiek lietota t.s. \textit{simgoid} funkcija
 \[
 	f(x) = \frac{1}{1 + e^{-x}}.
 \]
@@ -472,8 +472,8 @@ Ar $+1$ tiek apzīmēti neironi, kas nesaņem ieejā citu neironu vērtības; ti
 Bultiņas apzīmē, kuru neironu atgrieztās vērtības tiek izmantotas kāda neirona ieejā.
 
 Ir pierādīts, ka neironu tīkli darbojas kā universāli funkciju aproksimētāji \autocite{hornik1991approximation}.
-Šo apgalvojumu formulē kā universālās aproksimācijas teorēmu (universal approximation theorem).
-Tā apgalvo, ka feed-forward tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni, ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
+Šo apgalvojumu formulē kā universālās aproksimācijas teorēmu (\textit{universal approximation theorem}).
+Tā apgalvo, ka \textit{feed-forward} tipa neironu tīkls (tāds, kas atbilst \ref{fig:nn} attēla aprakstam) ar vienu slēpto slāni, ar galīgu skaitu neironu un nelineāru aktivācijas funkciju ir spējīgs aproksimēt nepārtrauktas funkcijas vērtībām, kas pieder kādai kompaktai $\mathbb{R}^n, n \in \mathbb{N}$ apakškopai.
 Tas nozīmē, ka tīkls ar pietiekamu neironu skaitu ir izmantojams patvaļīgu funkciju aproksimēšanai.
 Šī ir nozīmīga priekšrocība, salīdzinot ar, piemēram, lineārajiem funkciju aproksimājiem, un ir pamatā intuīcijai par neironu tīklu spēju uztvert sakarības MDP optimālajā kontroles stratēģijā.
 Kā arī spēja aproksimēt nepārtrauktas funkcijas ir nepieciešama lai funkciju aproksimētājs būtu spējīgs darboties nepārtrauktās darbību telpās.
@@ -481,10 +481,10 @@ Turklāt, kā ieejas parametrus iespējams izmantot MDP stāvokļu mainīgos, iz
 
 Tomēr universālās aproksimācijas teorēma nerisina jautājumu par attiecīgo parametru algoritmisku iegūšanu, bet tikai par to eksistenci.
 Praksē uzdevums vispārīgā gadījumā ir sarežģīts.
-Neironu tīkla parametru iegūšanu apgrūtina nepieciešamība izvairīties no lokālajiem minimumiem trenēšanas procesā, tīkla arhitektūras izvēle, lai izvairītos no pārlieku pielāgošanās treniņa datiem (overfitting) un grūtības, kas saistītas ar labu hiperparametru izvēli trenēšanas procesam.
+Neironu tīkla parametru iegūšanu apgrūtina nepieciešamība izvairīties no lokālajiem minimumiem trenēšanas procesā, tīkla arhitektūras izvēle, lai izvairītos no pārlieku pielāgošanās treniņa datiem (\textit{overfitting}) un grūtības, kas saistītas ar labu hiperparametru izvēli trenēšanas procesam.
 Turklāt nelineārajiem funkciju aproksimētājiem kopumā ir mazāk garantiju, ka trenēšanas algoritmus konverģēs uz optimālo risinājumu.
-Tomēr pastāv veidi, kā ar šīm problēmām cīnīties -- overfitting problēmu risina ar regularizācijas palīdzību \autocite{sarle1995stopped} \autocite{srivastava2014dropout}, atsevišķām neironu tīklu arhitektūrām var veidot mērķa funkciju, kas ir ieliekta, un pastāv metodes optimālo hiperparametru meklēšanai \autocite{bergstra2011algorithms}.
-Kopumā neironu tīklu trenēšanu ir ļoti atvieglojusi backpropagation algoritma ieviešana \autocite{Werbos74} \autocite{Rumelhart1988}.
+Tomēr pastāv veidi, kā ar šīm problēmām cīnīties -- \textit{overfitting} problēmu risina ar regularizācijas palīdzību \autocite{sarle1995stopped} \autocite{srivastava2014dropout}, atsevišķām neironu tīklu arhitektūrām var veidot mērķa funkciju, kas ir ieliekta, un pastāv metodes optimālo hiperparametru meklēšanai \autocite{bergstra2011algorithms}.
+Kopumā neironu tīklu trenēšanu ir ļoti atvieglojusi \textit{backpropagation} algoritma ieviešana \autocite{Werbos74} \autocite{Rumelhart1988}.
 Skatoties uz nelineāriem funkciju aproksimētājiem kopumā -- atsevišķos gadījumos var arī tikt dotas konverģences garantijas vismaz lokālā optimuma sasniegšanai \autocite{bhatnagar2009convergent}.
 
 \section{Parametru pielāgošana}
@@ -492,11 +492,11 @@ Skatoties uz nelineāriem funkciju aproksimētājiem kopumā -- atsevišķos gad
 \subsection{Evolucionārās metodes}
 
 \chapter{Stimulētā mācīšanās} \label{chap:stim}
-Stimuletas mācīšanās (SM, angliski -- reinforcement learning) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
+Stimulētās mācīšanās (SM, angliski -- \textit{reinforcement learning}) pārziņā ir situācijas, kurās uzdevums jārisina mijiedarbojoties ar apkārtējo vidi. 
 Tā vietā, lai problēmu risinātu, dodot algoritmam sagatavotus ieejas datus ar norādītām labākajām darbībām, algoritms mācās no savas pieredzes, izmēģinot darbības un novērojot saņemto atalgojumu.
 Vispārīgā gadījumā algoritmam ir patstāvīgi jāapgūst darbošanās sarežģītos problēmapgabalos, kur darbības labumu var izvērtēt tikai ilgtermiņā uz priekšu.
-Citējot \citet{Barto}: "Šie divi atribūti -- mācīšanās no pieredzes un novēlotais atalgojums -- ir stimuletās mācīšanās vissvarīgākās raksturiezīmes.
-Stimuleto mācīšanos definē nevis mācīšanās metodes, bet gan risināmā problēma."
+Citējot \citet{Barto}: "Šie divi atribūti -- mācīšanās no pieredzes un novēlotais atalgojums -- ir stimulētās mācīšanās vissvarīgākās raksturiezīmes.
+Stimulēto mācīšanos definē nevis mācīšanās metodes, bet gan risināmā problēma."
 Šīs pieejas ir interesantas, jo ir tuvas idealizētam skatījumam uz to, kā mācās dzīvnieki vai cilvēks.
 
 De facto modelis stimulētās mācīšanās problēmu formalizēšanai ir \ref{chap:mdp} nodaļā apskatītie Markova izvēles procesi.
@@ -504,18 +504,18 @@ Tiek pieņemts, ka aģentam sākotnēji nav pieejama nekāda informācija par pr
 
 Dažādās konceptuālās MDP risināšanas pieejas, kas izriet no Bellmana vienādojumiem ir apskatītas nodaļā \ref{chap:mdp}
 Šajā nodaļā tiks pievērsta padziļināta uzmanība stratēģijas aproksimēšanas algoritmiem.
-Bet vispirms jāsniedz īss ieskats temporal difference soļu izmantošanu algoritmos.
+Bet vispirms jāsniedz īss ieskats \textit{temporal difference} soļu izmantošanu algoritmos.
 
 \section{Temporal difference soļi} \label{chap:td}
-Temporal difference (TD) soļi tiek izmantoti stāvokļu vērtības funkcijas aproksimācijā.
-Šis paņēmiens ir idejiski tuvāks vērtības aproksimācijas metodēm, bet, kā vēlāk redzēsim, ir izmantojams arī actor-critic metodēs, lai iegūtu $V^*$ aproksimāciju.
-Pastāv dažādas idejas variācijas, kas ir pamatā vairākiem vērtību aproksimācijas algoritmiem, kas tiek klasificēti zem TD learning vārda, bet pamatideja ir vienkārša.
+\textit{Temporal difference} (TD) soļi tiek izmantoti stāvokļu vērtības funkcijas aproksimācijā.
+Šis paņēmiens ir idejiski tuvāks vērtības aproksimācijas metodēm, bet, kā vēlāk redzēsim, ir izmantojams arī \textit{actor-critic} metodēs, lai iegūtu $V^*$ aproksimāciju.
+Pastāv dažādas idejas variācijas, kas ir pamatā vairākiem vērtību aproksimācijas algoritmiem, kas tiek klasificēti zem \textit{TD learning} vārda, bet pamatideja ir vienkārša.
 TD soļiem tabulārajā formā stāvokļu vērtību funkcija tiek pielāgota, izmantojot vienādojumu
 \[
 	V_{t+1}(s_t) = V_t + \alpha_t(s_t) \delta_t,
 \]
 kur $\delta_t = r_{t} + \gamma V_t(s_{t + 1}) - V_t(s_t)$ un $\alpha_t(s_t) \in [0,1]$ ir soļa lieluma parametrs.
-Nepārtrauktai stāvokļu vērtību funkcijai TD soļa pielietošana ir saistīta ar gradient ascent soļa veikšanu funkcijas parametriem.
+Nepārtrauktai stāvokļu vērtību funkcijai TD soļa pielietošana ir saistīta ar \textit{gradient ascent} soļa veikšanu funkcijas parametriem.
 Ja ir dota parametrizēta vērtību funkcija $V:S \times \Theta \rightarrow \mathbb{R}$, tad TD solis tiek veikts funkcijas parametriem atbilstoši vienādojumam
 \[
 	\theta_{t+1} = \theta_t + \alpha_t(s_t) \delta_t \nabla_\theta V_t(s_t).
@@ -534,7 +534,7 @@ Ja funkcija $A(x)$ ir nepārtraukta, un ir parametrizēta ar kādu papildus vekt
 \[
 	\theta_{t+1} = \theta_t + \alpha \left(B_t - A_t(x)\right) \nabla_\theta A_t(x),
 \]
-ko var interpretēt, kā gradient descent soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
+ko var interpretēt, kā \textit{gradient descent} soļa veikšanu parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
 Tas ļauj pārrakstīt TD soli kā
 \[
 	V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1}).
@@ -554,37 +554,37 @@ Tas ir nozīmīgs ieguvums nepārtrauktās darbību telpās, jo nav jāveic darb
 \subsection{Actor-only metodes}
  
 Lai stratēģijas aproksimēšanai varētu izmantot kādu parametrizētu funkciju, nepieciešams ieviest veidu, kā pielāgot tās parametrus algoritma darbības laikā, ņemot vērā saņemto atalgojumu.
-Standarta pieeja ir izmantot gradient ascent soļus pa $V^\pi$ sagaidāmās vērtības funkciju \autocite{williams1992simple} \autocite{sutton2000policy} \autocite{Hasselt2012}.
+Standarta pieeja ir izmantot \textit{gradient ascent} soļus pa $V^\pi$ sagaidāmās vērtības funkciju \autocite{williams1992simple} \autocite{sutton2000policy} \autocite{Hasselt2012}.
 Citiem vārdiem -- stratēģijas parametri tiek pielāgoti tā, lai pieaugtu funkcijas $V^\pi$, kā tā ieviesta \eqref{eq:vpi}, sagaidāmā vērtība.
-Stratēģijas parametru pielāgošanas solis (batch gadījumā) ir
+Stratēģijas parametru pielāgošanas solis (\textit{batch} gadījumā) ir
 \[
 	\psi_{k+1} = \psi_k + \beta_k \nabla_\psi E \left\{V^\pi(s_t)\right\} = \psi_k + \beta_k \nabla_\psi \int_{s \in S} P(s_t = s) V^\pi(s)\ ds,
 \]
 kur $P(s_t = s)$ norāda varbūtību, ka aģents laikā $t$ atrodas stāvoklī $s$, un $\beta_k \in [0,1]$ ir mācīšanās soļa izmērs.
-Pastāv arī alternatīva, kur tiek lietots gradient ascent stohastiskais variants, kas ļauj parametru vērtības pielāgot katrā solī
+Pastāv arī alternatīva, kur tiek lietots \textit{gradient ascent} stohastiskais variants, kas ļauj parametru vērtības pielāgot katrā solī
 \begin{equation} \label{eq:stohgrad}
 	\psi_{t+1} = \psi_t + \beta_t(s_t) \nabla_\psi V^\pi(s_t).
 \end{equation}
 
-Šeit actor-only algoritmi sastopas ar problēmu. Veicot gradient ascent soļus pa $V^\pi$ funkciju (vai sagaidāmās vērtības funkciju) diferencējamā funkcija actor-only piegājienā nav pieejama.
+Šeit \textit{actor-only} algoritmi sastopas ar problēmu. Veicot \textit{gradient ascent} soļus pa $V^\pi$ funkciju (vai sagaidāmās vērtības funkciju) diferencējamā funkcija \textit{actor-only} piegājienā nav pieejama.
 Ar to iespējams tikt galā, ar vairākām matemātiskām manipulācijām, kas šeit izlaistas, izsakot $\nabla_\psi V^\pi(s_t)$ ar $\pi$ funkciju
 \begin{equation} \label{eq:nablav}
 	\nabla_\psi V^\pi(s_t) = E \left\{R_k(s_t) \left(\sum\limits_{j=t}^{T_k - 1} \nabla_\psi \log \pi(s_j, a_j, \psi) \right) \right\}
 \end{equation}
 
-Sagaidāmā vērtība šajā un atvasinātajās metodēs tiek iegūta ar Monte Carlo metodēm \autocite{halton1970retrospective}.
+Sagaidāmā vērtība šajā un atvasinātajās metodēs tiek iegūta ar \textit{Monte Carlo} metodēm \autocite{halton1970retrospective}.
 Īsumā -- meklējamā vērtība tiek novērtēta ar vairāku nejaušu paraugu palīdzību.
-Monte Carlo metodes pielietojot gradienta aprēķiniem actor-only piegājienā, ir novērots, ka tās saistās ir lielas dispersijas ieviešanu rezultātos.
+\textit{Monte Carlo} metodes pielietojot gradienta aprēķiniem \textit{actor-only} piegājienā, ir novērots, ka tās saistās ir lielas dispersijas ieviešanu rezultātos.
 Tas var būtiski negatīvi ietekmēt laiku, kas algoritmam ir nepieciešams, lai sasniegtu rezultātu.
-Ar dažādiem paņēmieniem ar šo efektu ir iespējams cīnīties, bet, kā vēlāk redzēsim, actor-critic piegājienā no šo metožu izmantošanas ir iespējams izvairīties vispār. %TODO: kas atrisina ar to saistītās problēmas.?
+Ar dažādiem paņēmieniem ar šo efektu ir iespējams cīnīties, bet, kā vēlāk redzēsim, \textit{actor-critic} piegājienā no šo metožu izmantošanas ir iespējams izvairīties vispār. %TODO: kas atrisina ar to saistītās problēmas.?
 
-Actor-only metodēm mēs tālāk šeit nesekosim.
+\textit{Actor-only} metodēm mēs tālāk šeit nesekosim.
 Vispārīgs pārskats ir dots \autocite{Hasselt2012}.
  
 \subsection{Actor-critic metodes}
-Actor-critic metodes ar iepriekšējā sadaļā norādītajiem ierobežojumiem cīnās līdztekus ar $\pi^*$ aproksimējot arī $V^*$.
-Gadījumā, kad parametru vektora $\psi$ pielāgošanai tiek izmantoti gradient ascent soļi pa $V^\pi$, tas ļauj iztikt bez vienādojumā \eqref{eq:nablav} redzamā lieluma novērtēšanas ar Monte Carlo metodēm, jo var parādīt, ka tā vietā var novērtēt $Q^\pi(s_t, a_t) - V^\pi(s_t)$ ar lielumu $\delta_t = r_{t} + \gamma V_t(s_{t+1}) - V_t(s_t)$.
-Lielums $\delta_t$ tiek dēvēts par temporal difference (TD) error.
+\textit{Actor-critic} metodes ar iepriekšējā sadaļā norādītajiem ierobežojumiem cīnās līdztekus ar $\pi^*$ aproksimējot arī $V^*$.
+Gadījumā, kad parametru vektora $\psi$ pielāgošanai tiek izmantoti \textit{gradient ascent} soļi pa $V^\pi$, tas ļauj iztikt bez vienādojumā \eqref{eq:nablav} redzamā lieluma novērtēšanas ar \textit{Monte Carlo} metodēm, jo var parādīt, ka tā vietā var novērtēt $Q^\pi(s_t, a_t) - V^\pi(s_t)$ ar lielumu $\delta_t = r_{t} + \gamma V_t(s_{t+1}) - V_t(s_t)$.
+Lielums $\delta_t$ tiek dēvēts par \textit{temporal difference} (TD) \textit{error}.
 Tas ļauj stratēģijas gradientu novērtēt ar $\delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)$ \autocite{sutton2000policy}, aizstājot \eqref{eq:stohgrad} ar
 \begin{equation} \label{eq:psi}
 	\psi_{t+1} = \psi_t + \beta_t(s_t) \delta_t \nabla_\psi \log \pi(s_t,a_t,\psi_t)
@@ -594,16 +594,16 @@ kā stratēģijas parametru pielāgošanas soli.
 Līdz šim ir apskatītas pieejas stratēģijas parametrus pielāgo, cenšoties paaugstināt $V^\pi$ sagaidāmo vērtību.
 Alternatīva ir parametrus pielāgot, cenšoties samazināt stratēģijas $\pi$ atšķirības no optimālās stratēģijas $\pi^*$.
 Citiem vārdiem -- ņemt vērā pašreizējās stratēģijas optimālo gājienu prognožu kļūdas.
-Šī ideja ir būtiska continuous action-critic learning automaton (CACLA) algoritmam, un nošķir to no vairuma citu actor-critic metožu.
+Šī ideja ir būtiska \textit{continuous action-critic learning automaton} (CACLA) algoritmam, un nošķir to no vairuma citu \textit{actor-critic} metožu.
 
 \subsubsection{CACLA algoritms}
 CACLA algoritma pamatā ir vienkārša ideja -- ja veiktā darbība paaugstina stāvokļa vērtības novērtējumu, tad šim stāvoklim ir derīgi pielāgot stratēģiju veiktās darbības virzienā, jo tā potenciāli var novest pie lielāka kopējā atalgojuma.
 %Paralēli tam, algoritms katrā solī uzlabo savu stāvokļu vērtības novērtējumu.
 %Laika gaitā stāvokļu vērtības novērtējums konverģē uz  Rezultātā algoritma stratēģija ar vien vairāk tuvojas optimālajai.
-Algoritms glabā funkciju $V:S \times \Theta \rightarrow \mathbb{R}$ -- kritiķi -- un $Ac : S \times \Psi \rightarrow A$ -- aktieri. Sasaistot apzīmējumus ar ierastajiem -- $V$ tagad tiek parametrizēta ar kādu vektoru $\theta \in \Theta$, kas ļaus pielāgot funkcijas vērtības algoritma darbības laikā. Apzīmēsim $V_t(s_t) = V(s_t, \theta_t)$ un $Ac_t(s_t) = Ac(s_t, \psi_t)$.
+Algoritms glabā funkciju $V:S \times \Theta \rightarrow \mathbb{R}$ -- kritiķi -- un $Ac : S \times \Psi \rightarrow A$ -- aktieri. Sasaistot apzīmējumus ar ierastajiem -- $V$ tagad tiek \textit{parametrizēta} ar kādu vektoru $\theta \in \Theta$, kas ļaus pielāgot funkcijas vērtības algoritma darbības laikā. Apzīmēsim $V_t(s_t) = V(s_t, \theta_t)$ un $Ac_t(s_t) = Ac(s_t, \psi_t)$.
 Aktieris katrā solī dotajam stāvoklim $s_t$ sniedz darbību $Ac(s_t, \psi_t)$.
 Lai nodrošinātu darbību telpas izpēti, nepieciešams, lai galā izmantotā darbība atšķiras no ieteiktās, jeb $a_t \neq Ac(s_t, \psi_t)$.
-To var darīt, piemēram, ņemot $\pi(s_t, \psi_t)$ kā normālsadalījumu ar centru $Ac(s_t, \psi_t)$.
+To var darīt, piemēram, ņemot $\pi(s_t, \psi_t)$ kā \textit{normālsadalījumu} ar centru $Ac(s_t, \psi_t)$.
 Kad ir iegūta veicamā darbība $a_t$, novēro atalgojumu $r_t$ un veic standarta TD soli vērtību funkcijai, kā tas aprakstīts sadaļā \ref{chap:td}
 \[
 	V_{t+1}(s_t) \xleftarrow{\alpha_t(s_t)} r_t + \gamma V_t(s_{t + 1}).
@@ -644,22 +644,22 @@ Algoritms sāk, inicializējot (piemēram, ģenerējot nejaušas vērtības, kas
 	\item veic darbību $a_t$, un novēro stāvokli $s_{t+1}$, uz kuru sistēma pāriet, un saņemto atalgojumu $r_t$; 
 	\item ja $s_{t+1}$ ir gala stāvoklis:
 	\begin{itemize}
-		\item[--] veic stohastiskā gradient descent soli $NTV$ parametriem $\theta_t$ pa funkciju, kas izsaka $\left(NTV_{\theta_t}(s_t) - r_t\right)^2$ atkarībā no $\theta_t$; iegūst $\theta_{t+1}$; %TODO šis jādziens jāpaskaidro 2. nodaļā
+		\item[--] veic stohastiskā \textit{gradient descent} soli $NTV$ parametriem $\theta_t$ pa funkciju, kas izsaka $\left(NTV_{\theta_t}(s_t) - r_t\right)^2$ atkarībā no $\theta_t$; iegūst $\theta_{t+1}$; %TODO šis jādziens jāpaskaidro 2. nodaļā
 		\item[--] izvēlas nākamās epizodes sākumstāvokli $s_{t+1}$;
 	\end{itemize}
 	\item citādi:
 	\begin{itemize}
-		\item[--] veic stohastiskā gradient descent soli $NTV$ parametriem $\theta_t$ pa funkciju, kas izsaka $\left(NTV_{\theta_t}(s_t) - \left(r_t + \gamma NTV_{\theta_t}(s_{t+1}) \right) \right)^2$ atkarībā no $\theta_t$; iegūst $\theta_{t+1}$;
+		\item[--] veic stohastiskā \textit{gradient descent} soli $NTV$ parametriem $\theta_t$ pa funkciju, kas izsaka $\left(NTV_{\theta_t}(s_t) - \left(r_t + \gamma NTV_{\theta_t}(s_{t+1}) \right) \right)^2$ atkarībā no $\theta_t$; iegūst $\theta_{t+1}$;
 	\end{itemize}
 	\item ja $NTV_{\theta_{t+1}}(s_t) > NTV_{\psi_t}(s_t)$ ($s_t$ vērtība palielinājusies):
 	\begin{itemize}
-		\item[--] veic stohastiskā gradient descent soli $NTA$ parametriem $\psi_t$ pa funkciju, kas izsaka $\left(NTA_{\psi_t}(s_t) - a_t\right)^2$ atkarībā no $\psi_t$; iegūst $\psi_{t+1}$;
+		\item[--] veic stohastiskā gradient \textit{descent} soli $NTA$ parametriem $\psi_t$ pa funkciju, kas izsaka $\left(NTA_{\psi_t}(s_t) - a_t\right)^2$ atkarībā no $\psi_t$; iegūst $\psi_{t+1}$;
 	\end{itemize}
 	\item atkārto.
 \end{itemize}
 
-CACLA algoritms ir ieviests \autocite{Hasselt2007}. Tas radies, pielāgojot actor-critic learning automaton (ACLA) algoritmu nepārtrauktām darbību telpām.
-To darbībā ir vairākas līdzības, piemēram $Ac_t$ pielāgošana, ņemot vērā tikai TD izmaiņas zīmi, nevis konkrēto vērtību, kā tas tiek darīts vairumā citu actor-critic algoritmu.
+CACLA algoritms ir ieviests \autocite{Hasselt2007}. Tas radies, pielāgojot \textit{actor-critic learning automaton} (ACLA) algoritmu nepārtrauktām darbību telpām.
+To darbībā ir vairākas līdzības, piemēram $Ac_t$ pielāgošana, ņemot vērā tikai TD izmaiņas zīmi, nevis konkrēto vērtību, kā tas tiek darīts vairumā citu \textit{actor-critic} algoritmu.
 Šai pieejai ir vairākas priekšrocības \autocite{Hasselt2007}.
 Tā dara algoritmu noturīgu pret troksni novērojumos trenēšanas laikā.
 CACLA algoritma gadījumā tā padara stāvokļu vērtību funkciju invariantu pret dažāda veida mērogošanu.
@@ -672,13 +672,13 @@ Tas ir novērojams, kad stāvokļu vērtības funkcijas parametri nonāk apgabal
 Intuīcija saka, ka pielāgojot aktiera uzvedību, attālums līdz jaunai daudzsološai darbībai ir nozīmīgāks nekā stāvokļa vērtības pieaugums, ko jaunā uzvedība sniegtu sniegtu.
 
 Šiem apsvērumiem par labu runā arī novērojumi \autocite{Hasselt2007}.
-Rakstā CACLA algoritms tiek salīdzināts ar citiem nepārtrauktu darbības telpu actor-critic algoritmiem.
+Rakstā CACLA algoritms tiek salīdzināts ar citiem nepārtrauktu darbības telpu \textit{actor-critic} algoritmiem.
 Novērojumi rāda, ka CACLA daudz ātrāk sasniedz labas stratēģijas.
 Apskatīts tiek arī CACLA variants, kas veic papildus aktiera pielāgošanas soļus, ja TD izmaiņa ir bijusi liela attiecībā pret standartnovirzi, kas noved pie vēl ātrākas labas stratēģijas sasniegšanas.
 
 Tā kā TD izmaiņas apmērs nav būtisks, aktiera parametrus var pielāgot, ņemot vērā tikai kļūdu darbību telpā.
-Izmantotais pielāgošanas solis $Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t$ ir ekvivalents gradient descent soļa veikšanai parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
-Citiem vārdiem -- aproksimācijai lietojot neironu tīklus, to parametru pielāgošanai pie pozitīvas TD izmaiņas var lietot standarta stohastiskā gradient descent pielāgošanas soli.
+Izmantotais pielāgošanas solis $Ac_{t+1}(s_t) \xleftarrow{\beta_t(s_t)} a_t$ ir ekvivalents \textit{gradient descent} soļa veikšanai parametriem $\theta$ pa $B_t$ un $A_t(x)$ starpības kvadrāta funkcijas vērtību.
+Citiem vārdiem -- aproksimācijai lietojot neironu tīklus, to parametru pielāgošanai pie pozitīvas TD izmaiņas var lietot standarta stohastiskā {gradient descent} pielāgošanas soli.
 Tas atbilst no mašīnmācīšanās aizgūtajai intuīcijai par neironu tīklu parametru pielāgošanu.
 
 Atšķirībā no ACLA algoritma, CACLA nepielāgo aktieri, ja TD izmaiņa ir bijusi negatīva. Tādējādi tiktu veiktas izmaiņas virzienā prom no izmēģinātās darbības, t.i., kādas citas neizmēģinātas darbības virzienā.
@@ -688,9 +688,9 @@ Tas ir arī empīriski pārbaudīts \autocite{Hasselt2007}.
 CACLA modifikācijai, kas veic izmaiņas stratēģijā arī, kad TD izmaiņa ir bijusi negatīva, ir novērojama pasliktināšanās algoritma darbībā.
 
 Citā darbā CACLA algoritms tiek salīdzināts arī ar vērtību aproksimācijas algoritmiem diskrētās darbību telpās \autocite{Hasselt2009}.
-Tiek parādīts, ka pārbaudītajos domēnos CACLA ir izteiktas priekšrocības attiecībā pret diskrētu darbības telpu algoritmiem, kā Q-learning un Sarsa, neskatoties uz to, ka CACLA darbības tiek noapaļotas uz tuvākajām pieļaujamajām.
+Tiek parādīts, ka pārbaudītajos domēnos CACLA ir izteiktas priekšrocības attiecībā pret diskrētu darbības telpu algoritmiem, kā \textit{Q-learning} un \textit{Sarsa}, neskatoties uz to, ka CACLA darbības tiek noapaļotas uz tuvākajām pieļaujamajām.
 Interesants novērojums minētajā darbā ir, ka CACLA parāda spējas vispārināt apgūto stratēģiju līdzīgiem uzdevumiem.
-Tika novērots, ka darbību telpas samazināšana cart-pole uzdevumā, atstājot tikai 2 pieejamās darbības, neprasīja algoritma pārtrenēšanu, atšķirībā no pārējiem algoritmiem.
+Tika novērots, ka darbību telpas samazināšana \textit{cart-pole} uzdevumā, atstājot tikai 2 pieejamās darbības, neprasīja algoritma pārtrenēšanu, atšķirībā no pārējiem algoritmiem.
 Tas tiek skaidrots ar priekšrocībām, ko sniedz nepārtrauktas darbību telpas izmantošana.
 Diskrēto algoritmu rezultātu kritums ir skaidrojams ar to, izmestās darbības tika apgūtas, ka atsevišķas sastāvdaļas stratēģijā.
 Tā kā algoritms ir iemācījies uz tām paļauties lielā daļā gadījumu, tad to izmešana būtiski negatīvi ietekmē sniegumu.
@@ -703,14 +703,14 @@ Darba gaitā tika izskatīts liels apjoms literatūras, un secinājumi, kas atti
 darbā ir iekļauti.
 Tomēr vairākas interesantas tēmas ir palikušas ārpus darba robežām.
 
-Viena šāda tēma ir dziļo on un rekursīvā tipa neironu tīklu pielietojums stimulās mācīšanās jomā.
+Viena šāda tēma ir dziļo on un rekursīvā tipa neironu tīklu pielietojums stimulētās mācīšanās jomā.
 Lai arī literatūrā dziļie neironu tīkli tiek apskatīti jau kopš 1980. gada, plašu atpazīstamību tie ir ieguvuši tikai salīdzinoši nesen, parādoties efektīvām metodēm to trenēšanai.
-To panākumi attēlu klasificēšanas jomā ir ievērojami, un šī darba tapšanas laikā tiem pieskaitāmas vairākas state of the art pieejas gan attēlu klasificēšanā, gan citos uzdevumos.
+To panākumi attēlu klasificēšanas jomā ir ievērojami, un šī darba tapšanas laikā tiem pieskaitāmas vairākas \textit{state of the} art pieejas gan attēlu klasificēšanā, gan citos uzdevumos.
 Tomēr iespējams pat svarīgākas ir idejas, kas ir pienestas neironu tīklu pielietojumā un trenēšanā.
-Deep leaning pieejas atbrīvo no nepieciešamības veidot lielus, pašrocīgi sagatavotus datu masīvus.
-Mācīšanu iespējams veikt ar nemarķētiem (angliski unlabeled) datiem, un paraugi tiek izmantoti, lai tīkls iemācītos sakarības datos un tos abstrahēt.
+\textit{Deep leaning} pieejas atbrīvo no nepieciešamības veidot lielus, pašrocīgi sagatavotus datu masīvus.
+Mācīšanu iespējams veikt ar nemarķētiem (angliski \textit{unlabeled}) datiem, un paraugi tiek izmantoti, lai tīkls iemācītos sakarības datos un tos abstrahēt.
 Pētot apmācītos tīklus attēlu klasificēšanas gadījumā, var redzēt, ka tīkla līmeņi patstāvīgi ir iemācījušies atpazīt attēla objektu malas, nākamiem līmeņiem veidojot jau dziļākas abstrakcijas, piemēram, cilvēka sejas kontūras.
-Tādēļ dziļo tīklu sasaistīšana ar stimuletās mācīšanās paradigmu ir ļoti interesanta tēma, jo tā potenciāli varētu dot lielu ieguvumu sarežģītākos uzdevumos.
+Tādēļ dziļo tīklu sasaistīšana ar stimulētās mācīšanās paradigmu ir ļoti interesanta tēma, jo tā potenciāli varētu dot lielu ieguvumu sarežģītākos uzdevumos.
 Ir bijuši darbi, kur tas jau ir novērots, piemēram, jau iepriekš minētais \autocite{mnih2013playing}, kur SI aģents tika uztrenēts Atari 2600 videospēļu spēlēšanā, izmantojot neapstrādātus spēles pikseļus.
 Tomēr, tik zīmīgi panākumi nav novērojami stratēģijas aproksimēšanas jomā.
 Darbā \autocite{Levine2013} tika pētīts dziļo un rekursīvo neironu tīklu pielietojums robota ekstremitāšu kontrolē.
@@ -734,10 +734,10 @@ Tas arī saistās ar nepieciešamību diskretizēt darbību telpu.
 Darbā netiek tuvāk pētīts, cik pārvarama ir šī problēma, bet tā vietā risinājums tiek meklēts alternatīvā pieejā, ko sniedz stratēģijas aproksimācijas metodes.
 Stratēģiju glabājot tiešā veidā, paveras iespējas šo lomu uzticēt neironu tīklam.
 Tomēr, kā nākas secināt, daļā metožu tīkla parametru pielāgošana, jeb tīkla trenēšana, it diezgan sarežģīta.
-Actor-only metodēs nākas parametru pielāgošanu sarežģītā veidā sasaistīt ar atalgojuma funkcijas novērtējumiem, izmantojot Monte Carlo metodes.
-Alternatīvu piedāvā actor-critic pieeja, kur tiešā veidā tiek glabāta gan stāvokļu vērtības funkcijas aproksimācija gan stratēģijas aproksimācija.
+\textit{Actor-only} metodēs nākas parametru pielāgošanu sarežģītā veidā sasaistīt ar atalgojuma funkcijas novērtējumiem, izmantojot \textit{Monte Carlo} metodes.
+Alternatīvu piedāvā \textit{actor-critic} pieeja, kur tiešā veidā tiek glabāta gan stāvokļu vērtības funkcijas aproksimācija gan stratēģijas aproksimācija.
 Šīs īpašības noved iespējas pie stratēģijas parametrus pielāgot, ņemot vērā kļūdu tās paredzēto darbību telpā, katras darbības labumu vērtējot ar izmaiņām, ko tās sniegtais atalgojums dod stāvokļa vērtības novērtējumam.
-Šīs idejas ir apvienotas CACLA, jeb continuous actor-critic learning automaton, algoritmā.
+Šīs idejas ir apvienotas CACLA, jeb \textit{continuous actor-critic learning automaton}, algoritmā.
 Autora prāt algoritma dizains elegantā un vienkārša veidā iekļauj risinājumus visām iepriekš minētajām problēmām.
 Turklāt ir empīriski parādītas priekšrocības, kas tam piemīt mācīšanās ātruma ziņā salīdzinot ar plaši izmantotajiem klasisko pieeju algoritmiem, kā arī algoritmam piemīt vairākas citas pozitīvas īpašības, kas izpaužas nestandarta uzdevumu uzstādījumos, kā, piemēram, darbinot CACLA diskrētā darbību telpā, pēc laika samazinot pieejamo darbību skaitu.
 
